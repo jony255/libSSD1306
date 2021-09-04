@@ -1,0 +1,8 @@
+.ccls-cache/
+build-clang/
+build-gcc/
+build/
+subprojects/
+compile_commands.json
+*.pdf
+TODO*
