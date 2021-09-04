@@ -1,0 +1,36 @@
+AlignConsecutiveMacros: true
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakBeforeMultilineStrings: true
+BinPackArguments: true
+BinPackParameters: true
+BreakBeforeBinaryOperators: NonAssignment
+ColumnLimit: 80
+IndentCaseLabels: true
+IndentFunctionDeclarationAfterType: true
+IndentGotoLabels: false
+IndentWidth: 4
+MaxEmptyLinesToKeep: 1
+PointerBindsToType: false
+SortIncludes: true
+SpaceAfterCStyleCast: false
+SpaceAfterControlStatementKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpacesInCStyleCastParentheses: false
+SpacesInConditionalStatement: false
+UseTab: Never
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterCaseLabel: false
+    AfterControlStatement: false
+    AfterEnum: false
+    AfterExternBlock: false
+    AfterFunction: false
+    AfterStruct: false
+    AfterUnion: false
+    BeforeElse: true
+    IndentBraces: false
+    SplitEmptyFunction: false
