@@ -2,6 +2,8 @@
 build-clang/
 build-gcc/
 build/
+html/
+latex/
 subprojects/
 compile_commands.json
 *.pdf
