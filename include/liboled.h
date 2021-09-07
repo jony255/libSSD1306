@@ -6,7 +6,7 @@
  * @{
  */
 
-enum liboled_fundamental_commands {
+enum liboled_fundamental_command {
     LIBOLED_DISPLAY_ON = 0xAF,  /**< Turn the display on. */
     LIBOLED_DISPLAY_OFF = 0xAE, /**< Turn the display off. */
 
@@ -30,7 +30,6 @@ enum liboled_fundamental_commands {
 
     /**
      * Select 1 out of 256 contrast steps.
-     * @note You must send the contrast step right after (8 bits long)
      */
     LIBOLED_SET_CONTRAST_CTRL = 0x81,
 };
