@@ -6,9 +6,12 @@
  * @{
  */
 
+/**
+ * The enumerated commands from @c Table 9-1
+ */
 enum ssd1306_fundamental_command {
-    SSD1306_DISPLAY_ON = 0xAF,  /**< Turn the display on. */
-    SSD1306_DISPLAY_OFF = 0xAE, /**< Turn the display off. */
+    SSD1306_DISPLAY_ON = 0xAF,  /**< Turn the display on. (i.e. Normal Mode) */
+    SSD1306_DISPLAY_OFF = 0xAE, /**< Turn the display off. (i.e. Sleep Mode) */
 
     /**
      * The display shows the RAM's content.
