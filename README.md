@@ -10,12 +10,21 @@ library to work with the `SSD1306` clones shouldn't require too much work.
 
 Commands
 --------
-All of the commands present in the datasheet are defined as `enum`s and grouped
-according to the table they were in. For example, `Table 9-1`'s title is
-`Fundamental Command`. Its corresponding `enum` identifier is
-`enum ssd1306_fundamental_command`.
+There are 3 "classes" of commands.
 
-There are some commands that don't accept arguments. However, commands that do
-accept arguments, require them. For example, `SSD1306_SET_CONTRAST_CTRL` accepts
-one argument, the contrast level. This contrast level isn't optional and must be
-supplied.
+* Commands that do not accept arguments
+* Commands that accept arguments
+* Commands that accept arguments but the arguments are OR'd with the command
+
+The last 2 classes of commands will be annotated in the generated documentation
+as `arguments` and `OR'd arguments`, respectively. The annotations will describe
+what the arguments are and in what order the arguments should be sent. As
+far as the controller is concerned, there are no optional arguments, all
+arguments are required!
+
+TODO: add example of command that must be OR'd with arguments
+
+All of the commands present in the datasheet are defined as `enum`s and grouped
+according to the table they are in. For example, `Table 9-1`'s title is
+`Fundamental Command`. Its corresponding `enum` identifier is `enum
+ssd1306_fundamental_command`.
