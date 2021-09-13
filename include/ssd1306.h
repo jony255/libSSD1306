@@ -33,9 +33,6 @@ enum ssd1306_fundamental_command {
 
     /**
      * Select 1 out of 256 contrast steps.
-     *
-     * @cmdarg
-     *  1. contrast_value[7:0]
      */
     SSD1306_SET_CONTRAST_CTRL = 0x81,
 };
