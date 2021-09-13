@@ -96,8 +96,8 @@ enum ssd1306_dummy_byte {
 };
 
 /**
- * These values are used to select the start/end addresses of horizontal
- * scrolling for the following commands:
+ * A page is a set of 8 rows. These values are used to select the start/end
+ * page addresses of various commands.
  *
  * @ref SSD1306_RIGHT_SCROLL \n
  * @ref SSD1306_LEFT_SCROLL \n\n
