@@ -214,4 +214,105 @@ enum ssd1306_row {
 
 /** @} */
 
+/**
+ * @defgroup address_setting_commands Address Settings Commands
+ * @{
+ */
+
+/**
+ * The enumerated commands from @c Table 9-3
+ */
+enum ssd1306_addr_setting_command {
+    /**
+     * Set the addressing mode to any of the modes defined in
+     * @ref ssd1306_addr_mode.
+     */
+    SSD1306_SET_MEM_ADDR_MODE = 0x20,
+
+    /**
+     * Set the page address.
+     *
+     * @note This command applies to the following addressing modes:\n
+     * @note @ref SSD1306_PAGE_ADDR_MODE
+     *
+     * @cmdarg_or @ref ssd1306_page start_page[2:0]
+     */
+    SSD1306_SET_SINGLE_PAGE_ADDR = 0xB0,
+    /**
+     * Set the upper nybble of the column.
+     *
+     * @note This command applies to the following addressing modes:\n
+     * @note @ref SSD1306_PAGE_ADDR_MODE
+     *
+     * @cmdarg_or upper_nybble[3:0]
+     */
+    SSD1306_SET_UPPER_NYBBLE_COL_ADDR = 0x10,
+    /**
+     * Set the lower nybble of the column.
+     *
+     * @note This command applies to the following addressing modes:\n
+     * @note @ref SSD1306_PAGE_ADDR_MODE
+     *
+     * @cmdarg_or lower_nybble[3:0]
+     */
+    SSD1306_SET_LOWER_NYBBLE_COL_ADDR = 0x00,
+
+    /**
+     * Set the start and end page addresses.
+     *
+     * @note This command applies to the following addressing modes:\n
+     * @note @ref SSD1306_HORIZ_ADDR_MODE
+     * @note @ref SSD1306_VERT_ADDR_MODE
+     */
+    SSD1306_SET_MULTIPLE_PAGE_ADDRS = 0x22,
+    /**
+     * Set the start and end column addresses.
+     *
+     * @note This command applies to the following addressing modes:\n
+     * @note @ref SSD1306_HORIZ_ADDR_MODE
+     * @note @ref SSD1306_VERT_ADDR_MODE
+     */
+    SSD1306_SET_MULTIPLE_COL_ADDRS = 0x21,
+};
+
+/**
+ * The available modes used as arguments to the command
+ * @ref SSD1306_SET_MEM_ADDR_MODE. For the description of the modes, assume you
+ * start at @c (PAGE_0, COL_0).
+ */
+enum ssd1306_addr_mode {
+    /**
+     * Walk the entire page until you reach the end (i.e. the last column).
+     * Afterwards, go to the beginning of the next page and repeat. Once you
+     * reach the last column of the last page, go to the very beginning
+     * @c (PAGE_0, COL_0).
+     */
+    SSD1306_HORIZ_ADDR_MODE,
+    /**
+     * Walk the entire column until you reach the end (i.e. the last page).
+     * Afterwards, go to the beginning of the next column and repeat. Once you
+     * reach the last page of the last column, go to the very beginning
+     * @c (PAGE_0, COL_0).
+     */
+    SSD1306_VERT_ADDR_MODE,
+    /**
+     * Walk the entire page until you reach the end (i.e. the last column).
+     * Afterwards, loop back to where you started (i.e. @c (PAGE_0, COL_0)).
+     *
+     * In order to go to a different page, you must call the following command:
+     *
+     * @ref SSD1306_SET_SINGLE_PAGE_ADDR.
+     *
+     * If you want to go to a different column, refer to the following commands:
+     *
+     * @ref SSD1306_SET_UPPER_NYBBLE_COL_ADDR \n
+     * @ref SSD1306_SET_LOWER_NYBBLE_COL_ADDR \n
+     */
+    SSD1306_PAGE_ADDR_MODE,
+
+    SSD1306_NUM_ADDR_MODE,
+};
+
+/** @} */
+
 #endif /* LIBSSD1306_SSD1306_H */
