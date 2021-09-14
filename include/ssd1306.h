@@ -232,7 +232,7 @@ enum ssd1306_addr_setting_command {
     /**
      * Set the page address.
      *
-     * @note This command applies to the following addressing modes:\n
+     * @note This command applies to the following addressing modes(s):\n
      * @note @ref SSD1306_PAGE_ADDR_MODE
      *
      * @cmdarg_or @ref ssd1306_page start_page[2:0]
@@ -241,7 +241,7 @@ enum ssd1306_addr_setting_command {
     /**
      * Set the upper nybble of the column.
      *
-     * @note This command applies to the following addressing modes:\n
+     * @note This command applies to the following addressing modes(s):\n
      * @note @ref SSD1306_PAGE_ADDR_MODE
      *
      * @cmdarg_or upper_nybble[3:0]
@@ -250,7 +250,7 @@ enum ssd1306_addr_setting_command {
     /**
      * Set the lower nybble of the column.
      *
-     * @note This command applies to the following addressing modes:\n
+     * @note This command applies to the following addressing modes(s):\n
      * @note @ref SSD1306_PAGE_ADDR_MODE
      *
      * @cmdarg_or lower_nybble[3:0]
@@ -260,7 +260,7 @@ enum ssd1306_addr_setting_command {
     /**
      * Set the start and end page addresses.
      *
-     * @note This command applies to the following addressing modes:\n
+     * @note This command applies to the following addressing modes(s):\n
      * @note @ref SSD1306_HORIZ_ADDR_MODE
      * @note @ref SSD1306_VERT_ADDR_MODE
      */
@@ -268,7 +268,7 @@ enum ssd1306_addr_setting_command {
     /**
      * Set the start and end column addresses.
      *
-     * @note This command applies to the following addressing modes:\n
+     * @note This command applies to the following addressing modes(s):\n
      * @note @ref SSD1306_HORIZ_ADDR_MODE
      * @note @ref SSD1306_VERT_ADDR_MODE
      */
