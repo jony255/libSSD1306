@@ -311,7 +311,7 @@ enum ssd1306_addr_mode {
      * If you want to go to a different column, refer to the following commands:
      *
      * @ref SSD1306_SET_UPPER_NYBBLE_COL_ADDR \n
-     * @ref SSD1306_SET_LOWER_NYBBLE_COL_ADDR \n
+     * @ref SSD1306_SET_LOWER_NYBBLE_COL_ADDR
      */
     SSD1306_PAGE_ADDR_MODE,
 
