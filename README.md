@@ -1,6 +1,7 @@
 # libSSD1306
 
 ## Description
+
 `libSSD1306` is a library meant for programming OLEDs driven by an
 `SSD1306` controller. There are other IC's that mimic the instruction set of
 the `SSD1306`. The most prominent clone out there is the `SSH1106`. Getting this

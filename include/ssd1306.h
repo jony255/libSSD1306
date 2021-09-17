@@ -306,7 +306,7 @@ enum ssd1306_addr_mode {
      *
      * In order to go to a different page, you must call the following command:
      *
-     * @ref SSD1306_SET_SINGLE_PAGE_ADDR.
+     * @ref SSD1306_SET_SINGLE_PAGE_ADDR
      *
      * If you want to go to a different column, refer to the following commands:
      *
@@ -461,6 +461,83 @@ enum ssd1306_col {
     SSD1306_COL_126,
     SSD1306_COL_127,
     SSD1306_NUM_COLS,
+};
+
+/** @} */
+
+/**
+ * @defgroup hardware_configuration_commands Hardware Configuration Commands
+ * @{
+ */
+
+/**
+ * The enumerated commands from @c Table 9-4
+ */
+enum ssd1306_hw_config_command {
+    /**
+     * Set the display's start line register.
+     *
+     * @cmdarg_or @ref ssd1306_row display_start_line_register[5:0]
+     */
+    SSD1306_SET_DISPLAY_START_LINE = 0x40,
+    /**
+     * Set a vertical offset.
+     */
+    SSD1306_SET_VERT_DISPLAY_OFFSET = 0xD3,
+
+    /**
+     * Vertically reflect the display.
+     *
+     * @note The effect takes place on subsequent data writes.
+     */
+    SSD1306_REFLECT_DISPLAY_VERT = 0xA0,
+    /**
+     * Don't vertically reflect the display.
+     *
+     * @note The effect takes place on subsequent data writes.
+     */
+    SSD1306_DONT_REFLECT_DISPLAY_VERT = 0xA1,
+
+    /**
+     * Horizontally reflect the display.
+     *
+     * @note The effect takes place on subsequent data writes.
+     */
+    SSD1306_REFLECT_DISPLAY_HORIZ = 0xC0,
+    /**
+     * Don't horizontally reflect the display.
+     *
+     * @note The effect takes place on subsequent data writes.
+     */
+    SSD1306_DONT_REFLECT_DISPLAY_HORIZ = 0xC8,
+    /**
+     * Set multiple, alternative common pin configurations.
+     */
+    SSD1306_CONFIG_COMMON_PINS = 0xDA,
+    /**
+     * Set the number of active rows. Choosing a value of @c SSD1306_ROW_15
+     * means that rows 0 to 15 will be active, a total of 16 rows.
+     *
+     * @note The argument must be a value between @c SSD1306_ROW_15 and
+     *       @c SSD1306_ROW_63.
+     */
+    SSD1306_SET_NUM_ACTIVE_ROWS = 0xA8,
+};
+
+/**
+ * These are various configurations available for the common pins. They are
+ * meant to be used as arguments to the following command:
+ *
+ * @ref SSD1306_CONFIG_COMMON_PINS
+ *
+ * @todo Find apt descriptions for the various configurations!!
+ */
+enum ssd1306_common_pin_config {
+    SSD1306_SEQUENTIAL_COMMON_PINS = 0x02,
+    SSD1306_ALT_COMMON_PINS = 0x12,
+
+    SSD1306_ENABLE_LEFT_RIGHT_REMAP = 0x22,
+    SSD1306_DISABLE_LEFT_RIGHT_REMAP = 0x02,
 };
 
 /** @} */
