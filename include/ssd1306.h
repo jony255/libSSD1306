@@ -542,4 +542,43 @@ enum ssd1306_common_pin_config {
 
 /** @} */
 
+/**
+ * @defgroup timing_and_driving_scheme_setting_commands \
+ *      Timing/Driving Scheme Setting Commands
+ * @{
+ */
+
+enum ssd1306_timing_and_driving_command {
+    /**
+     * Set the display clock divide ratio as well as the oscillator's
+     * frequency.
+     */
+    SSD1306_SET_CLOCK_DIV_AND_OSC_FREQ = 0xD5,
+    /**
+     * Set Pre-charge period
+     */
+    SSD1306_SET_PRECHARGE_PERIOD = 0xD9,
+    /**
+     * Set Vcomh's deselect level.
+     */
+    SSD1306_SET_V_COMH_DESELECT_LEVEL = 0xDB,
+    /**
+     * No operation.
+     */
+    SSD1306_NOOP = 0xE3,
+};
+
+/**
+ * These values are meant to be used as arguments to the following commnand:
+ *
+ * @ref SSD1306_SET_V_COMH_DESELECT_LEVEL
+ */
+enum ssd1306_vcomh_deselect_level {
+    SSD1306_POINT_65_X_VCC = 0x00, /**< Multiply Vcc by ~0.65 */
+    SSD1306_POINT_77_X_VCC = 0x20, /**< Multiply Vcc by ~0.77 */
+    SSD1306_POINT_83_X_VCC = 0x30, /**< Multiply Vcc by ~0.83 */
+};
+
+/** @} */
+
 #endif /* LIBSSD1306_SSD1306_H */
