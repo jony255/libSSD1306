@@ -1,4 +1,5 @@
 .ccls-cache/
+.cache/
 build-clang/
 build-gcc/
 build/
