@@ -80,7 +80,7 @@ implementation (.c file) to the library.
 2. Can complicate the build-system setup if more than one microcontroller is
    used within the same codebase.
 
-3. The implementation must be compiled with the library and violates the
+3. The glue code must be compiled with the library and violates the
    [open-closed principle](https://en.wikipedia.org/wiki/Open-closed_principle).
    I could [weakly](https://en.wikipedia.org/wiki/Weak_symbol) define the
    functions to get around this, but that requires a compiler attribute which is
@@ -99,7 +99,7 @@ functions in the library.
    run-time.
 
 2. Can be compiled into a static library, separate from the glue code, then
-   linked with the user's main application. As a result, this follows
+   linked with the user's main application. As a result, this follows the
    [open-closed principle](https://en.wikipedia.org/wiki/Open-closed_principle).
 
 #### Cons
