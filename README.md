@@ -54,3 +54,77 @@ Here is an another example but without the type.
 # 3:0 = a 4 bit value going from bit 3 to bit 0
 @cmdarg_or upper_nybble[3:0]
 ```
+
+## Communicating with the SSD1306
+
+There is no universal way to configure all `I2C`, `SPI`, etc.. peripherals in
+the world. There are some HAL's provided by manufacturers or RTOSes that enable
+cross-platform development, but maintaining all of these configurations by
+myself is error-prone. Instead, I will have the user define functions which I
+have declared. There are 2 ways of implementing what I have in mind.
+
+### Option #1 - Configuration done at link-time
+
+I will declare functions in a header file that I expect the user of the library
+to implement. The build system will take care of linking that header file's
+implementation (.c file) to the library.
+
+#### Pros
+
+1. Function calls to the glue code can be inlined by the compiler.
+
+#### Cons
+
+1. Stuck with only one way of communicating with the `SSD1306`.
+
+2. Can complicate the build-system setup if more than one microcontroller is
+   used within the same codebase.
+
+3. The implementation must be compiled with the library and violates the
+   [open-closed principle](https://en.wikipedia.org/wiki/Open-closed_principle).
+   I could [weakly](https://en.wikipedia.org/wiki/Weak_symbol) define the
+   functions to get around this, but that requires a compiler attribute which is
+   not supported by standard C.
+
+### Option #2 - Configuration done at run-time
+
+I will declare a struct whose fields consist of pointers to functions that are
+exactly the same as the stubs I would have declared in the header file from
+Option 1. The user must then pass a pointer to this struct to all of the
+functions in the library.
+
+#### Pros
+
+1. The user can change how the mcu can communicate with the `SSD1306` at
+   run-time.
+
+2. Can be compiled into a static library, separate from the glue code, then
+   linked with the user's main application. As a result, this follows
+   [open-closed principle](https://en.wikipedia.org/wiki/Open-closed_principle).
+
+#### Cons
+
+1. Some of the esoteric compilers haven't implemented function pointers
+
+   todo(need source, I don't remember where I heard this...)
+
+2. The compiler may not inline calls to the functions as a result of using
+   function pointers. However, these functions aren't meant to be doing much
+   anyway so it may not matter too much. `const`'ing the struct or some of the
+   fields of the struct may fix the inlining issue.
+
+3. Extra `NULL` checking must be done by the functions to ensure the struct is
+   valid. I can setup a compile-time switch to disable the checks with something
+   like `-DNDEBUG` to denote a release build.
+
+4. Might require a bit more memory as a result of storing `x` amount of function
+   pointers, where `x` is the number of stubs declared. It's honestly not much
+   but it might be on a *very* memory constrained platform.
+
+### And the winner is...
+
+Option 2!!
+
+Option 2 is more portable across c compilers and, I feel, is the cleanest. This
+option doesn't require altering the `libSSD1306` codebase. The code the user
+writes is, by design, independent of the library's.
