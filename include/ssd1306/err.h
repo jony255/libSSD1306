@@ -2,7 +2,7 @@
 #define LIBSSD1306_ERR_H
 
 /**
- * @defgroup ssd1306_return_codes Possible Return Codes
+ * @defgroup ssd1306_return_codes Return Codes
  *
  * @{
  */
