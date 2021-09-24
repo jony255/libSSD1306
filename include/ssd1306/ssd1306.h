@@ -2,6 +2,14 @@
 #define LIBSSD1306_SSD1306_H
 
 /**
+ * @defgroup commands Commands
+ *
+ * All possible command groups are placed here.
+ *
+ * @{
+ */
+
+/**
  * @defgroup fundamental_commands Fundamental Commands
  * @{
  */
@@ -578,6 +586,8 @@ enum ssd1306_vcomh_deselect_level {
     SSD1306_POINT_77_X_VCC = 0x20, /**< Multiply Vcc by ~0.77 */
     SSD1306_POINT_83_X_VCC = 0x30, /**< Multiply Vcc by ~0.83 */
 };
+
+/** @} */
 
 /** @} */
 
