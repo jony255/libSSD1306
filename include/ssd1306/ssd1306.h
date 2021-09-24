@@ -1,5 +1,5 @@
-#ifndef LIBSSD1306_SSD1306_H
-#define LIBSSD1306_SSD1306_H
+#ifndef LIBSSD1306_SSD1306_SSD1306_H
+#define LIBSSD1306_SSD1306_SSD1306_H
 
 /**
  * @defgroup commands Commands
@@ -591,4 +591,4 @@ enum ssd1306_vcomh_deselect_level {
 
 /** @} */
 
-#endif /* LIBSSD1306_SSD1306_H */
+#endif /* LIBSSD1306_SSD1306_SSD1306_H */

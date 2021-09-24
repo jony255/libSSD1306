@@ -1,5 +1,5 @@
-#ifndef LIBSSD1306_ERR_H
-#define LIBSSD1306_ERR_H
+#ifndef LIBSSD1306_SSD1306_ERR_H
+#define LIBSSD1306_SSD1306_ERR_H
 
 /**
  * @defgroup ssd1306_return_codes Return Codes
@@ -16,4 +16,4 @@ enum ssd1306_err {
 
 /** @} */
 
-#endif /* LIBSSD1306_ERR_H */
+#endif /* LIBSSD1306_SSD1306_ERR_H */
