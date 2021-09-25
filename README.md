@@ -3,6 +3,8 @@
 ## Table of contents
 
 - [Description](#description)
+- [Prerequisites](#prerequisites)
+- [Getting started](#getting_started)
 - [Commands](#commands)
     - [Command definitions](#command_definitions)
     - [Classes of commands](#classes_of_commands)
@@ -23,6 +25,54 @@
 `SSD1306` controller. There are other IC's that mimic the instruction set of
 the `SSD1306`. The most prominent clone out there is the `SSH1106`. Getting
 this library to work with the `SSH1106` shouldn't require too much work.
+
+<a id="prerequisites"></a>
+## Prerequisites
+
+- `meson`, `ninja`, and a `c99` compliant compiler for building the library
+- `curl` or `wget` (optional, for downloading the `SSD1306`'s datasheet)
+- `git` (optional, `libSSD1306` can be downloaded as a zip archive)
+
+<a id="getting_started"></a>
+## Getting started
+
+To begin using this library, clone the repo.
+
+    $ git clone https://github.com/maybe-one-day-ubermensch/libSSD1306
+
+Once you have cloned the repo, download the SSD1306's datasheet like so:
+
+    $ ./scripts/dl_ssd1306_datasheet.sh
+
+The script assumes you have either `curl` or `wget` in your `$PATH`. If you
+don't have any of the two, install one of them. They are both pretty useful!
+Alternatively, you can copy the datasheet's url from the script, paste it into
+your browser, and download it from there.
+
+Next, configure the build by calling `meson`:
+
+    $ BUILD_DIR='build'
+    $
+    $ # The build-system currently defaults to building a static library.
+    $ meson "$BUILD_DIR"
+
+or
+
+    $ # Tell meson to build a shared libray instead
+    $ meson -Ddefault_libray=shared "$BUILD_DIR"
+
+or
+
+    $ # Tell meson to build both types of libraries
+    $ meson -Ddefault_libray=both "$BUILD_DIR"
+
+Finally, build the library:
+
+    $ ninja -C "$BUILD_DIR"
+
+todo(add examples on how to build with cross-compilers like clang or arm-none-eabi-gcc)
+todo(those examples should include example [machine files](https://mesonbuild.com/Machine-files.html))
+
 
 <a id="commands"></a>
 ## Commands
