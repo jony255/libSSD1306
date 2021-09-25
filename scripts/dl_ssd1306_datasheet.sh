@@ -38,4 +38,4 @@ fi
 # One thing to keep in mind though, is that if OPTS can be empty, an
 # empty pair of quotes would be passed into the command. The quoting
 # makes no difference if there is only one option to pass in.
-"$DL_CMD" "$DL_CMD_OPTS" "$DATASHEET_URL"
+"$DL_CMD" $DL_CMD_OPTS "$DATASHEET_URL"
