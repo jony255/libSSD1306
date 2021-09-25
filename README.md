@@ -21,8 +21,8 @@
 
 `libSSD1306` is a library meant for programming OLEDs driven by an
 `SSD1306` controller. There are other IC's that mimic the instruction set of
-the `SSD1306`. The most prominent clone out there is the `SSH1106`. Getting this
-library to work with the `SSH1106` shouldn't require too much work.
+the `SSD1306`. The most prominent clone out there is the `SSH1106`. Getting
+this library to work with the `SSH1106` shouldn't require too much work.
 
 <a id="commands"></a>
 ## Commands
@@ -51,8 +51,8 @@ commands that accept arguments require them.
 #### Documenting Commands OR'd with Arguments
 
 The last class of commands will be annotated in the generated documentation as
-`OR'd arguments`. The annotations will describe what the arguments are and their
-position in the command. The format of the doxygen alias to generate said
+`OR'd arguments`. The annotations will describe what the arguments are and
+their position in the command. The format of the doxygen alias to generate said
 documentation is as follows:
 
 ```
@@ -108,8 +108,8 @@ implementation (.c file) to the library.
 3. The glue code must be compiled with the library and violates the
    [open-closed principle](https://en.wikipedia.org/wiki/Open-closed_principle).
    I could [weakly](https://en.wikipedia.org/wiki/Weak_symbol) define the
-   functions to get around this, but that requires a compiler attribute which is
-   not supported by standard C.
+   functions to get around this, but that requires a compiler attribute which
+   is not supported by standard C.
 
 <a id="option_2_run_time"></a>
 ### Option #2 - Configuration done at run-time
@@ -142,12 +142,12 @@ functions in the library.
    fields of the struct may fix the inlining issue.
 
 3. Extra `NULL` checking must be done by the functions to ensure the struct is
-   valid. I can setup a compile-time switch to disable the checks with something
-   like `-DNDEBUG` to denote a release build.
+   valid. I can setup a compile-time switch to disable the checks with
+   something like `-DNDEBUG` to denote a release build.
 
-4. Might require a bit more memory as a result of storing `x` amount of function
-   pointers, where `x` is the number of stubs declared. It's honestly not much
-   but it might be on a *very* memory constrained platform.
+4. Might require a bit more memory as a result of storing `x` amount of
+   function pointers, where `x` is the number of stubs declared. It's honestly
+   not much but it might be on a *very* memory constrained platform.
 
 <a id="and_the_winner_is"></a>
 ### And the winner is...
