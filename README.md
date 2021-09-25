@@ -1,12 +1,12 @@
 # libSSD1306
 
-## Table of Contents
+## Table of contents
 
 - [Description](#description)
 - [Commands](#commands)
-    - [Command Definitions](#command_definitions)
-    - [Classes of Commands](#classes_of_commands)
-        - [Documenting Commands OR'd with Arguments](#documenting_commands_ord_with_arguments)
+    - [Command definitions](#command_definitions)
+    - [Classes of commands](#classes_of_commands)
+        - [Documenting commands or'd with arguments](#documenting_commands_ord_with_arguments)
 - [Communicating with the SSD1306](#communicating_with_the_ssd1306)
     - [Option #1 - Configuration done at link-time](#option_1_link_time)
         - [Pros](#option_1_link_time_pros)
@@ -14,7 +14,7 @@
     - [Option #2 - Configuration done at run-time](#option_2_run_time)
         - [Pros](#option_2_run_time_pros)
         - [Cons](#option_2_run_time_cons)
-    - [And the Winner is...](#and_the_winner_is)
+    - [And the winner is...](#and_the_winner_is)
 
 <a id="description"></a>
 ## Description
@@ -28,7 +28,7 @@ this library to work with the `SSH1106` shouldn't require too much work.
 ## Commands
 
 <a id="command_definitions"></a>
-### Command Definitions
+### Command definitions
 
 All of the commands present in the datasheet are defined as `enum`s and grouped
 according to the table they are in. For example, `Table 9-1`'s title is
@@ -36,7 +36,7 @@ according to the table they are in. For example, `Table 9-1`'s title is
 `enum ssd1306_fundamental_command`.
 
 <a id="classes_of_commands"></a>
-### Classes of Commands
+### Classes of commands
 
 There are 3 "classes" of commands.
 
@@ -48,7 +48,7 @@ As far as the controller is concerned, there are no optional arguments, all
 commands that accept arguments require them.
 
 <a id="documenting_commands_ord_with_arguments"></a>
-#### Documenting Commands OR'd with Arguments
+#### Documenting commands or'd with arguments
 
 The last class of commands will be annotated in the generated documentation as
 `OR'd arguments`. The annotations will describe what the arguments are and
@@ -86,7 +86,7 @@ myself is error-prone. Instead, I will have the user define functions which I
 have declared. There are 2 ways of implementing what I have in mind.
 
 <a id="option_1_link_time"></a>
-### Option #1 - Configuration done at link-time
+### Option #1 - configuration done at link-time
 
 I will declare functions in a header file that I expect the user of the library
 to implement. The build system will take care of linking that header file's
@@ -112,7 +112,7 @@ implementation (.c file) to the library.
    is not supported by standard C.
 
 <a id="option_2_run_time"></a>
-### Option #2 - Configuration done at run-time
+### Option #2 - configuration done at run-time
 
 I will declare a struct whose fields consist of pointers to functions that are
 exactly the same as the stubs I would have declared in the header file from
