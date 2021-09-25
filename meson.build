@@ -13,4 +13,9 @@ inc_dir = include_directories('include')
 #       * src_files
 subdir('src')
 
-library('ssd1306', src_files, include_directories: inc_dir)
+libssd1306 = library('ssd1306',
+                     src_files,
+                     include_directories: inc_dir)
+
+libssd1306_dep = declare_dependency(link_with: libssd1306,
+                                    include_directories: inc_dir)
