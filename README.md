@@ -7,6 +7,7 @@
 - [Getting started](#getting_started)
     - [Download necessary files](#download_necessary_files)
     - [Configure and build the library](#configure_and_build_the_library)
+    - [Build the documentation](#build_the_documentation)
 - [Commands](#commands)
     - [Command definitions](#command_definitions)
     - [Classes of commands](#classes_of_commands)
@@ -34,6 +35,7 @@ this library to work with the `SSH1106` shouldn't require too much work.
 - `meson`, `ninja`, and a `c99` compliant compiler for building the library
 - `curl` or `wget` (optional, for downloading the `SSD1306`'s datasheet)
 - `git` (optional, `libSSD1306` can be downloaded as a zip archive)
+- `doxygen` (optional, to build the documentation)
 
 <a id="getting_started"></a>
 ## Getting started
@@ -81,6 +83,17 @@ Finally, build the library:
 todo(add examples on how to build with cross-compilers like clang or arm-none-eabi-gcc)
 todo(those examples should include example [machine files](https://mesonbuild.com/Machine-files.html))
 
+<a id="build_the_documentation"></a>
+### Build the documentation
+
+In order to build the documentation run the following command:
+
+    $ doxygen ./docs/Doxyfile
+
+Open the generated documentation by pointing your preferred browser to `docs/html/index.html`.
+For example, if you use firefox, run the following command:
+
+    $ firefox ./docs/html/index.html
 
 <a id="commands"></a>
 ## Commands
