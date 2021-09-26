@@ -556,6 +556,9 @@ enum ssd1306_common_pin_config {
  * @{
  */
 
+/**
+ * The enumerated commands from @c Table 9-5
+ */
 enum ssd1306_timing_and_driving_command {
     /**
      * Set the display clock divide ratio as well as the oscillator's
