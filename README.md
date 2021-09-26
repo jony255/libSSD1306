@@ -122,9 +122,9 @@ commands that accept arguments require them.
 <a id="documenting_commands_ord_with_arguments"></a>
 #### Documenting commands or'd with arguments
 
-The last class of commands will be annotated in the generated documentation as
-`OR'd arguments`. The annotations will describe what the arguments are and
-their position in the command. The format of the doxygen alias to generate said
+The last class of commands are annotated in the generated documentation as
+`OR'd arguments`. The annotations describe what the arguments are and their
+position in the command. The format of the doxygen alias to generate said
 documentation is as follows:
 
 ```
