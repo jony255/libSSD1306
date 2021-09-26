@@ -133,7 +133,7 @@ documentation is as follows:
 
 The `@ref lib_defined_type` is a reference link to a datatype defined by
 `libSSD1306`, if one exists. Otherwise, leave it blank. Here is an example from
-`include/ssd1306.h`.
+`include/ssd1306/ssd1306.h`.
 
 ```
 # 2:0 = a 3 bit value going from bit 2 to bit 0
