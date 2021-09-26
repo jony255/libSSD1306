@@ -139,8 +139,8 @@ have declared. There are 2 ways of implementing what I have in mind.
 ### Option #1 - configuration done at link-time
 
 I will declare functions in a header file that I expect the user of the library
-to implement. The build system will take care of linking that header file's
-implementation (.c file) to the library.
+to implement. The user will have to write their glue code within `libSSD1306`'s
+codebase.
 
 <a id="option_1_link_time_pros"></a>
 #### Pros
