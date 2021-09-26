@@ -5,6 +5,8 @@
 - [Description](#description)
 - [Prerequisites](#prerequisites)
 - [Getting started](#getting_started)
+    - [Download necessary files](#download_necessary_files)
+    - [Configure and build the library](#configure_and_build_the_library)
 - [Commands](#commands)
     - [Command definitions](#command_definitions)
     - [Classes of commands](#classes_of_commands)
@@ -36,6 +38,9 @@ this library to work with the `SSH1106` shouldn't require too much work.
 <a id="getting_started"></a>
 ## Getting started
 
+<a id="download_necessary_files"></a>
+### Download necessary files
+
 To begin using this library, clone the repo.
 
     $ git clone https://github.com/maybe-one-day-ubermensch/libSSD1306
@@ -48,6 +53,9 @@ The script assumes you have either `curl` or `wget` in your `$PATH`. If you
 don't have any of the two, install one of them. They are both pretty useful!
 Alternatively, you can copy the datasheet's url from the script, paste it into
 your browser, and download it from there.
+
+<a id="configure_and_build_the_library"></a>
+### Configure and build the library
 
 Next, configure the build by calling `meson`:
 
