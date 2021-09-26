@@ -104,7 +104,8 @@ For example, if you use firefox, run the following command:
 All of the commands present in the datasheet are defined as `enum`s and grouped
 according to the table they are in. For example, `Table 9-1`'s title is
 `Fundamental Command`. Its corresponding type declaration
-`enum ssd1306_fundamental_command`.
+`enum ssd1306_fundamental_command`. All of the `enum` definitions can be found
+in `./include/ssd1306/ssd1306.h`
 
 <a id="classes_of_commands"></a>
 ### Classes of commands
