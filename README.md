@@ -204,9 +204,9 @@ functions in the library.
 <a id="option_2_run_time_cons"></a>
 #### Cons
 
-1. Some of the esoteric compilers haven't implemented function pointers
-
-   todo(need source, I don't remember where I heard this...)
+1. Some of the esoteric compilers haven't implemented function pointers.
+   However, as mentioned in the prerequisites, a `c99` compliant compiler
+   is required.
 
 2. The compiler may not inline calls to the functions as a result of using
    function pointers. However, these functions aren't meant to be doing much
