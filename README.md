@@ -20,6 +20,9 @@
         - [Pros](#option_2_run_time_pros)
         - [Cons](#option_2_run_time_cons)
     - [And the winner is...](#and_the_winner_is)
+    - [Implementing option 2](#implementing_option_2_four)
+        - [Explaining platform dependent operations](#explaining_platform_dependent_operations)
+        - [Code snippet using libopencm3s HAL](#code_snippet_using_libopencm3s_hal)
 
 <a id="description"></a>
 ## Description
@@ -229,3 +232,121 @@ Option 2!!
 Option 2 is more portable across c compilers and, I feel, is the cleanest. This
 option doesn't require altering the `libSSD1306` codebase. The code the user
 writes is, by design, independent of the library's.
+
+<a id="implementing_option_2_four"></a>
+### Implementing option 2
+
+<a id="explaining_platform_dependent_operations"></a>
+#### Explaining platform dependent operations
+
+All of the code that pertains to platform dependent operations can be found in
+`./include/ssd1306/platform.h`. In it, there are two `typedef`s and a `struct`
+that are responsible for configuring the I/O of the library:
+
+```c
+typedef enum ssd1306_err (*ssd1306_send_cmd_cb)(struct ssd1306_ctx *ctx,
+                                                uint8_t cmd);
+typedef enum ssd1306_err (*ssd1306_write_data_cb)(struct ssd1306_ctx *ctx,
+                                                  uint8_t data);
+
+struct ssd1306_ctx {
+    /**
+     * User supplied callback that sends a command to the SSD1306.
+     */
+    ssd1306_send_cmd_cb send_cmd;
+    /**
+     * User supplied callback that writes data to the SSD1306's memory.
+     */
+    ssd1306_write_data_cb write_data;
+
+    /**
+     * Custom data that a user might want available in their supplied callbacks.
+     */
+    void *user_ctx;
+};
+```
+
+As mentioned in
+[Option #2 - Configuration done at run-time](#option_2_run_time), you will pass
+in an instance of `struct ssd1306_ctx` to all functions. The struct's
+`send_cmd` and `write_data` fields must store the pointer to the functions that
+implement the I/O.
+
+<a id="code_snippet_using_libopencm3s_hal"></a>
+#### Code snippet using libopencm3s HAL
+
+The following is a small example on how to configure/use `libSSD1306` with
+[libopencm3's](https://libopencm3.org/) HAL.
+
+The snippet assumes you have already configured the SPI peripheral and will
+focus only on how to interface `libopencm3` with `libSSD1306`. The wiring used
+in this example is explained in detail in the `SSD1306`'s datasheet (8.1.3) and
+will be referred to from here on out as 4-wire SPI. (SDIN, SCLK, CS, D/C)
+
+```c
+/* chip select is active LOW */
+
+#define CS_GPIO_BANK     GPIOC
+#define CS_GPIO_PORT_NUM GPIO9
+
+#define DC_GPIO_BANK     GPIOC
+#define DC_GPIO_PORT_NUM GPIO2
+
+static void set_chip_select_high(void) {
+    gpio_set(CS_GPIO_BANK, CS_GPIO_PORT_NUM);
+}
+static void set_chip_select_low(void) {
+    gpio_clear(CS_GPIO_BANK, CS_GPIO_PORT_NUM);
+}
+
+static void mark_as_data(void) {
+    gpio_set(DC_GPIO_BANK, DC_GPIO_PORT_NUM);
+}
+static void mark_as_command(void) {
+    gpio_clear(DC_GPIO_BANK, DC_GPIO_PORT_NUM);
+}
+
+static enum ssd1306_err send_cmd(struct ssd1306_ctx *ctx, uint8_t cmd) {
+    set_chip_select_low();
+
+    mark_as_command();
+
+    spi_send(SPI2, (uint8_t)cmd);
+
+    set_chip_select_high();
+
+    return SSD1306_OK;
+}
+
+static enum ssd1306_err write_data(struct ssd1306_ctx *ctx, uint8_t data) {
+    set_chip_select_low();
+
+    mark_as_data();
+
+    spi_send(SPI2, (uint8_t)data);
+
+    set_chip_select_high();
+
+    return SSD1306_OK;
+}
+
+int main(int argc, char *argv[]) {
+    /*
+     * libopencm3 setup done ...
+     *
+     * Assume GPIO ports C9 = chip select and C2 = data/command.
+     * Assume SPI2 peripheral is being used.
+     */
+
+    struct ssd1306_ctx ctx = {
+        .send_cmd = &send_cmd,
+        .write_data = &write_data,
+    };
+
+    ssd1306_setup(&ctx);
+
+    ssd1306_set_contrast(&ctx, 4);
+
+    return 0;
+}
+```
