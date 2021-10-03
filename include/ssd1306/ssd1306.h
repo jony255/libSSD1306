@@ -50,49 +50,52 @@ enum ssd1306_fundamental_command {
 };
 
 /**
- * @param ctx struct that contains the platform dependent I/O
- *
  * @implements SSD1306_DISPLAY_ON
+ *
+ * @param ctx struct that contains the platform dependent I/O
  */
 enum ssd1306_err ssd1306_turn_display_on(struct ssd1306_ctx *ctx);
+
 /**
- * @param ctx struct that contains the platform dependent I/O
- *
  * @implements SSD1306_DISPLAY_OFF
+ *
+ * @param ctx struct that contains the platform dependent I/O
  */
 enum ssd1306_err ssd1306_turn_display_off(struct ssd1306_ctx *ctx);
 
 /**
- * @param ctx struct that contains the platform dependent I/O
- *
  * @implements SSD1306_DISPLAY_IGNORE_RAM
+ *
+ * @param ctx struct that contains the platform dependent I/O
  */
 enum ssd1306_err ssd1306_ignore_ram_contents(struct ssd1306_ctx *ctx);
+
 /**
- * @param ctx struct that contains the platform dependent I/O
- *
  * @implements SSD1306_DISPLAY_FOLLOW_RAM
+ *
+ * @param ctx struct that contains the platform dependent I/O
  */
 enum ssd1306_err ssd1306_follow_ram_contents(struct ssd1306_ctx *ctx);
 
 /**
- * @param ctx struct that contains the platform dependent I/O
- *
  * @implements SSD1306_NORMAL_DISPLAY
+ *
+ * @param ctx struct that contains the platform dependent I/O
  */
 enum ssd1306_err ssd1306_normalize_display(struct ssd1306_ctx *ctx);
+
 /**
- * @param ctx struct that contains the platform dependent I/O
- *
  * @implements SSD1306_INVERT_DISPLAY
+ *
+ * @param ctx struct that contains the platform dependent I/O
  */
 enum ssd1306_err ssd1306_invert_display(struct ssd1306_ctx *ctx);
 
 /**
+ * @implements SSD1306_SET_CONTRAST_CTRL
+ *
  * @param ctx struct that contains the platform dependent I/O
  * @param contrast_value set the contrast to any value between 0 and 255
- *
- * @implements SSD1306_SET_CONTRAST_CTRL
  */
 enum ssd1306_err ssd1306_set_contrast(struct ssd1306_ctx *ctx,
                                       uint8_t contrast_value);
