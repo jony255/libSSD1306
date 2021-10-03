@@ -1,6 +1,9 @@
 #ifndef LIBSSD1306_SSD1306_SSD1306_H
 #define LIBSSD1306_SSD1306_SSD1306_H
 
+#include "ssd1306/err.h"
+#include "ssd1306/platform.h"
+
 /**
  * @defgroup commands Commands
  *
@@ -44,6 +47,54 @@ enum ssd1306_fundamental_command {
      */
     SSD1306_SET_CONTRAST_CTRL = 0x81,
 };
+
+/**
+ * @param ctx struct that contains the platform dependent I/O
+ *
+ * @implements SSD1306_DISPLAY_ON
+ */
+enum ssd1306_err ssd1306_turn_display_on(struct ssd1306_ctx *ctx);
+/**
+ * @param ctx struct that contains the platform dependent I/O
+ *
+ * @implements SSD1306_DISPLAY_OFF
+ */
+enum ssd1306_err ssd1306_turn_display_off(struct ssd1306_ctx *ctx);
+
+/**
+ * @param ctx struct that contains the platform dependent I/O
+ *
+ * @implements SSD1306_DISPLAY_IGNORE_RAM
+ */
+enum ssd1306_err ssd1306_ignore_ram_contents(struct ssd1306_ctx *ctx);
+/**
+ * @param ctx struct that contains the platform dependent I/O
+ *
+ * @implements SSD1306_DISPLAY_FOLLOW_RAM
+ */
+enum ssd1306_err ssd1306_follow_ram_contents(struct ssd1306_ctx *ctx);
+
+/**
+ * @param ctx struct that contains the platform dependent I/O
+ *
+ * @implements SSD1306_NORMAL_DISPLAY
+ */
+enum ssd1306_err ssd1306_normalize_display(struct ssd1306_ctx *ctx);
+/**
+ * @param ctx struct that contains the platform dependent I/O
+ *
+ * @implements SSD1306_INVERT_DISPLAY
+ */
+enum ssd1306_err ssd1306_invert_display(struct ssd1306_ctx *ctx);
+
+/**
+ * @param ctx struct that contains the platform dependent I/O
+ * @param contrast_value set the contrast to any value between 0 and 255
+ *
+ * @implements SSD1306_SET_CONTRAST_CTRL
+ */
+enum ssd1306_err ssd1306_set_contrast(struct ssd1306_ctx *ctx,
+                                      uint8_t contrast_value);
 
 /** @} */
 
