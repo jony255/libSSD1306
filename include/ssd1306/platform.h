@@ -6,7 +6,7 @@
 #include <stdint.h>
 
 /**
- * @defgroup platform_dependent Platform Dependent Operations
+ * @defgroup platform_dependent_operations Platform Dependent Operations
  *
  * This module houses all the types that need to be implemented per platform.
  *
