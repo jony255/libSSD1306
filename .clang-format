@@ -2,13 +2,14 @@ AlignConsecutiveMacros: true
 AllowShortFunctionsOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterReturnType: AllDefinitions
 AlwaysBreakBeforeMultilineStrings: true
 BinPackArguments: true
 BinPackParameters: true
 BreakBeforeBinaryOperators: NonAssignment
 ColumnLimit: 80
 IndentCaseLabels: true
-IndentFunctionDeclarationAfterType: true
+IndentWrappedFunctionNames: false
 IndentGotoLabels: false
 IndentWidth: 4
 MaxEmptyLinesToKeep: 1
@@ -28,7 +29,7 @@ BraceWrapping:
     AfterControlStatement: false
     AfterEnum: false
     AfterExternBlock: false
-    AfterFunction: false
+    AfterFunction: true
     AfterStruct: false
     AfterUnion: false
     BeforeElse: true
