@@ -12,6 +12,12 @@
  */
 enum ssd1306_err {
     SSD1306_OK, /**< The function did not encounter an error. */
+
+    /**
+     * The current wiring setup doesn't support reading from the @c SSD1306.
+     * This is the case for serial wiring setups.
+     */
+    SSD1306_READING_UNSUPPORTED,
 };
 
 /** @} */
