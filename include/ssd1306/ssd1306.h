@@ -14,6 +14,7 @@
 
 /**
  * @defgroup fundamental_commands Fundamental Commands
+ *
  * @{
  */
 
@@ -96,10 +97,11 @@ enum ssd1306_err ssd1306_invert_display(struct ssd1306_ctx *ctx);
 enum ssd1306_err ssd1306_set_contrast(struct ssd1306_ctx *ctx,
                                       uint8_t contrast_value);
 
-/** @} */
+/** @} */ /* fundamental_commands */
 
 /**
  * @defgroup scrolling_commands Scrolling Commands
+ *
  * @{
  */
 
@@ -271,10 +273,11 @@ enum ssd1306_row {
     SSD1306_ROW_63,
 };
 
-/** @} */
+/** @} */ /* scrolling_commands */
 
 /**
  * @defgroup address_setting_commands Address Settings Commands
+ *
  * @{
  */
 
@@ -522,10 +525,11 @@ enum ssd1306_col {
     SSD1306_NUM_COLS,
 };
 
-/** @} */
+/** @} */ /* address_setting_commands */
 
 /**
  * @defgroup hardware_configuration_commands Hardware Configuration Commands
+ *
  * @{
  */
 
@@ -599,11 +603,12 @@ enum ssd1306_common_pin_config {
     SSD1306_DISABLE_LEFT_RIGHT_REMAP = 0x02,
 };
 
-/** @} */
+/** @} */ /* hardware_configuration_commands */
 
 /**
  * @defgroup timing_and_driving_scheme_setting_commands \
  *      Timing/Driving Scheme Setting Commands
+ *
  * @{
  */
 
@@ -641,8 +646,8 @@ enum ssd1306_vcomh_deselect_level {
     SSD1306_POINT_83_X_VCC = 0x30, /**< Multiply Vcc by ~0.83 */
 };
 
-/** @} */
+/** @} */ /* timing_and_driving_scheme_setting_commands */
 
-/** @} */
+/** @} */ /* commands */
 
 #endif /* LIBSSD1306_SSD1306_SSD1306_H */

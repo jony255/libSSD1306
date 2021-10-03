@@ -72,6 +72,6 @@ struct ssd1306_ctx {
     void *user_ctx;
 };
 
-/** @} */
+/** @} */ /* platform_dependent_operations */
 
 #endif /* LIBSSD1306_SSD1306_PLATFORM_H */

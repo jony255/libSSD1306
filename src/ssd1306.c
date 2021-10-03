@@ -57,4 +57,4 @@ ssd1306_set_contrast(struct ssd1306_ctx *ctx, uint8_t contrast_value)
     return ctx->send_cmd(ctx, contrast_value);
 }
 
-/** @} */
+/** @} */ /* fundamental_commands */

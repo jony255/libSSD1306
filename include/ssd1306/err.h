@@ -20,6 +20,6 @@ enum ssd1306_err {
     SSD1306_READING_UNSUPPORTED,
 };
 
-/** @} */
+/** @} */ /* ssd1306_return_codes */
 
 #endif /* LIBSSD1306_SSD1306_ERR_H */
