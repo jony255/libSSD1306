@@ -99,8 +99,8 @@ enum ssd1306_scrolling_command {
  * @ref SSD1306_LEFT_VERT_SCROLL \n
  */
 enum ssd1306_dummy_byte {
-    SSD1306_DUMMY_BYTE_0S = 0x00, /**< Filler byte comprised of all 0's. */
-    SSD1306_DUMMY_BYTE_1S = 0xFF, /**< Filler byte comprised of all 1's. */
+    SSD1306_DUMMY_BYTE_0S = 0x00,
+    SSD1306_DUMMY_BYTE_1S = 0xFF,
 };
 
 /**
@@ -114,15 +114,15 @@ enum ssd1306_dummy_byte {
  * @ref SSD1306_LEFT_VERT_SCROLL \n
  */
 enum ssd1306_page {
-    SSD1306_PAGE_0,    /**< Select page 0. */
-    SSD1306_PAGE_1,    /**< Select page 1. */
-    SSD1306_PAGE_2,    /**< Select page 2. */
-    SSD1306_PAGE_3,    /**< Select page 3. */
-    SSD1306_PAGE_4,    /**< Select page 4. */
-    SSD1306_PAGE_5,    /**< Select page 5. */
-    SSD1306_PAGE_6,    /**< Select page 6. */
-    SSD1306_PAGE_7,    /**< Select page 7. */
-    SSD1306_NUM_PAGES, /**< Total number of pages. */
+    SSD1306_PAGE_0,
+    SSD1306_PAGE_1,
+    SSD1306_PAGE_2,
+    SSD1306_PAGE_3,
+    SSD1306_PAGE_4,
+    SSD1306_PAGE_5,
+    SSD1306_PAGE_6,
+    SSD1306_PAGE_7,
+    SSD1306_NUM_PAGES,
 };
 
 /**
