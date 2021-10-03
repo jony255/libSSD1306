@@ -50,7 +50,7 @@ ssd1306_set_contrast(struct ssd1306_ctx *ctx, uint8_t contrast_value)
 {
     enum ssd1306_err ret = ctx->send_cmd(ctx, SSD1306_DISPLAY_FOLLOW_RAM);
 
-    if (ctx->send_cmd(ctx, SSD1306_DISPLAY_FOLLOW_RAM) != SSD1306_OK) {
+    if (ret != SSD1306_OK) {
         return ret;
     }
 
