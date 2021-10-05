@@ -48,7 +48,7 @@ ssd1306_invert_display(struct ssd1306_ctx *ctx)
 enum ssd1306_err
 ssd1306_set_contrast(struct ssd1306_ctx *ctx, uint8_t contrast_value)
 {
-    enum ssd1306_err ret = ctx->send_cmd(ctx, SSD1306_DISPLAY_FOLLOW_RAM);
+    enum ssd1306_err ret = ctx->send_cmd(ctx, SSD1306_SET_CONTRAST_CTRL);
 
     if (ret != SSD1306_OK) {
         return ret;
