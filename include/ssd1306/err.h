@@ -9,6 +9,9 @@
 
 /**
  * An enum that contains of all possible return codes.
+ *
+ * @todo Make sure to add note to functions about common errors so I don't
+ *       repeat that information in their generated documentation.
  */
 enum ssd1306_err {
     SSD1306_OK, /**< The function did not encounter an error. */
