@@ -304,6 +304,125 @@ enum ssd1306_row {
     SSD1306_ROW_63,
 };
 
+/**
+ * @warning writing/reading data and changing the horizontal scroll parameters
+ *          are prohibited after calling this function
+ *
+ * @implements SSD1306_START_SCROLLING
+ *
+ * @param ctx struct that contains the platform dependent I/O
+ *
+ * @return
+ *      - @ref SSD1306_OK on success
+ *      - some other error propagated by any of the callbacks
+ */
+enum ssd1306_err ssd1306_start_scrolling(struct ssd1306_ctx *ctx);
+
+/**
+ * @implements SSD1306_STOP_SCROLLING
+ *
+ * @param ctx struct that contains the platform dependent I/O
+ *
+ * @return
+ *      - @ref SSD1306_OK on success
+ *      - some other error propagated by any of the callbacks
+ */
+enum ssd1306_err ssd1306_stop_scrolling(struct ssd1306_ctx *ctx);
+
+/**
+ * @implements SSD1306_RIGHT_SCROLL
+ *
+ * @param ctx         struct that contains the platform dependent I/O
+ * @param upper_bound use this page's first row as the upper boundary of the
+ *                    scrolling area
+ * @param interval    time interval between each scroll step
+ * @param lower_bound use this page's last row as the lower boundary of the
+ *                    scrolling area
+ *
+ * @return
+ *      - @ref SSD1306_OK on success
+ *      - some other error propagated by any of the callbacks
+ */
+enum ssd1306_err ssd1306_scroll_right(struct ssd1306_ctx *ctx,
+                                      enum ssd1306_page upper_bound,
+                                      enum ssd1306_scroll_step interval,
+                                      enum ssd1306_page lower_bound);
+
+/**
+ * @implements SSD1306_LEFT_SCROLL
+ *
+ * @param ctx         struct that contains the platform dependent I/O
+ * @param upper_bound use this page's first row as the upper boundary of the
+ *                    scrolling area
+ * @param interval    time interval between each scroll step
+ * @param lower_bound use this page's last row as the lower boundary of the
+ *                    scrolling area
+ *
+ * @return
+ *      - @ref SSD1306_OK on success
+ *      - some other error propagated by any of the callbacks
+ */
+enum ssd1306_err ssd1306_scroll_left(struct ssd1306_ctx *ctx,
+                                     enum ssd1306_page upper_bound,
+                                     enum ssd1306_scroll_step interval,
+                                     enum ssd1306_page lower_bound);
+
+/**
+ * @implements SSD1306_VERT_SCROLL
+ *
+ * @param ctx          struct that contains the platform dependent I/O
+ * @param static_rows  number of rows in the top, fixed area
+ * @param dynamic_rows number of rows in the bottom, scrolling area
+ *
+ * @return
+ *      - @ref SSD1306_OK on success
+ *      - some other error propagated by any of the callbacks
+ */
+enum ssd1306_err ssd1306_scroll_vertical(struct ssd1306_ctx *ctx,
+                                         enum ssd1306_row static_rows,
+                                         enum ssd1306_row dynamic_rows);
+
+/**
+ * @implements SSD1306_RIGHT_VERT_SCROLL
+ *
+ * @param ctx             struct that contains the platform dependent I/O
+ * @param upper_bound     use this page's first row as the upper boundary of the
+ *                        scrolling area
+ * @param interval        time interval between each scroll step
+ * @param lower_bound     use this page's last row as the lower boundary of the
+ *                        scrolling area
+ * @param vertical_offset number of rows to scroll vertically each @c interval
+ *
+ * @return
+ *      - @ref SSD1306_OK on success
+ *      - some other error propagated by any of the callbacks
+ */
+enum ssd1306_err ssd1306_scroll_vertical_right(
+    struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
+    enum ssd1306_scroll_step interval, enum ssd1306_page lower_bound,
+    enum ssd1306_row vertical_offset);
+
+/**
+ * @implements SSD1306_LEFT_VERT_SCROLL
+ *
+ * @param ctx             struct that contains the platform dependent I/O
+ * @param upper_bound     use this page's first row as the upper boundary of the
+ *                        scrolling area
+ * @param interval        time interval between each scroll step
+ * @param lower_bound     use this page's last row as the lower boundary of the
+ *                        scrolling area
+ * @param vertical_offset number of rows to scroll vertically each @c interval
+ *
+ * @return
+ *      - @ref SSD1306_OK on success
+ *      - some other error propagated by any of the callbacks
+ */
+enum ssd1306_err ssd1306_scroll_vertical_left(struct ssd1306_ctx *ctx,
+                                              enum ssd1306_page upper_bound,
+                                              enum ssd1306_scroll_step interval,
+                                              enum ssd1306_page lower_bound,
+                                              enum ssd1306_row vertical_offset);
+
 /** @} */ /* scrolling_commands */
 
 /**
