@@ -220,15 +220,15 @@ enum ssd1306_page {
  * @ref SSD1306_RIGHT_VERT_SCROLL \n
  * @ref SSD1306_LEFT_VERT_SCROLL \n
  */
-enum ssd1306_scroll_step_frame_freq {
-    SSD1306_2_FRAMES = 0x07,   /**< Scroll step of 2 frames. */
-    SSD1306_3_FRAMES = 0x04,   /**< Scroll step of 3 frames.*/
-    SSD1306_4_FRAMES = 0x05,   /**< Scroll step of 4 frames.*/
-    SSD1306_5_FRAMES = 0x00,   /**< Scroll step of 5 frames.*/
-    SSD1306_25_FRAMES = 0x06,  /**< Scroll step of 25 frames.*/
-    SSD1306_64_FRAMES = 0x01,  /**< Scroll step of 64 frames.*/
-    SSD1306_128_FRAMES = 0x02, /**< Scroll step of 128 frames.*/
-    SSD1306_256_FRAMES = 0x03, /**< Scroll step of 256 frames.*/
+enum ssd1306_scroll_step {
+    SSD1306_2_FRAMES = 0x07,
+    SSD1306_3_FRAMES = 0x04,
+    SSD1306_4_FRAMES = 0x05,
+    SSD1306_5_FRAMES = 0x00,
+    SSD1306_25_FRAMES = 0x06,
+    SSD1306_64_FRAMES = 0x01,
+    SSD1306_128_FRAMES = 0x02,
+    SSD1306_256_FRAMES = 0x03,
 };
 
 /**
