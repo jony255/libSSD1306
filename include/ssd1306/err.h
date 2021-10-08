@@ -9,6 +9,9 @@
  * will omit the following return codes from their @c \@return:
  *
  * - @ref SSD1306_OK
+ *
+ * - @ref SSD1306_CTX_NULL
+ *
  * - @ref SSD1306_READING_UNSUPPORTED
  *
  * The only time a function should explicitly state what the return codes are
@@ -22,6 +25,10 @@
  */
 enum ssd1306_err {
     SSD1306_OK, /**< The function did not encounter an error. */
+
+    SSD1306_CTX_NULL,        /**< The @ref ssd1306_ctx passed in is @c NULL. */
+    SSD1306_SEND_CMD_NULL,   /**< @ref ssd1306_ctx::send_cmd is @c NULL. */
+    SSD1306_WRITE_DATA_NULL, /**< @ref ssd1306_ctx::write_data is @c NULL. */
 
     /**
      * The current wiring setup doesn't support reading from the @c SSD1306.
