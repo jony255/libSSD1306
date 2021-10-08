@@ -26,6 +26,9 @@ enum ssd1306_err {
     /**
      * The current wiring setup doesn't support reading from the @c SSD1306.
      * This is the case for serial wiring setups.
+     *
+     * @todo This return code only applies to @c ssd1306_ctx::read_data or
+     *       @c ssd1306_ctx::read_status . These still need to be spec'd out.
      */
     SSD1306_READING_UNSUPPORTED,
 };
