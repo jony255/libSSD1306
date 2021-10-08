@@ -4,14 +4,21 @@
 /**
  * @defgroup ssd1306_return_codes Return Codes
  *
- * @{
+ * Each library function shares a common set of possible return codes.
+ * For the sake of not duplicating documentation, all of the library functions
+ * will omit the following return codes from their @c \@return:
+ *
+ * - @ref SSD1306_OK
+ * - @ref SSD1306_READING_UNSUPPORTED
+ *
+ * The only time a function should explicitly state what the return codes are
+ * is when they differ from the set of common return codes.
  */
+
+/** @{ */
 
 /**
  * An enum that contains of all possible return codes.
- *
- * @todo Make sure to add note to functions about common errors so I don't
- *       repeat that information in their generated documentation.
  */
 enum ssd1306_err {
     SSD1306_OK, /**< The function did not encounter an error. */

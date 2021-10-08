@@ -53,10 +53,6 @@ enum ssd1306_fundamental_command {
  * @implements SSD1306_DISPLAY_ON
  *
  * @param ctx struct that contains the platform dependent I/O
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_turn_display_on(struct ssd1306_ctx *ctx);
 
@@ -64,10 +60,6 @@ enum ssd1306_err ssd1306_turn_display_on(struct ssd1306_ctx *ctx);
  * @implements SSD1306_DISPLAY_OFF
  *
  * @param ctx struct that contains the platform dependent I/O
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_turn_display_off(struct ssd1306_ctx *ctx);
 
@@ -75,10 +67,6 @@ enum ssd1306_err ssd1306_turn_display_off(struct ssd1306_ctx *ctx);
  * @implements SSD1306_DISPLAY_IGNORE_RAM
  *
  * @param ctx struct that contains the platform dependent I/O
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_ignore_ram_contents(struct ssd1306_ctx *ctx);
 
@@ -86,10 +74,6 @@ enum ssd1306_err ssd1306_ignore_ram_contents(struct ssd1306_ctx *ctx);
  * @implements SSD1306_DISPLAY_FOLLOW_RAM
  *
  * @param ctx struct that contains the platform dependent I/O
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_follow_ram_contents(struct ssd1306_ctx *ctx);
 
@@ -97,10 +81,6 @@ enum ssd1306_err ssd1306_follow_ram_contents(struct ssd1306_ctx *ctx);
  * @implements SSD1306_NORMAL_DISPLAY
  *
  * @param ctx struct that contains the platform dependent I/O
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_normalize_display(struct ssd1306_ctx *ctx);
 
@@ -108,10 +88,6 @@ enum ssd1306_err ssd1306_normalize_display(struct ssd1306_ctx *ctx);
  * @implements SSD1306_INVERT_DISPLAY
  *
  * @param ctx struct that contains the platform dependent I/O
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_invert_display(struct ssd1306_ctx *ctx);
 
@@ -120,10 +96,6 @@ enum ssd1306_err ssd1306_invert_display(struct ssd1306_ctx *ctx);
  *
  * @param ctx struct that contains the platform dependent I/O
  * @param contrast_value set the contrast to any value between 0 and 255
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_set_contrast(struct ssd1306_ctx *ctx,
                                       uint8_t contrast_value);
@@ -311,10 +283,6 @@ enum ssd1306_row {
  * @implements SSD1306_START_SCROLLING
  *
  * @param ctx struct that contains the platform dependent I/O
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_start_scrolling(struct ssd1306_ctx *ctx);
 
@@ -322,10 +290,6 @@ enum ssd1306_err ssd1306_start_scrolling(struct ssd1306_ctx *ctx);
  * @implements SSD1306_STOP_SCROLLING
  *
  * @param ctx struct that contains the platform dependent I/O
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_stop_scrolling(struct ssd1306_ctx *ctx);
 
@@ -338,10 +302,6 @@ enum ssd1306_err ssd1306_stop_scrolling(struct ssd1306_ctx *ctx);
  * @param interval    time interval between each scroll step
  * @param lower_bound use this page's last row as the lower boundary of the
  *                    scrolling area
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_scroll_right(struct ssd1306_ctx *ctx,
                                       enum ssd1306_page upper_bound,
@@ -357,10 +317,6 @@ enum ssd1306_err ssd1306_scroll_right(struct ssd1306_ctx *ctx,
  * @param interval    time interval between each scroll step
  * @param lower_bound use this page's last row as the lower boundary of the
  *                    scrolling area
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_scroll_left(struct ssd1306_ctx *ctx,
                                      enum ssd1306_page upper_bound,
@@ -373,10 +329,6 @@ enum ssd1306_err ssd1306_scroll_left(struct ssd1306_ctx *ctx,
  * @param ctx          struct that contains the platform dependent I/O
  * @param static_rows  number of rows in the top, fixed area
  * @param dynamic_rows number of rows in the bottom, scrolling area
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_scroll_vertical(struct ssd1306_ctx *ctx,
                                          enum ssd1306_row static_rows,
@@ -392,10 +344,6 @@ enum ssd1306_err ssd1306_scroll_vertical(struct ssd1306_ctx *ctx,
  * @param lower_bound     use this page's last row as the lower boundary of the
  *                        scrolling area
  * @param vertical_offset number of rows to scroll vertically each @c interval
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_scroll_vertical_right(
     struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
@@ -412,10 +360,6 @@ enum ssd1306_err ssd1306_scroll_vertical_right(
  * @param lower_bound     use this page's last row as the lower boundary of the
  *                        scrolling area
  * @param vertical_offset number of rows to scroll vertically each @c interval
- *
- * @return
- *      - @ref SSD1306_OK on success
- *      - some other error propagated by any of the callbacks
  */
 enum ssd1306_err ssd1306_scroll_vertical_left(struct ssd1306_ctx *ctx,
                                               enum ssd1306_page upper_bound,
