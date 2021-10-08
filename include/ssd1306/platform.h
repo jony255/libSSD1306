@@ -21,6 +21,7 @@ struct ssd1306_ctx;
 
 /**
  * A callback typedef that is in charge of sending a command to the SSD1306.
+ * The user can safely assume that @c ctx will be not be @c NULL.
  *
  * @param ctx Pointer to the @ref ssd1306_ctx.
  * @param cmd Command to send.
@@ -31,6 +32,7 @@ typedef enum ssd1306_err (*ssd1306_send_cmd_cb)(struct ssd1306_ctx *ctx,
                                                 uint8_t cmd);
 /**
  * A callback typedef that is in charge of writing data to the SSD1306's memory.
+ * The user can safely assume that @c ctx will be not be @c NULL.
  *
  * @param ctx  Pointer to the @ref ssd1306_ctx.
  * @param data Data to write to RAM.
