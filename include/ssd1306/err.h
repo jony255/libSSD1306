@@ -4,7 +4,7 @@
 /**
  * @defgroup ssd1306_return_codes Return Codes
  *
- * Each library function shares a common set of possible return codes.
+ * All library functions share a common set of possible return codes.
  * For the sake of not duplicating documentation, all of the library functions
  * will omit the following return codes from their @c \@return:
  *
