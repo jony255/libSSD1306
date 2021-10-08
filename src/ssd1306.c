@@ -62,42 +62,56 @@ check_ctx(struct ssd1306_ctx *ctx, enum ctx_check flags)
 enum ssd1306_err
 ssd1306_turn_display_on(struct ssd1306_ctx *ctx)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     return ctx->send_cmd(ctx, SSD1306_DISPLAY_ON);
 }
 
 enum ssd1306_err
 ssd1306_turn_display_off(struct ssd1306_ctx *ctx)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     return ctx->send_cmd(ctx, SSD1306_DISPLAY_OFF);
 }
 
 enum ssd1306_err
 ssd1306_ignore_ram_contents(struct ssd1306_ctx *ctx)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     return ctx->send_cmd(ctx, SSD1306_DISPLAY_IGNORE_RAM);
 }
 
 enum ssd1306_err
 ssd1306_follow_ram_contents(struct ssd1306_ctx *ctx)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     return ctx->send_cmd(ctx, SSD1306_DISPLAY_FOLLOW_RAM);
 }
 
 enum ssd1306_err
 ssd1306_normalize_display(struct ssd1306_ctx *ctx)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     return ctx->send_cmd(ctx, SSD1306_NORMAL_DISPLAY);
 }
 
 enum ssd1306_err
 ssd1306_invert_display(struct ssd1306_ctx *ctx)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     return ctx->send_cmd(ctx, SSD1306_INVERT_DISPLAY);
 }
 
 enum ssd1306_err
 ssd1306_set_contrast(struct ssd1306_ctx *ctx, uint8_t contrast_value)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     enum ssd1306_err ret = ctx->send_cmd(ctx, SSD1306_SET_CONTRAST_CTRL);
 
     if (ret != SSD1306_OK) {
@@ -118,6 +132,8 @@ ssd1306_set_contrast(struct ssd1306_ctx *ctx, uint8_t contrast_value)
 enum ssd1306_err
 ssd1306_start_scrolling(struct ssd1306_ctx *ctx)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_START_SCROLLING));
 
     return SSD1306_OK;
@@ -126,6 +142,8 @@ ssd1306_start_scrolling(struct ssd1306_ctx *ctx)
 enum ssd1306_err
 ssd1306_stop_scrolling(struct ssd1306_ctx *ctx)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD | CHECK_WRITE_DATA));
+
     SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_STOP_SCROLLING));
 
     /*
@@ -190,6 +208,8 @@ ssd1306_scroll_right(struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
                      enum ssd1306_scroll_step interval,
                      enum ssd1306_page lower_bound)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     SSD1306_RETURN_ON_ERR(setup_horiz_nonvert_scroll_params(
         ctx, SSD1306_RIGHT_SCROLL, upper_bound, interval, lower_bound));
 
@@ -201,6 +221,8 @@ ssd1306_scroll_left(struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
                     enum ssd1306_scroll_step interval,
                     enum ssd1306_page lower_bound)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     SSD1306_RETURN_ON_ERR(setup_horiz_nonvert_scroll_params(
         ctx, SSD1306_LEFT_SCROLL, upper_bound, interval, lower_bound));
 
@@ -211,6 +233,8 @@ enum ssd1306_err
 ssd1306_scroll_vertical(struct ssd1306_ctx *ctx, enum ssd1306_row static_rows,
                         enum ssd1306_row dynamic_rows)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_VERT_SCROLL));
 
     SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, static_rows));
@@ -247,6 +271,8 @@ ssd1306_scroll_vertical_right(struct ssd1306_ctx *ctx,
                               enum ssd1306_page lower_bound,
                               enum ssd1306_row vertical_offset)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     SSD1306_RETURN_ON_ERR(setup_horiz_vert_scroll_params(
         ctx, SSD1306_RIGHT_VERT_SCROLL, upper_bound, interval, lower_bound,
         vertical_offset));
@@ -261,6 +287,8 @@ ssd1306_scroll_vertical_left(struct ssd1306_ctx *ctx,
                              enum ssd1306_page lower_bound,
                              enum ssd1306_row vertical_offset)
 {
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     SSD1306_RETURN_ON_ERR(setup_horiz_vert_scroll_params(
         ctx, SSD1306_LEFT_VERT_SCROLL, upper_bound, interval, lower_bound,
         vertical_offset));
