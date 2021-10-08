@@ -3,10 +3,55 @@
 #include "ssd1306/err.h"
 #include "ssd1306/platform.h"
 
+#include <stddef.h> /* NULL */
+
 /**
  * @todo Correctly check the validity of the parameters passed in to all
  *       functions. Also make sure to add those potential errors to 'err.h'.
  */
+
+#define BITU(n) (1U << (n))
+#define BIT(n)  BITU(n)
+
+/**
+ * Flags used to determine which of the callbacks to check.
+ */
+enum ctx_check {
+    CHECK_SEND_CMD = BIT(0),
+    CHECK_WRITE_DATA = BIT(1),
+};
+
+/**
+ * Check that ctx and its callbacks aren't NULL.
+ *
+ * @param ctx   ctx to NULL-check
+ * @param flags bitwise or'd set of flags to determine which callbacks to check
+ *
+ * @return
+ *       - the appropriate NULL return code for the NULL argument
+ *       - SSD1306_OK otherwise
+ */
+static enum ssd1306_err
+check_ctx(struct ssd1306_ctx *ctx, enum ctx_check flags)
+{
+    if (ctx == NULL) {
+        return SSD1306_CTX_NULL;
+    }
+    else if ((flags & CHECK_SEND_CMD) && ctx->send_cmd == NULL) {
+        return SSD1306_SEND_CMD_NULL;
+    }
+    else if ((flags & CHECK_WRITE_DATA) && ctx->write_data == NULL) {
+        return SSD1306_WRITE_DATA_NULL;
+    }
+
+    /*
+     * Don't add an else clause returning SSD1306_OK. It will be easier to
+     * conditionally compile the if checks out of the function should such a
+     * need arise.
+     */
+
+    return SSD1306_OK;
+}
 
 /**
  * @ingroup fundamental_commands
