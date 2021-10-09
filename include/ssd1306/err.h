@@ -38,6 +38,17 @@ enum ssd1306_err {
      *       @c ssd1306_ctx::read_status . These still need to be spec'd out.
      */
     SSD1306_READING_UNSUPPORTED,
+
+    /**
+     * A calculation involving the width of the OLED was performed and noticed
+     * that the width was set to 0.
+     */
+    SSD1306_WIDTH_ZERO,
+    /**
+     * A calculation involving the height of the OLED was performed and noticed
+     * that the height was set to 0.
+     */
+    SSD1306_HEIGHT_ZERO,
 };
 
 /**
