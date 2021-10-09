@@ -8,15 +8,15 @@
  * @defgroup commands Commands
  *
  * All possible command groups are placed here.
- *
- * @{
  */
+
+/** @{ */
 
 /**
  * @defgroup fundamental_commands Fundamental Commands
- *
- * @{
  */
+
+/** @{ */
 
 /**
  * The enumerated commands from @c Table 9-1
@@ -104,9 +104,9 @@ enum ssd1306_err ssd1306_set_contrast(struct ssd1306_ctx *ctx,
 
 /**
  * @defgroup scrolling_commands Scrolling Commands
- *
- * @{
  */
+
+/** @{ */
 
 /**
  * The enumerated commands from @c Table 9-2
@@ -371,9 +371,9 @@ enum ssd1306_err ssd1306_scroll_vertical_left(struct ssd1306_ctx *ctx,
 
 /**
  * @defgroup address_setting_commands Address Settings Commands
- *
- * @{
  */
+
+/** @{ */
 
 /**
  * The enumerated commands from @c Table 9-3
@@ -623,9 +623,9 @@ enum ssd1306_col {
 
 /**
  * @defgroup hardware_configuration_commands Hardware Configuration Commands
- *
- * @{
  */
+
+/** @{ */
 
 /**
  * The enumerated commands from @c Table 9-4
@@ -702,9 +702,9 @@ enum ssd1306_common_pin_config {
 /**
  * @defgroup timing_and_driving_scheme_setting_commands \
  *      Timing/Driving Scheme Setting Commands
- *
- * @{
  */
+
+/** @{ */
 
 /**
  * The enumerated commands from @c Table 9-5
