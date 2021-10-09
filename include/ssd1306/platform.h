@@ -70,6 +70,15 @@ struct ssd1306_ctx {
      * Custom data that a user might want available in their supplied callbacks.
      */
     void *user_ctx;
+
+    /**
+     * Number of maximum columns the OLED supports.
+     */
+    const uint16_t width;
+    /**
+     * Number of maximum rows the OLED supports.
+     */
+    const uint16_t height;
 };
 
 /** @} */ /* platform_dependent_operations */
