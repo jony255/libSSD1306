@@ -160,8 +160,8 @@ enum ssd1306_dummy_byte {
 };
 
 /**
- * A page is a set of 8 rows. These values are used to select the start/end
- * page addresses of various commands.
+ * These values are used to select the start/end page addresses of various
+ * commands.
  *
  * @ref SSD1306_RIGHT_SCROLL \n
  * @ref SSD1306_LEFT_SCROLL \n\n
@@ -180,6 +180,11 @@ enum ssd1306_page {
     SSD1306_PAGE_7,
     SSD1306_NUM_PAGES,
 };
+
+/**
+ * Useful macro for determining offests into pages.
+ */
+#define SSD1306_ROWS_PER_PAGE 8
 
 /**
  * These values are used to set the time interval between each scroll step in
