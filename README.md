@@ -215,6 +215,9 @@ functions in the library.
    function pointers. However, these functions aren't meant to be doing much
    anyway so it may not matter too much. `const`'ing the struct or some of the
    fields of the struct may fix the inlining issue.
+   todo(a simple example on godbolt.com didn't show a difference)
+   todo(between calling a function from a const/non-const pointer.)
+   todo(I need to figure out what's going on...)
 
 3. Extra `NULL` checking must be done by the functions to ensure the struct is
    valid. I can setup a compile-time switch to disable the checks with

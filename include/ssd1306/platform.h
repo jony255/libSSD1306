@@ -46,8 +46,6 @@ typedef enum ssd1306_err (*ssd1306_write_data_cb)(struct ssd1306_ctx *ctx,
  * An instance of this struct must be populated and passed in to all functions
  * as it contains all the platform dependent operations.
  *
- * @todo Should I should const-qualify the callbacks?
- *
  * @note The struct was forward declared so that its present before defining the
  *       typedef. I also had to move the struct's docs to the forward
  *       declaration because, otherwise, the hover information displayed by the
@@ -62,11 +60,11 @@ struct ssd1306_ctx {
     /**
      * User supplied callback that sends a command to the SSD1306.
      */
-    ssd1306_send_cmd_cb send_cmd;
+    const ssd1306_send_cmd_cb send_cmd;
     /**
      * User supplied callback that writes data to the SSD1306's memory.
      */
-    ssd1306_write_data_cb write_data;
+    const ssd1306_write_data_cb write_data;
 
     /**
      * Custom data that a user might want available in their supplied callbacks.
