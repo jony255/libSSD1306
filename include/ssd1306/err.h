@@ -11,6 +11,7 @@
  * - @ref SSD1306_OK
  *
  * - @ref SSD1306_CTX_NULL
+ * - @ref SSD1306_SEND_CMD_NULL (all functions that implement @ref commands)
  *
  * - @ref SSD1306_READING_UNSUPPORTED
  *
