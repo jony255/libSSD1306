@@ -330,9 +330,9 @@ enum ssd1306_err ssd1306_scroll_left(struct ssd1306_ctx *ctx,
  * @param static_rows  number of rows in the top, fixed area
  * @param dynamic_rows number of rows in the bottom, scrolling area
  */
-enum ssd1306_err ssd1306_scroll_vertical(struct ssd1306_ctx *ctx,
-                                         enum ssd1306_row static_rows,
-                                         enum ssd1306_row dynamic_rows);
+enum ssd1306_err ssd1306_scroll_vert(struct ssd1306_ctx *ctx,
+                                     enum ssd1306_row static_rows,
+                                     enum ssd1306_row dynamic_rows);
 
 /**
  * @implements SSD1306_RIGHT_VERT_SCROLL
@@ -345,10 +345,11 @@ enum ssd1306_err ssd1306_scroll_vertical(struct ssd1306_ctx *ctx,
  *                        scrolling area
  * @param vertical_offset number of rows to scroll vertically each @c interval
  */
-enum ssd1306_err ssd1306_scroll_vertical_right(
-    struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
-    enum ssd1306_scroll_step interval, enum ssd1306_page lower_bound,
-    enum ssd1306_row vertical_offset);
+enum ssd1306_err ssd1306_scroll_vert_right(struct ssd1306_ctx *ctx,
+                                           enum ssd1306_page upper_bound,
+                                           enum ssd1306_scroll_step interval,
+                                           enum ssd1306_page lower_bound,
+                                           enum ssd1306_row vertical_offset);
 
 /**
  * @implements SSD1306_LEFT_VERT_SCROLL
@@ -361,11 +362,11 @@ enum ssd1306_err ssd1306_scroll_vertical_right(
  *                        scrolling area
  * @param vertical_offset number of rows to scroll vertically each @c interval
  */
-enum ssd1306_err ssd1306_scroll_vertical_left(struct ssd1306_ctx *ctx,
-                                              enum ssd1306_page upper_bound,
-                                              enum ssd1306_scroll_step interval,
-                                              enum ssd1306_page lower_bound,
-                                              enum ssd1306_row vertical_offset);
+enum ssd1306_err ssd1306_scroll_vert_left(struct ssd1306_ctx *ctx,
+                                          enum ssd1306_page upper_bound,
+                                          enum ssd1306_scroll_step interval,
+                                          enum ssd1306_page lower_bound,
+                                          enum ssd1306_row vertical_offset);
 
 /** @} */ /* scrolling_commands */
 

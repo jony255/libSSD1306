@@ -230,8 +230,8 @@ ssd1306_scroll_left(struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
 }
 
 enum ssd1306_err
-ssd1306_scroll_vertical(struct ssd1306_ctx *ctx, enum ssd1306_row static_rows,
-                        enum ssd1306_row dynamic_rows)
+ssd1306_scroll_vert(struct ssd1306_ctx *ctx, enum ssd1306_row static_rows,
+                    enum ssd1306_row dynamic_rows)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
@@ -265,11 +265,11 @@ setup_horiz_vert_scroll_params(struct ssd1306_ctx *ctx,
 }
 
 enum ssd1306_err
-ssd1306_scroll_vertical_right(struct ssd1306_ctx *ctx,
-                              enum ssd1306_page upper_bound,
-                              enum ssd1306_scroll_step interval,
-                              enum ssd1306_page lower_bound,
-                              enum ssd1306_row vertical_offset)
+ssd1306_scroll_vert_right(struct ssd1306_ctx *ctx,
+                          enum ssd1306_page upper_bound,
+                          enum ssd1306_scroll_step interval,
+                          enum ssd1306_page lower_bound,
+                          enum ssd1306_row vertical_offset)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
@@ -281,11 +281,10 @@ ssd1306_scroll_vertical_right(struct ssd1306_ctx *ctx,
 }
 
 enum ssd1306_err
-ssd1306_scroll_vertical_left(struct ssd1306_ctx *ctx,
-                             enum ssd1306_page upper_bound,
-                             enum ssd1306_scroll_step interval,
-                             enum ssd1306_page lower_bound,
-                             enum ssd1306_row vertical_offset)
+ssd1306_scroll_vert_left(struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
+                         enum ssd1306_scroll_step interval,
+                         enum ssd1306_page lower_bound,
+                         enum ssd1306_row vertical_offset)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
