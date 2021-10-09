@@ -112,11 +112,7 @@ ssd1306_set_contrast(struct ssd1306_ctx *ctx, uint8_t contrast_value)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    enum ssd1306_err ret = ctx->send_cmd(ctx, SSD1306_SET_CONTRAST_CTRL);
-
-    if (ret != SSD1306_OK) {
-        return ret;
-    }
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_SET_CONTRAST_CTRL));
 
     return ctx->send_cmd(ctx, contrast_value);
 }
