@@ -104,6 +104,64 @@ enum ssd1306_err ssd1306_set_contrast(struct ssd1306_ctx *ctx,
 
 /**
  * @defgroup scrolling_commands Scrolling Commands
+ *
+ * A quick note regarding the @c upper_bound and @c lower_bound arguments to
+ * the horizontal scrolling commands:
+ *
+ * @ref ssd1306_scroll_right \n
+ * @ref ssd1306_scroll_left \n
+ * @ref ssd1306_scroll_vert_right \n
+ * @ref ssd1306_scroll_vert_left
+ *
+ * You configure the bounds of the horizontal scrolling area manually. You do so
+ * by passing in pages as the bounds of said scrolling area. There are two
+ * boundaries you need to pass in, the @c upper_bound and @c lower_bound.
+ *
+ * - @c upper_bound, which refers to the starting address of the scrolling area.
+ * - @c lower_bound, which refers to the end address of the scrolling area.
+ *
+ * However, as mentioned before, you don't pass in an individual row as the
+ * bounds, you pass in a page. The @c upper_bound will refer to that page's
+ * starting row and the @c lower_bound will refer to that page's ending row.
+ *
+ * Hopefully this illustration clears things up.
+ *
+ * Assume
+ * `upper_bound = PAGE_0` and `lower_bound = PAGE_1`
+ *
+ * PAGE_0
+ * ------
+ * - ROW_0 (@c upper_bound)
+ * - ROW_1
+ * - ROW_2
+ * - ROW_3
+ * - ROW_4
+ * - ROW_5
+ * - ROW_6
+ * - ROW_7
+ *
+ * PAGE_1
+ * ------
+ * - ROW_8
+ * - ROW_9
+ * - ROW_10
+ * - ROW_11
+ * - ROW_12
+ * - ROW_13
+ * - ROW_14
+ * - ROW_15 (@c lower_bound)
+ *
+ * In this case, ONLY rows 0 through 15 will scroll horizontally.
+ *
+ * If you only want one page to scroll horizontally, then pass in the same page
+ * to both @c upper_bound and @c lower_bound.
+ *
+ * To summarize,
+ *   - Since the bounds are only addressable as pages, the amount of rows you
+ *     can scroll by are only multiples of 8.
+ *   - Starting addresses are also multiples of 8
+ *     (i.e. you can't scroll in between pages).
+ *   - @c lower_bound must be greater than or equal to @c upper_bound.
  */
 
 /** @{ */
@@ -307,6 +365,7 @@ enum ssd1306_err ssd1306_stop_scrolling(struct ssd1306_ctx *ctx);
  * @param interval    time interval between each scroll step
  * @param lower_bound use this page's last row as the lower boundary of the
  *                    scrolling area
+ *                    (must be greater than or equal to @c upper_bound)
  */
 enum ssd1306_err ssd1306_scroll_right(struct ssd1306_ctx *ctx,
                                       enum ssd1306_page upper_bound,
@@ -322,6 +381,7 @@ enum ssd1306_err ssd1306_scroll_right(struct ssd1306_ctx *ctx,
  * @param interval    time interval between each scroll step
  * @param lower_bound use this page's last row as the lower boundary of the
  *                    scrolling area
+ *                    (must be greater than or equal to @c upper_bound)
  */
 enum ssd1306_err ssd1306_scroll_left(struct ssd1306_ctx *ctx,
                                      enum ssd1306_page upper_bound,
@@ -348,6 +408,7 @@ enum ssd1306_err ssd1306_scroll_vert(struct ssd1306_ctx *ctx,
  * @param interval        time interval between each scroll step
  * @param lower_bound     use this page's last row as the lower boundary of the
  *                        scrolling area
+ *                        (must be greater than or equal to @c upper_bound)
  * @param vertical_offset number of rows to scroll vertically each @c interval
  */
 enum ssd1306_err ssd1306_scroll_vert_right(struct ssd1306_ctx *ctx,
@@ -365,6 +426,7 @@ enum ssd1306_err ssd1306_scroll_vert_right(struct ssd1306_ctx *ctx,
  * @param interval        time interval between each scroll step
  * @param lower_bound     use this page's last row as the lower boundary of the
  *                        scrolling area
+ *                        (must be greater than or equal to @c upper_bound)
  * @param vertical_offset number of rows to scroll vertically each @c interval
  */
 enum ssd1306_err ssd1306_scroll_vert_left(struct ssd1306_ctx *ctx,
