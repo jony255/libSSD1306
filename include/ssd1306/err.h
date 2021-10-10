@@ -50,6 +50,44 @@ enum ssd1306_err {
      * that the height was set to 0.
      */
     SSD1306_HEIGHT_ZERO,
+
+    /**
+     * The @c upper_bound argument for setting up horizontal scrolling was not
+     * within the dimensions of the OLED.
+     *
+     * @see ssd1306_scroll_right
+     * @see ssd1306_scroll_left
+     * @see ssd1306_scroll_vert_right
+     * @see ssd1306_scroll_vert_left
+     */
+    SSD1306_UPPER_BOUND_OUT_OF_DIMENSION,
+    /**
+     * The @c lower_bound argument for setting up horizontal scrolling was not
+     * within the dimensions of the OLED.
+     *
+     * @see ssd1306_scroll_right
+     * @see ssd1306_scroll_left
+     * @see ssd1306_scroll_vert_right
+     * @see ssd1306_scroll_vert_left
+     */
+    SSD1306_LOWER_BOUND_OUT_OF_DIMENSION,
+    /**
+     * The @c upper_bound argument for setting up horizontal scrolling was
+     * greater than @c lower_bound.
+     *
+     * @c upper_bound must be less than or equal to @c lower_bound.
+     * Remember, @c upper_bound refers to the first row of the page and
+     * @c lower_bound refers to the last row of the page.
+     *
+     * If the arguments are the same page, then the only thing scrolling
+     * horizontally is that page.
+     *
+     * @see ssd1306_scroll_right
+     * @see ssd1306_scroll_left
+     * @see ssd1306_scroll_vert_right
+     * @see ssd1306_scroll_vert_left
+     */
+    SSD1306_UPPER_BOUND_GT_LOWER_BOUND,
 };
 
 /**
