@@ -199,6 +199,38 @@ setup_horiz_nonvert_scroll_params(struct ssd1306_ctx *ctx,
     return SSD1306_OK;
 }
 
+/**
+ * Flags to determine which of the dimensions to check.
+ */
+enum dimension_check {
+    CHECK_WIDTH = BIT(0),
+    CHECK_HEIGHT = BIT(1),
+};
+
+/**
+ * Check that the dimensions of the OLED are non-zero.
+ *
+ * @param ctx   container of the dimensions
+ * @param flags bitwise or'd set of flags to determine which dimensions to check
+ */
+static enum ssd1306_err
+check_dimensions(struct ssd1306_ctx *ctx, enum dimension_check flags)
+{
+    if ((flags & CHECK_WIDTH) && ctx->width == 0) {
+        return SSD1306_WIDTH_ZERO;
+    }
+    else if ((flags & CHECK_HEIGHT) && ctx->height == 0) {
+        return SSD1306_HEIGHT_ZERO;
+    }
+
+    /*
+     * Don't add an else clause returning SSD1306_OK. It will be easier to
+     * conditionally compile the if checks out of the function should such a
+     * need arise.
+     */
+    return SSD1306_OK;
+}
+
 enum ssd1306_err
 ssd1306_scroll_right(struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
                      enum ssd1306_scroll_step interval,
