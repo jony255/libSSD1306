@@ -16,7 +16,7 @@
 /**
  * Flags used to determine which of the callbacks to check.
  */
-enum ctx_check {
+enum cb_check {
     CHECK_SEND_CMD = BIT(0),
     CHECK_WRITE_DATA = BIT(1),
 };
@@ -32,7 +32,7 @@ enum ctx_check {
  *       - SSD1306_OK otherwise
  */
 static enum ssd1306_err
-check_ctx(struct ssd1306_ctx *ctx, enum ctx_check flags)
+check_ctx(struct ssd1306_ctx *ctx, enum cb_check flags)
 {
     if (ctx == NULL) {
         return SSD1306_CTX_NULL;
@@ -49,7 +49,6 @@ check_ctx(struct ssd1306_ctx *ctx, enum ctx_check flags)
      * conditionally compile the if checks out of the function should such a
      * need arise.
      */
-
     return SSD1306_OK;
 }
 
