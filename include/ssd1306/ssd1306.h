@@ -236,7 +236,6 @@ enum ssd1306_page {
     SSD1306_PAGE_5,
     SSD1306_PAGE_6,
     SSD1306_PAGE_7,
-    SSD1306_NUM_PAGES,
 };
 
 /**
@@ -684,7 +683,6 @@ enum ssd1306_col {
     SSD1306_COL_125,
     SSD1306_COL_126,
     SSD1306_COL_127,
-    SSD1306_NUM_COLS,
 };
 
 /** @} */ /* address_setting_commands */
