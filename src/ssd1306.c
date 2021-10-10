@@ -211,6 +211,10 @@ enum dimension_check {
  *
  * @param ctx   container of the dimensions
  * @param flags bitwise or'd set of flags to determine which dimensions to check
+ *
+ * @return @ref SSD1306_WIDTH_ZERO  if the width is set to 0
+ * @return @ref SSD1306_HEIGHT_ZERO if the height is set to 0
+ * @return otherwise, @ref SSD1306_OK
  */
 static enum ssd1306_err
 check_dimensions(struct ssd1306_ctx *ctx, enum dimension_check flags)
