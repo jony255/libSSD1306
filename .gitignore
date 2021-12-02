@@ -3,8 +3,11 @@
 build-clang/
 build-gcc/
 build/
+
 html/
 latex/
+xml/
+
 subprojects/
 compile_commands.json
 *.pdf
