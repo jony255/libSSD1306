@@ -53,7 +53,7 @@ check_ctx(struct ssd1306_ctx *ctx, enum cb_check flags)
 }
 
 /**
- * @ingroup fundamental_commands
+ * @addtogroup fundamental_commands
  */
 
 /** @{ */
@@ -119,7 +119,7 @@ ssd1306_set_contrast(struct ssd1306_ctx *ctx, uint8_t contrast_value)
 /** @} */ /* fundamental_commands */
 
 /**
- * @ingroup scrolling_commands
+ * @addtogroup scrolling_commands
  */
 
 /** @{ */
