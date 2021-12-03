@@ -32,7 +32,7 @@ enum cb_check {
  *       - SSD1306_OK otherwise
  */
 static enum ssd1306_err
-check_ctx(struct ssd1306_ctx *ctx, enum cb_check flags)
+check_ctx(const struct ssd1306_ctx *ctx, enum cb_check flags)
 {
     if (ctx == NULL) {
         return SSD1306_CTX_NULL;
@@ -217,7 +217,7 @@ enum dimension_check {
  * @return otherwise, @ref SSD1306_OK
  */
 static enum ssd1306_err
-check_dimensions(struct ssd1306_ctx *ctx, enum dimension_check flags)
+check_dimensions(const struct ssd1306_ctx *ctx, enum dimension_check flags)
 {
     if ((flags & CHECK_WIDTH) && ctx->width == 0) {
         return SSD1306_WIDTH_ZERO;
