@@ -10,10 +10,10 @@
  * All possible command groups are placed here.
  */
 
-/** @{ */
-
 /**
  * @defgroup fundamental_commands Fundamental Commands
+ *
+ * @ingroup commands
  */
 
 /** @{ */
@@ -104,6 +104,8 @@ enum ssd1306_err ssd1306_set_contrast(struct ssd1306_ctx *ctx,
 
 /**
  * @defgroup scrolling_commands Scrolling Commands
+ *
+ * @ingroup commands
  *
  * A quick note regarding the @c upper_bound and @c lower_bound arguments to
  * the horizontal scrolling commands:
@@ -438,6 +440,8 @@ enum ssd1306_err ssd1306_scroll_vert_left(struct ssd1306_ctx *ctx,
 
 /**
  * @defgroup address_setting_commands Address Settings Commands
+ *
+ * @ingroup commands
  */
 
 /** @{ */
@@ -689,6 +693,8 @@ enum ssd1306_col {
 
 /**
  * @defgroup hardware_configuration_commands Hardware Configuration Commands
+ *
+ * @ingroup commands
  */
 
 /** @{ */
@@ -768,6 +774,8 @@ enum ssd1306_common_pin_config {
 /**
  * @defgroup timing_and_driving_scheme_setting_commands \
  *      Timing/Driving Scheme Setting Commands
+ *
+ * @ingroup commands
  */
 
 /** @{ */
@@ -807,7 +815,5 @@ enum ssd1306_vcomh_deselect_level {
 };
 
 /** @} */ /* timing_and_driving_scheme_setting_commands */
-
-/** @} */ /* commands */
 
 #endif /* LIBSSD1306_SSD1306_SSD1306_H */
