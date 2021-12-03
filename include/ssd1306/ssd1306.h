@@ -19,7 +19,7 @@
 /** @{ */
 
 /**
- * The enumerated commands from @c Table 9-1
+ * The enumerated commands from `Table 9-1`
  */
 enum ssd1306_fundamental_command {
     SSD1306_DISPLAY_ON = 0xAF,  /**< Turn the display on. (i.e. Normal Mode) */
@@ -169,7 +169,7 @@ enum ssd1306_err ssd1306_set_contrast(struct ssd1306_ctx *ctx,
 /** @{ */
 
 /**
- * The enumerated commands from @c Table 9-2
+ * The enumerated commands from `Table 9-2`
  */
 enum ssd1306_scrolling_command {
     /**
@@ -447,7 +447,7 @@ enum ssd1306_err ssd1306_scroll_vert_left(struct ssd1306_ctx *ctx,
 /** @{ */
 
 /**
- * The enumerated commands from @c Table 9-3
+ * The enumerated commands from `Table 9-3`
  */
 enum ssd1306_addr_setting_command {
     /**
@@ -510,26 +510,26 @@ enum ssd1306_addr_setting_command {
 /**
  * The available modes used as arguments to the command
  * @ref SSD1306_SET_MEM_ADDR_MODE. For the description of the modes, assume you
- * start at @c (PAGE_0, COL_0).
+ * start at `(PAGE_0, COL_0)`.
  */
 enum ssd1306_addr_mode {
     /**
      * Walk the entire page until you reach the end (i.e. the last column).
      * Afterwards, go to the beginning of the next page and repeat. Once you
      * reach the last column of the last page, go to the very beginning
-     * @c (PAGE_0, COL_0).
+     * `(PAGE_0, COL_0)`.
      */
     SSD1306_HORIZ_ADDR_MODE,
     /**
      * Walk the entire column until you reach the end (i.e. the last page).
      * Afterwards, go to the beginning of the next column and repeat. Once you
      * reach the last page of the last column, go to the very beginning
-     * @c (PAGE_0, COL_0).
+     * `(PAGE_0, COL_0)`.
      */
     SSD1306_VERT_ADDR_MODE,
     /**
      * Walk the entire page until you reach the end (i.e. the last column).
-     * Afterwards, loop back to where you started (i.e. @c (PAGE_0, COL_0)).
+     * Afterwards, loop back to where you started (i.e. `(PAGE_0, COL_0)`).
      *
      * In order to go to a different page, you must call the following command:
      *
@@ -700,7 +700,7 @@ enum ssd1306_col {
 /** @{ */
 
 /**
- * The enumerated commands from @c Table 9-4
+ * The enumerated commands from `Table 9-4`
  */
 enum ssd1306_hw_config_command {
     /**
@@ -781,7 +781,7 @@ enum ssd1306_common_pin_config {
 /** @{ */
 
 /**
- * The enumerated commands from @c Table 9-5
+ * The enumerated commands from `Table 9-5`
  */
 enum ssd1306_timing_and_driving_command {
     /**
