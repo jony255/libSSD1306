@@ -16,7 +16,7 @@ elif does_cmd_exist wget; then
     DL_CMD='wget'
     DL_CMD_OPTS="--no-verbose --show-progress --output-document $PDF_FILE"
 else
-    printf 'could not find a suitable downloader (curl/wget)\n'
+    printf 'could not find a suitable downloader (curl/wget)\n' 1>&2
     exit 1
 fi
 
