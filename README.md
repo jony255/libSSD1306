@@ -89,14 +89,18 @@ todo(those examples should include example [machine files](https://mesonbuild.co
 <a id="build_the_documentation"></a>
 ### Build the documentation
 
-In order to build the documentation run the following command:
+In order to build and view the documentation, run the following command:
 
-    $ doxygen ./docs/Doxyfile
+    $ make view-doxygen
 
-Open the generated documentation by pointing your preferred browser to `docs/html/index.html`.
-For example, if you use firefox, run the following command:
+This will open the generated `html` documentation defined in the `BROWSER`
+environment variable. If `BROWSER` is empty, then it will default to `firefox`.
+The `view-doxygen` targets always builds the documentation before opening it in
+the browser.
 
-    $ firefox ./docs/html/index.html
+However, if you only want to build the documentation, run the following command:
+
+    $ make doxygen
 
 <a id="commands"></a>
 ## Commands
