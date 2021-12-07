@@ -8,7 +8,7 @@
     - [Download necessary files](#download_necessary_files)
     - [Configure and build the library](#configure_and_build_the_library)
     - [Build the documentation](#build_the_documentation)
-- [Commands](#commands)
+- [SSD1306 commands](#ssd1306_commands)
     - [Command definitions](#command_definitions)
     - [Classes of commands](#classes_of_commands)
         - [Documenting commands or'd with arguments](#documenting_commands_ord_with_arguments)
@@ -102,8 +102,8 @@ However, if you only want to build the documentation, run the following command:
 
     $ make doxygen
 
-<a id="commands"></a>
-## Commands
+<a id="ssd1306_commands"></a>
+## SSD1306 commands
 
 <a id="command_definitions"></a>
 ### Command definitions
