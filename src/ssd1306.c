@@ -63,7 +63,9 @@ ssd1306_turn_display_on(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    return ctx->send_cmd(ctx, SSD1306_DISPLAY_ON);
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISPLAY_ON));
+
+    return SSD1306_OK;
 }
 
 enum ssd1306_err
@@ -71,7 +73,9 @@ ssd1306_turn_display_off(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    return ctx->send_cmd(ctx, SSD1306_DISPLAY_OFF);
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISPLAY_OFF));
+
+    return SSD1306_OK;
 }
 
 enum ssd1306_err
@@ -79,7 +83,9 @@ ssd1306_ignore_ram_contents(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    return ctx->send_cmd(ctx, SSD1306_DISPLAY_IGNORE_RAM);
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISPLAY_IGNORE_RAM));
+
+    return SSD1306_OK;
 }
 
 enum ssd1306_err
@@ -87,7 +93,9 @@ ssd1306_follow_ram_contents(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    return ctx->send_cmd(ctx, SSD1306_DISPLAY_FOLLOW_RAM);
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISPLAY_FOLLOW_RAM));
+
+    return SSD1306_OK;
 }
 
 enum ssd1306_err
@@ -95,7 +103,9 @@ ssd1306_normalize_display(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    return ctx->send_cmd(ctx, SSD1306_NORMAL_DISPLAY);
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_NORMAL_DISPLAY));
+
+    return SSD1306_OK;
 }
 
 enum ssd1306_err
@@ -103,7 +113,9 @@ ssd1306_invert_display(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    return ctx->send_cmd(ctx, SSD1306_INVERT_DISPLAY);
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_INVERT_DISPLAY));
+
+    return SSD1306_OK;
 }
 
 enum ssd1306_err
@@ -112,8 +124,9 @@ ssd1306_set_contrast(struct ssd1306_ctx *ctx, uint8_t contrast_value)
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
     SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_SET_CONTRAST_CTRL));
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, contrast_value));
 
-    return ctx->send_cmd(ctx, contrast_value);
+    return SSD1306_OK;
 }
 
 /** @} */ /* fundamental_commands */
