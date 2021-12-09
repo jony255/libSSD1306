@@ -24,7 +24,7 @@ struct ssd1306_ctx;
  * The user can safely assume that @c ctx will be not be @c NULL.
  *
  * @param ctx struct that contains the platform dependent I/O
- * @param cmd Command to send.
+ * @param cmd command to send
  *
  * @return an appropriate error code of type enum @ref ssd1306_err
  */
@@ -35,7 +35,7 @@ typedef enum ssd1306_err (*ssd1306_send_cmd_cb)(struct ssd1306_ctx *ctx,
  * The user can safely assume that @c ctx will be not be @c NULL.
  *
  * @param ctx  struct that contains the platform dependent I/O
- * @param data Data to write to RAM.
+ * @param data data to write to RAM
  *
  * @return an appropriate error code of type enum @ref ssd1306_err
  */
