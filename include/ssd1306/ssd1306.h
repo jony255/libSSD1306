@@ -219,8 +219,8 @@ enum ssd1306_dummy_byte {
 };
 
 /**
- * These values are used to select the start/end page addresses of various
- * commands.
+ * These values are used to configure the start/end page addresses of the
+ * following scrolling commands:
  *
  * - @ref SSD1306_RIGHT_SCROLL
  * - @ref SSD1306_LEFT_SCROLL
