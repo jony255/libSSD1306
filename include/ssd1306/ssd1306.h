@@ -110,10 +110,10 @@ enum ssd1306_err ssd1306_set_contrast(struct ssd1306_ctx *ctx,
  * A quick note regarding the @c upper_bound and @c lower_bound arguments to
  * the horizontal scrolling commands:
  *
- * - @ref ssd1306_scroll_right
- * - @ref ssd1306_scroll_left
- * - @ref ssd1306_scroll_vert_right
- * - @ref ssd1306_scroll_vert_left
+ * - @ref SSD1306_RIGHT_SCROLL
+ * - @ref SSD1306_LEFT_SCROLL
+ * - @ref SSD1306_RIGHT_VERT_SCROLL
+ * - @ref SSD1306_LEFT_VERT_SCROLL
  *
  * You configure the bounds of the horizontal scrolling area manually. You do so
  * by passing in pages as the bounds of said scrolling area. There are two
