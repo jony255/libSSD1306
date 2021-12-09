@@ -110,10 +110,10 @@ enum ssd1306_err ssd1306_set_contrast(struct ssd1306_ctx *ctx,
  * A quick note regarding the @c upper_bound and @c lower_bound arguments to
  * the horizontal scrolling commands:
  *
- * @ref ssd1306_scroll_right \n
- * @ref ssd1306_scroll_left \n
- * @ref ssd1306_scroll_vert_right \n
- * @ref ssd1306_scroll_vert_left
+ * - @ref ssd1306_scroll_right
+ * - @ref ssd1306_scroll_left
+ * - @ref ssd1306_scroll_vert_right
+ * - @ref ssd1306_scroll_vert_left
  *
  * You configure the bounds of the horizontal scrolling area manually. You do so
  * by passing in pages as the bounds of said scrolling area. There are two
@@ -208,11 +208,10 @@ enum ssd1306_scrolling_command {
 /**
  * These dummy bytes are used to space out arguments to the following commands:
  *
- * @ref SSD1306_RIGHT_SCROLL \n
- * @ref SSD1306_LEFT_SCROLL \n\n
- *
- * @ref SSD1306_RIGHT_VERT_SCROLL \n
- * @ref SSD1306_LEFT_VERT_SCROLL \n
+ * - @ref SSD1306_RIGHT_SCROLL
+ * - @ref SSD1306_LEFT_SCROLL
+ * - @ref SSD1306_RIGHT_VERT_SCROLL
+ * - @ref SSD1306_LEFT_VERT_SCROLL
  */
 enum ssd1306_dummy_byte {
     SSD1306_DUMMY_BYTE_0S = 0x00,
@@ -223,11 +222,10 @@ enum ssd1306_dummy_byte {
  * These values are used to select the start/end page addresses of various
  * commands.
  *
- * @ref SSD1306_RIGHT_SCROLL \n
- * @ref SSD1306_LEFT_SCROLL \n\n
- *
- * @ref SSD1306_RIGHT_VERT_SCROLL \n
- * @ref SSD1306_LEFT_VERT_SCROLL \n
+ * - @ref SSD1306_RIGHT_SCROLL
+ * - @ref SSD1306_LEFT_SCROLL
+ * - @ref SSD1306_RIGHT_VERT_SCROLL
+ * - @ref SSD1306_LEFT_VERT_SCROLL
  */
 enum ssd1306_page {
     SSD1306_PAGE_0,
@@ -250,11 +248,10 @@ enum ssd1306_page {
  * terms of frame frequency. They are used to configure the following horizontal
  * scrolling commands:
  *
- * @ref SSD1306_RIGHT_SCROLL \n
- * @ref SSD1306_LEFT_SCROLL \n\n
- *
- * @ref SSD1306_RIGHT_VERT_SCROLL \n
- * @ref SSD1306_LEFT_VERT_SCROLL \n
+ * - @ref SSD1306_RIGHT_SCROLL
+ * - @ref SSD1306_LEFT_SCROLL
+ * - @ref SSD1306_RIGHT_VERT_SCROLL
+ * - @ref SSD1306_LEFT_VERT_SCROLL
  */
 enum ssd1306_scroll_step {
     SSD1306_2_FRAMES = 0x07,
@@ -533,12 +530,12 @@ enum ssd1306_addr_mode {
      *
      * In order to go to a different page, you must call the following command:
      *
-     * @ref SSD1306_SET_SINGLE_PAGE_ADDR
+     * - @ref SSD1306_SET_SINGLE_PAGE_ADDR
      *
      * If you want to go to a different column, refer to the following commands:
      *
-     * @ref SSD1306_SET_UPPER_NYBBLE_COL_ADDR \n
-     * @ref SSD1306_SET_LOWER_NYBBLE_COL_ADDR
+     * - @ref SSD1306_SET_UPPER_NYBBLE_COL_ADDR
+     * - @ref SSD1306_SET_LOWER_NYBBLE_COL_ADDR
      */
     SSD1306_PAGE_ADDR_MODE,
 
@@ -548,12 +545,12 @@ enum ssd1306_addr_mode {
 /**
  * These values are used as arguments to the following command:
  *
- * @ref SSD1306_SET_MULTIPLE_COL_ADDRS
+ * - @ref SSD1306_SET_MULTIPLE_COL_ADDRS
  *
  * These values can also be used as arguments to the following commands:
  *
- * @ref SSD1306_SET_UPPER_NYBBLE_COL_ADDR \n
- * @ref SSD1306_SET_LOWER_NYBBLE_COL_ADDR
+ * - @ref SSD1306_SET_UPPER_NYBBLE_COL_ADDR
+ * - @ref SSD1306_SET_LOWER_NYBBLE_COL_ADDR
  *
  * You have to make sure to grab the appropriate nybble of the value for both
  * commands.
