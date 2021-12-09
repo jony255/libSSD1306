@@ -20,8 +20,9 @@
 struct ssd1306_ctx;
 
 /**
- * A callback typedef that is in charge of sending a command to the SSD1306.
- * The user can safely assume that @c ctx will be not be @c NULL.
+ * A callback typedef that is in charge of sending a command and that command's
+ * argument(s), if it has any, to the SSD1306. The user can safely assume that
+ * @c ctx will be not be @c NULL.
  *
  * @param ctx struct that contains the platform dependent I/O
  * @param cmd command to send
@@ -58,7 +59,8 @@ typedef enum ssd1306_err (*ssd1306_write_data_cb)(struct ssd1306_ctx *ctx,
  */
 struct ssd1306_ctx {
     /**
-     * User supplied callback that sends a command to the SSD1306.
+     * User supplied callback that sends a command and that command's
+     * argument(s), if it has any, to the SSD1306
      */
     const ssd1306_send_cmd_cb send_cmd;
     /**
