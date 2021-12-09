@@ -189,8 +189,6 @@ enum ssd1306_scrolling_command {
     SSD1306_RIGHT_SCROLL = 0x26, /**< Scroll the display to the right. */
     SSD1306_LEFT_SCROLL = 0x27,  /**< Scroll the display to the left. */
 
-    SSD1306_VERT_SCROLL = 0xA3, /**< Scroll the display vertically. */
-
     /**
      * Scroll the display to the right and vertically (optional).
      * This command can be configured to only scroll the right. However, you
@@ -203,6 +201,15 @@ enum ssd1306_scrolling_command {
      * might as well just use @ref SSD1306_LEFT_SCROLL at that point.
      */
     SSD1306_LEFT_VERT_SCROLL = 0x2A,
+
+    /**
+     * Sets the vertical scroll area for the following vertical scrolling
+     * commands:
+     *
+     * - @ref SSD1306_RIGHT_VERT_SCROLL
+     * - @ref SSD1306_LEFT_VERT_SCROLL
+     */
+    SSD1306_SET_VERT_SCROLL_AREA = 0xA3,
 };
 
 /**
@@ -387,17 +394,6 @@ enum ssd1306_err ssd1306_scroll_left(struct ssd1306_ctx *ctx,
                                      enum ssd1306_page lower_bound);
 
 /**
- * @implements SSD1306_VERT_SCROLL
- *
- * @param ctx          struct that contains the platform dependent I/O
- * @param static_rows  number of rows in the top, fixed area
- * @param dynamic_rows number of rows in the bottom, scrolling area
- */
-enum ssd1306_err ssd1306_scroll_vert(struct ssd1306_ctx *ctx,
-                                     enum ssd1306_row static_rows,
-                                     enum ssd1306_row dynamic_rows);
-
-/**
  * @implements SSD1306_RIGHT_VERT_SCROLL
  *
  * @param ctx             struct that contains the platform dependent I/O
@@ -432,6 +428,16 @@ enum ssd1306_err ssd1306_scroll_vert_left(struct ssd1306_ctx *ctx,
                                           enum ssd1306_scroll_step interval,
                                           enum ssd1306_page lower_bound,
                                           enum ssd1306_row vertical_offset);
+/**
+ * @implements SSD1306_SET_VERT_SCROLL_AREA
+ *
+ * @param ctx          struct that contains the platform dependent I/O
+ * @param static_rows  number of rows in the top, fixed area
+ * @param dynamic_rows number of rows in the bottom, scrolling area
+ */
+enum ssd1306_err ssd1306_set_vert_scroll_area(struct ssd1306_ctx *ctx,
+                                              enum ssd1306_row static_rows,
+                                              enum ssd1306_row dynamic_rows);
 
 /** @} */ /* scrolling_commands */
 

@@ -275,20 +275,6 @@ ssd1306_scroll_left(struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
     return SSD1306_OK;
 }
 
-enum ssd1306_err
-ssd1306_scroll_vert(struct ssd1306_ctx *ctx, enum ssd1306_row static_rows,
-                    enum ssd1306_row dynamic_rows)
-{
-    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
-
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_VERT_SCROLL));
-
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, static_rows));
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, dynamic_rows));
-
-    return SSD1306_OK;
-}
-
 /**
  * The two commands that configure horizontal and vertical scrolling call this
  * function. The pattern they share is sending the vertical offset at the end of
@@ -339,6 +325,21 @@ ssd1306_scroll_vert_left(struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
     SSD1306_RETURN_ON_ERR(setup_horiz_vert_scroll_params(
         ctx, SSD1306_LEFT_VERT_SCROLL, upper_bound, interval, lower_bound,
         vertical_offset));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_set_vert_scroll_area(struct ssd1306_ctx *ctx,
+                             enum ssd1306_row static_rows,
+                             enum ssd1306_row dynamic_rows)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_SET_VERT_SCROLL_AREA));
+
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, static_rows));
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, dynamic_rows));
 
     return SSD1306_OK;
 }
