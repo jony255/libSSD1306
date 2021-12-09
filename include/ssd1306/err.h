@@ -92,7 +92,7 @@ enum ssd1306_err {
 
 /**
  * Simple macro that propagates the return code of @c fn_call iff the return
- * code isn't @c SSD1306_OK.
+ * code isn't @ref SSD1306_OK.
  *
  * @param fn_call call expression to check
  */
