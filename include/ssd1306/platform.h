@@ -3,6 +3,7 @@
 
 #include "ssd1306/err.h"
 
+#include <stddef.h> /* size_t */
 #include <stdint.h>
 
 /**
@@ -82,6 +83,33 @@ struct ssd1306_ctx {
      */
     const uint16_t height;
 };
+
+/**
+ * Standard macro used to calculate the length of an array.
+ *
+ * Use this macro to calculate the length of @c cmd_list when calling
+ * @ref ssd1306_send_cmd_list.
+ *
+ * @param arr array to calculate the length of
+ *
+ * @return length of @c arr
+ */
+#define SSD1306_ARRAY_LEN(arr) (sizeof(arr) / sizeof(arr[0]))
+
+/**
+ * Sends all of the commands present in @c cmd_list.
+ *
+ * This is useful when sending commands that require multiple arguments.
+ * The commands are sent by calling @ref ssd1306_ctx::send_cmd on each command
+ * in the list. @ref ssd1306_send_cmd_list returns immediately if
+ * @ref ssd1306_ctx::send_cmd returns anything other than @ref SSD1306_OK.
+ *
+ * @param ctx          struct that contains all of the platform dependent I/O
+ * @param cmd_list     list of the commands/arguments
+ * @param cmd_list_len length of @c cmd_list
+ */
+enum ssd1306_err ssd1306_send_cmd_list(struct ssd1306_ctx *ctx,
+                                       uint8_t *cmd_list, size_t cmd_list_len);
 
 /** @} */ /* platform_dependent_operations */
 
