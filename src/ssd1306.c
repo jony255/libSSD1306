@@ -169,7 +169,7 @@ ssd1306_stop_scrolling(struct ssd1306_ctx *ctx)
 
 /**
  * Of all the scrolling commands, there are 4 that configure horizontal
- * scrolling. The functions that will implement those commands have to call this
+ * scrolling. The functions that implement those commands have to call this
  * function to configure the horizontal scrolling.
  */
 static enum ssd1306_err
@@ -179,13 +179,12 @@ setup_horiz_scroll_params(struct ssd1306_ctx *ctx,
                           enum ssd1306_scroll_step interval,
                           enum ssd1306_page lower_bound)
 {
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, scroll_dir));
+    uint8_t cmd_list[] = {
+        scroll_dir, SSD1306_DUMMY_BYTE_0S, upper_bound, interval, lower_bound,
+    };
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DUMMY_BYTE_0S));
-
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, upper_bound));
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, interval));
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, lower_bound));
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
 
     return SSD1306_OK;
 }
@@ -336,10 +335,14 @@ ssd1306_set_vert_scroll_area(struct ssd1306_ctx *ctx,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_SET_VERT_SCROLL_AREA));
+    uint8_t cmd_list[] = {
+        SSD1306_SET_VERT_SCROLL_AREA,
+        static_rows,
+        dynamic_rows,
+    };
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, static_rows));
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, dynamic_rows));
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
 
     return SSD1306_OK;
 }
