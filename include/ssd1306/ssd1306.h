@@ -494,7 +494,7 @@ enum ssd1306_addr_setting_command {
      * - @ref SSD1306_HORIZ_ADDR_MODE
      * - @ref SSD1306_VERT_ADDR_MODE
      */
-    SSD1306_SET_MULTIPLE_PAGE_ADDRS = 0x22,
+    SSD1306_SET_PAGE_ADDR_RANGE = 0x22,
     /**
      * Set the start and end column addresses.
      *
@@ -502,7 +502,7 @@ enum ssd1306_addr_setting_command {
      * - @ref SSD1306_HORIZ_ADDR_MODE
      * - @ref SSD1306_VERT_ADDR_MODE
      */
-    SSD1306_SET_MULTIPLE_COL_ADDRS = 0x21,
+    SSD1306_SET_COL_ADDR_RANGE = 0x21,
 };
 
 /**
@@ -546,7 +546,7 @@ enum ssd1306_addr_mode {
 /**
  * These values are used as arguments to the following command:
  *
- * - @ref SSD1306_SET_MULTIPLE_COL_ADDRS
+ * - @ref SSD1306_SET_COL_ADDR_RANGE
  *
  * These values can also be used as arguments to the following commands:
  *
