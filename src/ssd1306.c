@@ -348,3 +348,92 @@ ssd1306_set_vert_scroll_area(struct ssd1306_ctx *ctx,
 }
 
 /** @} */ /* scrolling_commands */
+
+/**
+ * @addtogroup address_setting_commands
+ */
+
+/** @{ */
+
+enum ssd1306_err
+ssd1306_set_addr_mode(struct ssd1306_ctx *ctx, enum ssd1306_addr_mode addr_mode)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    uint8_t cmd_list[] = {
+        SSD1306_SET_MEM_ADDR_MODE,
+        addr_mode,
+    };
+
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_set_page_addr(struct ssd1306_ctx *ctx, enum ssd1306_page page)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    uint8_t cmd = SSD1306_SET_SINGLE_PAGE_ADDR | (page & 0x07);
+
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, cmd));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_set_col_addr(struct ssd1306_ctx *ctx, enum ssd1306_col col)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    /* I'm not sure if the upper or lower nybble need to be sent first. */
+    uint8_t cmd_list[] = {
+        SSD1306_SET_UPPER_NYBBLE_COL_ADDR | ((col & 0xF0) >> 4),
+        SSD1306_SET_LOWER_NYBBLE_COL_ADDR | (col & 0x0F),
+    };
+
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_set_page_range(struct ssd1306_ctx *ctx, enum ssd1306_page start_page,
+                       enum ssd1306_page end_page)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    uint8_t cmd_list[] = {
+        SSD1306_SET_PAGE_ADDR_RANGE,
+        start_page,
+        end_page,
+    };
+
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_set_col_range(struct ssd1306_ctx *ctx, enum ssd1306_col start_col,
+                      enum ssd1306_col end_col)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    uint8_t cmd_list[] = {
+        SSD1306_SET_COL_ADDR_RANGE,
+        start_col,
+        end_col,
+    };
+
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
+
+    return SSD1306_OK;
+}
+
+/** @} */

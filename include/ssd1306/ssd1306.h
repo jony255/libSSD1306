@@ -687,6 +687,59 @@ enum ssd1306_col {
     SSD1306_COL_127,
 };
 
+/**
+ * @implements SSD1306_SET_MEM_ADDR_MODE
+ *
+ * @param ctx       struct that contains the platform dependent I/O
+ * @param addr_mode addressing mode to set
+ */
+enum ssd1306_err ssd1306_set_addr_mode(struct ssd1306_ctx *ctx,
+                                       enum ssd1306_addr_mode addr_mode);
+
+/**
+ * @implements SSD1306_SET_SINGLE_PAGE_ADDR
+ *
+ * @param ctx  struct that contains the platform dependent I/O
+ * @param page page to go to
+ */
+enum ssd1306_err ssd1306_set_page_addr(struct ssd1306_ctx *ctx,
+                                       enum ssd1306_page page);
+
+/**
+ * @implements SSD1306_SET_UPPER_NYBBLE_COL_ADDR
+ * @implements SSD1306_SET_LOWER_NYBBLE_COL_ADDR
+ *
+ * Extracts the relevant nybbles from @c col and or's it with the
+ * appropriate command.
+ *
+ * @param ctx struct that contains the platform dependent I/O
+ * @param col column to go to
+ */
+enum ssd1306_err ssd1306_set_col_addr(struct ssd1306_ctx *ctx,
+                                      enum ssd1306_col col);
+
+/**
+ * @implements SSD1306_SET_PAGE_ADDR_RANGE
+ *
+ * @param ctx        struct that contains the platform dependent I/O
+ * @param start_page page to start at
+ * @param end_page   page to end at
+ */
+enum ssd1306_err ssd1306_set_page_range(struct ssd1306_ctx *ctx,
+                                        enum ssd1306_page start_page,
+                                        enum ssd1306_page end_page);
+
+/**
+ * @implements SSD1306_SET_COL_ADDR_RANGE
+ *
+ * @param ctx       struct that contains the platform dependent I/O
+ * @param start_col col to start at
+ * @param end_col   col to end at
+ */
+enum ssd1306_err ssd1306_set_col_range(struct ssd1306_ctx *ctx,
+                                       enum ssd1306_col start_col,
+                                       enum ssd1306_col end_col);
+
 /** @} */ /* address_setting_commands */
 
 /**
