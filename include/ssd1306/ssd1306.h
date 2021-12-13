@@ -810,6 +810,10 @@ enum ssd1306_hw_config_command {
  *
  * @ref SSD1306_CONFIG_COMMON_PINS
  *
+ * or the function that implements it
+ *
+ * @ref ssd1306_set_common_pin_config
+ *
  * @todo Find apt descriptions for the various configurations!!
  */
 enum ssd1306_common_pin_config {
@@ -819,6 +823,75 @@ enum ssd1306_common_pin_config {
     SSD1306_ENABLE_LEFT_RIGHT_REMAP = 0x22,
     SSD1306_DISABLE_LEFT_RIGHT_REMAP = 0x02,
 };
+
+/**
+ * @implements SSD1306_SET_DISPLAY_START_LINE
+ *
+ * @param ctx        struct that contains the platform dependent I/O
+ * @param start_line line to start displaying at
+ */
+enum ssd1306_err ssd1306_set_start_line(struct ssd1306_ctx *ctx,
+                                        enum ssd1306_row start_line);
+
+/**
+ * @implements SSD1306_SET_VERT_DISPLAY_OFFSET
+ *
+ * @param ctx    struct that contains the platform dependent I/O
+ * @param offset row to map the starting line to
+ */
+enum ssd1306_err ssd1306_set_vert_offset(struct ssd1306_ctx *ctx,
+                                         enum ssd1306_row offset);
+
+/**
+ * @implements SSD1306_ENABLE_VERT_REFLECTION
+ *
+ * @param ctx struct that contains the platform dependent I/O
+ */
+enum ssd1306_err ssd1306_enable_vert_reflection(struct ssd1306_ctx *ctx);
+
+/**
+ * @implements SSD1306_DISABLE_VERT_REFLECTION
+ *
+ * @param ctx struct that contains the platform dependent I/O
+ */
+enum ssd1306_err ssd1306_disable_vert_reflection(struct ssd1306_ctx *ctx);
+
+/**
+ * @implements SSD1306_ENABLE_HORIZ_REFLECTION
+ *
+ * @param ctx struct that contains the platform dependent I/O
+ */
+enum ssd1306_err ssd1306_enable_horiz_reflection(struct ssd1306_ctx *ctx);
+
+/**
+ * @implements SSD1306_DISABLE_HORIZ_REFLECTION
+ *
+ * @param ctx struct that contains the platform dependent I/O
+ */
+enum ssd1306_err ssd1306_disable_horiz_reflection(struct ssd1306_ctx *ctx);
+
+/**
+ * @implements SSD1306_SET_NUM_ACTIVE_ROWS
+ *
+ * @param ctx  struct that contains the platform dependent I/O
+ * @param rows number of active rows
+ */
+enum ssd1306_err ssd1306_set_active_rows(struct ssd1306_ctx *ctx,
+                                         enum ssd1306_row rows);
+
+/**
+ * @implements SSD1306_CONFIG_COMMON_PINS
+ *
+ * @param ctx              struct that contains the platform dependent I/O
+ * @param common_layout    one of @c SSD1306_SEQUENTIAL_COMMON_PINS or
+ *                         @c SSD1306_ALT_COMMON_PINS
+ * @param left_right_remap one of @c SSD1306_ENABLE_LEFT_RIGHT_REMAP or
+ *                         @c SSD1306_DISABLE_LEFT_RIGHT_REMAP
+ */
+enum ssd1306_err
+ssd1306_set_common_pin_config(struct ssd1306_ctx *ctx,
+                              enum ssd1306_common_pin_config common_layout,
+                              enum ssd1306_common_pin_config left_right_remap);
 
 /** @} */ /* hardware_configuration_commands */
 

@@ -437,3 +437,113 @@ ssd1306_set_col_range(struct ssd1306_ctx *ctx, enum ssd1306_col start_col,
 }
 
 /** @} */ /* address_setting_commands */
+
+/**
+ * @addtogroup hardware_configuration_commands
+ */
+
+/** @{ */
+
+enum ssd1306_err
+ssd1306_set_start_line(struct ssd1306_ctx *ctx, enum ssd1306_row start_line)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    uint8_t cmd = SSD1306_SET_DISPLAY_START_LINE | (start_line & 0x3F);
+
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, cmd));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_set_vert_offset(struct ssd1306_ctx *ctx, enum ssd1306_row offset)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    uint8_t cmd_list[] = {
+        SSD1306_SET_VERT_DISPLAY_OFFSET,
+        offset,
+    };
+
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_enable_vert_reflection(struct ssd1306_ctx *ctx)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_ENABLE_VERT_REFLECTION));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_disable_vert_reflection(struct ssd1306_ctx *ctx)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISABLE_VERT_REFLECTION));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_enable_horiz_reflection(struct ssd1306_ctx *ctx)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_ENABLE_HORIZ_REFLECTION));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_disable_horiz_reflection(struct ssd1306_ctx *ctx)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISABLE_HORIZ_REFLECTION));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_set_active_rows(struct ssd1306_ctx *ctx, enum ssd1306_row rows)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    uint8_t cmd_list[] = {
+        SSD1306_SET_NUM_ACTIVE_ROWS,
+        rows,
+    };
+
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_set_common_pin_config(struct ssd1306_ctx *ctx,
+                              enum ssd1306_common_pin_config common_layout,
+                              enum ssd1306_common_pin_config left_right_remap)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    uint8_t cmd_list[] = {
+        SSD1306_CONFIG_COMMON_PINS,
+        common_layout | left_right_remap,
+    };
+
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
+
+    return SSD1306_OK;
+}
+
+/** @} */ /* hardware_configuration_commands */
