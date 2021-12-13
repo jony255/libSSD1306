@@ -770,26 +770,26 @@ enum ssd1306_hw_config_command {
      *
      * @note The effect takes place on subsequent data writes.
      */
-    SSD1306_REFLECT_DISPLAY_VERT = 0xA0,
+    SSD1306_ENABLE_VERT_REFLECTION = 0xA0,
     /**
      * Don't vertically reflect the display.
      *
      * @note The effect takes place on subsequent data writes.
      */
-    SSD1306_DONT_REFLECT_DISPLAY_VERT = 0xA1,
+    SSD1306_DISABLE_VERT_REFLECTION = 0xA1,
 
     /**
      * Horizontally reflect the display.
      *
      * @note The effect takes place on subsequent data writes.
      */
-    SSD1306_REFLECT_DISPLAY_HORIZ = 0xC0,
+    SSD1306_ENABLE_HORIZ_REFLECTION = 0xC0,
     /**
      * Don't horizontally reflect the display.
      *
      * @note The effect takes place on subsequent data writes.
      */
-    SSD1306_DONT_REFLECT_DISPLAY_HORIZ = 0xC8,
+    SSD1306_DISABLE_HORIZ_REFLECTION = 0xC8,
     /**
      * Set multiple, alternative common pin configurations.
      */
