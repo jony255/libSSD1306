@@ -436,4 +436,4 @@ ssd1306_set_col_range(struct ssd1306_ctx *ctx, enum ssd1306_col start_col,
     return SSD1306_OK;
 }
 
-/** @} */
+/** @} */ /* address_setting_commands */
