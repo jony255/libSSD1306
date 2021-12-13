@@ -547,3 +547,63 @@ ssd1306_set_common_pin_config(struct ssd1306_ctx *ctx,
 }
 
 /** @} */ /* hardware_configuration_commands */
+
+/**
+ * @addtogroup timing_and_driving_scheme_setting_commands
+ */
+
+/** @{ */
+
+enum ssd1306_err
+ssd1306_config_timing(struct ssd1306_ctx *ctx,
+                      enum ssd1306_divide_ratio divide_ratio, uint8_t f_osc)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    uint8_t cmd_list[] = {
+        SSD1306_SET_CLOCK_DIV_AND_OSC_FREQ,
+        (f_osc << 4) | divide_ratio,
+    };
+
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_set_precharge_period(struct ssd1306_ctx *ctx,
+                             enum ssd1306_dclk phase_one,
+                             enum ssd1306_dclk phase_two)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    uint8_t cmd_list[] = {
+        SSD1306_SET_PRECHARGE_PERIOD,
+        (phase_two << 4) | phase_one,
+    };
+
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
+ssd1306_set_v_comh_deselect_level(struct ssd1306_ctx *ctx,
+                                  enum ssd1306_vcomh_deselect_level level)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    uint8_t cmd_list[] = {
+        SSD1306_SET_V_COMH_DESELECT_LEVEL,
+        level,
+    };
+
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
+
+    return SSD1306_OK;
+}
+
+/** @} */ /* timing_and_driving_scheme_setting_commands */

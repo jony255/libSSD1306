@@ -928,6 +928,54 @@ enum ssd1306_timing_and_driving_command {
 };
 
 /**
+ * These values are used to configure the divide ratio of the display clocks.
+ *
+ * These values are meant to be used as arguments to the following command:
+ * - @ref SSD1306_SET_CLOCK_DIV_AND_OSC_FREQ.
+ */
+enum ssd1306_divide_ratio {
+    SSD1306_DIVIDE_RATIO_1,
+    SSD1306_DIVIDE_RATIO_2,
+    SSD1306_DIVIDE_RATIO_3,
+    SSD1306_DIVIDE_RATIO_4,
+    SSD1306_DIVIDE_RATIO_5,
+    SSD1306_DIVIDE_RATIO_6,
+    SSD1306_DIVIDE_RATIO_7,
+    SSD1306_DIVIDE_RATIO_8,
+    SSD1306_DIVIDE_RATIO_9,
+    SSD1306_DIVIDE_RATIO_10,
+    SSD1306_DIVIDE_RATIO_11,
+    SSD1306_DIVIDE_RATIO_12,
+    SSD1306_DIVIDE_RATIO_13,
+    SSD1306_DIVIDE_RATIO_14,
+    SSD1306_DIVIDE_RATIO_15,
+};
+
+/**
+ * These values are used to configure the duration of the pre-charge period.
+ *
+ * These values are meant to be used as arguments to the following command:
+ * - @ref SSD1306_SET_PRECHARGE_PERIOD.
+ */
+enum ssd1306_dclk {
+    SSD1306_DCLK_1 = 0x01,
+    SSD1306_DCLK_2,
+    SSD1306_DCLK_3,
+    SSD1306_DCLK_4,
+    SSD1306_DCLK_5,
+    SSD1306_DCLK_6,
+    SSD1306_DCLK_7,
+    SSD1306_DCLK_8,
+    SSD1306_DCLK_9,
+    SSD1306_DCLK_10,
+    SSD1306_DCLK_11,
+    SSD1306_DCLK_12,
+    SSD1306_DCLK_13,
+    SSD1306_DCLK_14,
+    SSD1306_DCLK_15,
+};
+
+/**
  * These values are meant to be used as arguments to the following commnand:
  * - @ref SSD1306_SET_V_COMH_DESELECT_LEVEL
  */
@@ -936,6 +984,38 @@ enum ssd1306_vcomh_deselect_level {
     SSD1306_POINT_77_X_VCC = 0x20, /**< Multiply Vcc by ~0.77.*/
     SSD1306_POINT_83_X_VCC = 0x30, /**< Multiply Vcc by ~0.83.*/
 };
+
+/**
+ * @implements SSD1306_SET_CLOCK_DIV_AND_OSC_FREQ
+ *
+ * @param ctx          struct that contains the platform dependent I/O
+ * @param divide_ratio divide ratio of the display clocks
+ * @param f_osc        frequency of the oscillator
+ */
+enum ssd1306_err ssd1306_config_timing(struct ssd1306_ctx *ctx,
+                                       enum ssd1306_divide_ratio divide_ratio,
+                                       uint8_t f_osc);
+
+/**
+ * @implements SSD1306_SET_PRECHARGE_PERIOD
+ *
+ * @param ctx       struct that contains the platform dependent I/O
+ * @param phase_one dclks to wait during phase one
+ * @param phase_two dckls to wait during phase two
+ */
+enum ssd1306_err ssd1306_set_precharge_period(struct ssd1306_ctx *ctx,
+                                              enum ssd1306_dclk phase_one,
+                                              enum ssd1306_dclk phase_two);
+
+/**
+ * @implements SSD1306_SET_V_COMH_DESELECT_LEVEL
+ *
+ * @param ctx   struct that contains the platform dependent I/O
+ * @param level deselect level of Vcomh regulator
+ */
+enum ssd1306_err
+ssd1306_set_v_comh_deselect_level(struct ssd1306_ctx *ctx,
+                                  enum ssd1306_vcomh_deselect_level level);
 
 /** @} */ /* timing_and_driving_scheme_setting_commands */
 
