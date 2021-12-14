@@ -109,7 +109,8 @@ struct ssd1306_ctx {
  * @param cmd_list_len length of @c cmd_list
  */
 enum ssd1306_err ssd1306_send_cmd_list(struct ssd1306_ctx *ctx,
-                                       uint8_t *cmd_list, size_t cmd_list_len);
+                                       const uint8_t *cmd_list,
+                                       size_t cmd_list_len);
 
 /** @} */ /* platform_dependent_operations */
 

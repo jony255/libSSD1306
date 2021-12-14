@@ -4,7 +4,7 @@
 #include <stddef.h> /* size_t */
 
 enum ssd1306_err
-ssd1306_send_cmd_list(struct ssd1306_ctx *ctx, uint8_t *cmd_list,
+ssd1306_send_cmd_list(struct ssd1306_ctx *ctx, const uint8_t *cmd_list,
                       size_t cmd_list_len)
 {
     for (size_t i = 0; i < cmd_list_len; i++) {
