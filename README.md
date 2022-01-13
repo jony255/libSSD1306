@@ -271,6 +271,8 @@ struct ssd1306_ctx {
      * Custom data that a user might want available in their supplied callbacks.
      */
     void *user_ctx;
+
+    ...
 };
 ```
 
