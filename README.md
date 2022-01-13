@@ -39,6 +39,7 @@ this library to work with the `SSH1106` shouldn't require too much work.
 - `curl` or `wget` (optional, for downloading the `SSD1306`'s datasheet)
 - `git` (optional, `libSSD1306` can be downloaded as a zip archive)
 - `doxygen` (optional, to build the documentation)
+- `make` (optional, provides aliases to quicken various aspects of developing/building the library)
 
 <a id="getting_started"></a>
 ## Getting started
