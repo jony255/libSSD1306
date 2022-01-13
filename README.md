@@ -16,7 +16,7 @@
     - [Option #1 - Configuration done at link-time of the static library](#option_1_link_time)
         - [Pros](#option_1_link_time_pros)
         - [Cons](#option_1_link_time_cons)
-    - [Option #2 - Configuration done at run-time](#option_2_users_application)
+    - [Option #2 - Configuration done by the user's application](#option_2_users_application)
         - [Pros](#option_2_users_application_pros)
         - [Cons](#option_2_users_application_cons)
     - [And the winner is...](#and_the_winner_is)
