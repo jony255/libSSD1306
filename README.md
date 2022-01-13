@@ -13,12 +13,12 @@
     - [Classes of commands](#classes_of_commands)
         - [Documenting commands or'd with arguments](#documenting_commands_ord_with_arguments)
 - [Communicating with the SSD1306](#communicating_with_the_ssd1306)
-    - [Option #1 - Configuration done at link-time](#option_1_link_time)
+    - [Option #1 - Configuration done at link-time of the static library](#option_1_link_time)
         - [Pros](#option_1_link_time_pros)
         - [Cons](#option_1_link_time_cons)
-    - [Option #2 - Configuration done at run-time](#option_2_run_time)
-        - [Pros](#option_2_run_time_pros)
-        - [Cons](#option_2_run_time_cons)
+    - [Option #2 - Configuration done at run-time](#option_2_users_application)
+        - [Pros](#option_2_users_application_pros)
+        - [Cons](#option_2_users_application_cons)
     - [And the winner is...](#and_the_winner_is)
     - [Implementing option 2](#implementing_option_2_four)
         - [Explaining platform dependent operations](#explaining_platform_dependent_operations)
@@ -162,15 +162,16 @@ Here is an another example but without the type.
 There is no universal way to configure all `I2C`, `SPI`, etc.. peripherals in
 the world. There are some HAL's provided by manufacturers or RTOSes that enable
 cross-platform development, but maintaining all of these configurations by
-myself is error-prone. Instead, I will have the user define functions which I
-have declared. There are 2 ways of implementing what I have in mind.
+myself is error-prone. Instead, the user will have to implement an interface
+that performs all the platform dependent I/O. As I see it, there are 2 ways of
+implementing said interface.
 
 <a id="option_1_link_time"></a>
-### Option #1 - configuration done at link-time
+### Option #1 - configuration done at link-time of the static library
 
-I will declare functions in a header file that I expect the user of the library
-to implement. The user will have to write their glue code within `libSSD1306`'s
-codebase.
+The library's header files would contain the function prototypes of the interface
+that needs to be implemented. The user would then have to write their glue code
+within `libSSD1306`'s codebase.
 
 <a id="option_1_link_time_pros"></a>
 #### Pros
@@ -187,36 +188,34 @@ codebase.
 
 3. The glue code must be compiled with the library and violates the
    [open-closed principle](https://en.wikipedia.org/wiki/Open-closed_principle).
-   I could [weakly](https://en.wikipedia.org/wiki/Weak_symbol) define the
-   functions to get around this, but that requires a compiler attribute which
-   is not supported by standard C.
+   I could declare the functions as [weak symbols](https://en.wikipedia.org/wiki/Weak_symbol)
+   to get around this, but that requires a compiler attribute which is not
+   supported by standard C.
 
-<a id="option_2_run_time"></a>
-### Option #2 - configuration done at run-time
+<a id="option_2_users_application"></a>
+### Option #2 - configuration done by the user's application
 
-I will declare a struct whose fields consist of pointers to functions that are
-exactly the same as the stubs I would have declared in the header file from
-Option 1. The user must then pass a pointer to this struct to all of the
-functions in the library.
+The library's header file would declare a struct whose fields would be function
+pointers to the platform dependent I/O. The user would then pass a pointer to
+this struct to the library's functions.
 
-<a id="option_2_run_time_pros"></a>
+<a id="option_2_users_application_pros"></a>
 #### Pros
 
-1. The user can change how the mcu can communicate with the `SSD1306` at
-   run-time.
+1. The user can change how the mcu can communicate with the `SSD1306` within
+   their own code.
 
-2. Can be compiled into a static library, separate from the glue code, then
-   linked with the user's main application. As a result, this follows the
+2. The user could choose to switch which functions are used to communicate
+   with the `SSD1306`.
+
+2. `libSSD1306` can be compiled into a static library, separate from the glue code,
+   then linked with the user's main application. As a result, this follows the
    [open-closed principle](https://en.wikipedia.org/wiki/Open-closed_principle).
 
-<a id="option_2_run_time_cons"></a>
+<a id="option_2_users_application_cons"></a>
 #### Cons
 
-1. Some of the esoteric compilers haven't implemented function pointers.
-   However, as mentioned in the prerequisites, a `c99` compliant compiler
-   is required.
-
-2. The compiler may not inline calls to the functions as a result of using
+1. The compiler may not inline calls to the functions as a result of using
    function pointers. However, these functions aren't meant to be doing much
    anyway so it may not matter too much. `const`'ing the struct or some of the
    fields of the struct may fix the inlining issue.
@@ -224,13 +223,14 @@ functions in the library.
    todo(between calling a function from a const/non-const pointer.)
    todo(I need to figure out what's going on...)
 
-3. Extra `NULL` checking must be done by the functions to ensure the struct is
+2. Extra `NULL` checking must be done by the functions to ensure the struct is
    valid. I can setup a compile-time switch to disable the checks with
    something like `-DNDEBUG` to denote a release build.
 
-4. Might require a bit more memory as a result of storing `x` amount of
-   function pointers, where `x` is the number of stubs declared. It's honestly
-   not much but it might be on a *very* memory constrained platform.
+3. Might require a bit more memory as a result of storing `x` amount of
+   function pointers, where `x` is the number of platform dependent functions
+   declared. It's honestly not much but it might be on a *very* memory
+   constrained platform.
 
 <a id="and_the_winner_is"></a>
 ### And the winner is...
@@ -239,7 +239,7 @@ Option 2!!
 
 Option 2 is more portable across c compilers and, I feel, is the cleanest. This
 option doesn't require altering the `libSSD1306` codebase. The code the user
-writes is, by design, independent of the library's.
+writes is independent of the library's, as it should be.
 
 <a id="implementing_option_2_four"></a>
 ### Implementing option 2
@@ -274,11 +274,10 @@ struct ssd1306_ctx {
 };
 ```
 
-As mentioned in
-[Option #2 - Configuration done at run-time](#option_2_run_time), you will pass
-in an instance of `struct ssd1306_ctx` to all functions. The struct's
-`send_cmd` and `write_data` fields must store the pointer to the functions that
-implement the I/O.
+As mentioned in [option #2](#option_2_users_application), you will pass
+in an instance of `struct ssd1306_ctx *` to all library functions. The struct's
+`send_cmd` and `write_data` fields are function pointers to the platform
+dependent I/O.
 
 <a id="code_snippet_using_libopencm3s_hal"></a>
 #### Code snippet using libopencm3s HAL
