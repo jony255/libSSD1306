@@ -294,24 +294,24 @@ will be referred to from here on out as 4-wire SPI. (SDIN, SCLK, CS, D/C)
 ```c
 /* chip select is active LOW */
 
-#define CS_GPIO_BANK     GPIOC
-#define CS_GPIO_PORT_NUM GPIO9
+#define CS_PORT GPIOC
+#define CS_PIN  GPIO9
 
-#define DC_GPIO_BANK     GPIOC
-#define DC_GPIO_PORT_NUM GPIO2
+#define DC_PORT GPIOC
+#define DC_PIN  GPIO2
 
 static void set_chip_select_high(void) {
-    gpio_set(CS_GPIO_BANK, CS_GPIO_PORT_NUM);
+    gpio_set(CS_PORT, CS_PIN);
 }
 static void set_chip_select_low(void) {
-    gpio_clear(CS_GPIO_BANK, CS_GPIO_PORT_NUM);
+    gpio_clear(CS_PORT, CS_PIN);
 }
 
 static void mark_as_data(void) {
-    gpio_set(DC_GPIO_BANK, DC_GPIO_PORT_NUM);
+    gpio_set(DC_PORT, DC_PIN);
 }
 static void mark_as_command(void) {
-    gpio_clear(DC_GPIO_BANK, DC_GPIO_PORT_NUM);
+    gpio_clear(DC_PORT, DC_PIN);
 }
 
 static enum ssd1306_err send_cmd(struct ssd1306_ctx *ctx, uint8_t cmd) {
