@@ -445,6 +445,22 @@ ssd1306_set_col_range(struct ssd1306_ctx *ctx, enum ssd1306_col start_col,
 /** @{ */
 
 enum ssd1306_err
+ssd1306_set_active_rows(struct ssd1306_ctx *ctx, enum ssd1306_row rows)
+{
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
+    const uint8_t cmd_list[] = {
+        SSD1306_SET_NUM_ACTIVE_ROWS,
+        rows,
+    };
+
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
+
+    return SSD1306_OK;
+}
+
+enum ssd1306_err
 ssd1306_set_start_line(struct ssd1306_ctx *ctx, enum ssd1306_row start_line)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
@@ -508,22 +524,6 @@ ssd1306_disable_horiz_reflection(struct ssd1306_ctx *ctx)
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
     SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISABLE_HORIZ_REFLECTION));
-
-    return SSD1306_OK;
-}
-
-enum ssd1306_err
-ssd1306_set_active_rows(struct ssd1306_ctx *ctx, enum ssd1306_row rows)
-{
-    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
-
-    const uint8_t cmd_list[] = {
-        SSD1306_SET_NUM_ACTIVE_ROWS,
-        rows,
-    };
-
-    SSD1306_RETURN_ON_ERR(
-        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
 
     return SSD1306_OK;
 }

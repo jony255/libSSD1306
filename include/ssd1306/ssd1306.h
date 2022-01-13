@@ -758,6 +758,14 @@ enum ssd1306_err ssd1306_set_col_range(struct ssd1306_ctx *ctx,
  */
 enum ssd1306_hw_config_command {
     /**
+     * Set the number of active rows. Choosing a value of @c SSD1306_ROW_15
+     * means that rows 0 to 15 will be active, a total of 16 rows.
+     *
+     * @note The argument must be a value between @c SSD1306_ROW_15 and
+     *       @c SSD1306_ROW_63.
+     */
+    SSD1306_SET_NUM_ACTIVE_ROWS = 0xA8,
+    /**
      * Set the display's start line register.
      *
      * @cmdarg_or @ref ssd1306_row display_start_line_register[5:0]
@@ -798,15 +806,6 @@ enum ssd1306_hw_config_command {
      * Set multiple, alternative common pin configurations.
      */
     SSD1306_CONFIG_COMMON_PINS = 0xDA,
-
-    /**
-     * Set the number of active rows. Choosing a value of @c SSD1306_ROW_15
-     * means that rows 0 to 15 will be active, a total of 16 rows.
-     *
-     * @note The argument must be a value between @c SSD1306_ROW_15 and
-     *       @c SSD1306_ROW_63.
-     */
-    SSD1306_SET_NUM_ACTIVE_ROWS = 0xA8,
 };
 
 /**
@@ -828,6 +827,15 @@ enum ssd1306_common_pin_config {
     SSD1306_ENABLE_LEFT_RIGHT_REMAP = 0x22,
     SSD1306_DISABLE_LEFT_RIGHT_REMAP = 0x02,
 };
+
+/**
+ * @implements SSD1306_SET_NUM_ACTIVE_ROWS
+ *
+ * @param ctx  struct that contains the platform dependent I/O
+ * @param rows number of active rows
+ */
+enum ssd1306_err ssd1306_set_active_rows(struct ssd1306_ctx *ctx,
+                                         enum ssd1306_row rows);
 
 /**
  * @implements SSD1306_SET_DISPLAY_START_LINE
@@ -874,15 +882,6 @@ enum ssd1306_err ssd1306_enable_horiz_reflection(struct ssd1306_ctx *ctx);
  * @param ctx struct that contains the platform dependent I/O
  */
 enum ssd1306_err ssd1306_disable_horiz_reflection(struct ssd1306_ctx *ctx);
-
-/**
- * @implements SSD1306_SET_NUM_ACTIVE_ROWS
- *
- * @param ctx  struct that contains the platform dependent I/O
- * @param rows number of active rows
- */
-enum ssd1306_err ssd1306_set_active_rows(struct ssd1306_ctx *ctx,
-                                         enum ssd1306_row rows);
 
 /**
  * @implements SSD1306_CONFIG_COMMON_PINS
