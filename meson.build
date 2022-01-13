@@ -6,6 +6,7 @@ project(
         'warning_level=3',
         'default_library=static',
     ],
+    version: '0.1.0',
 )
 
 inc_dir = include_directories('include')
