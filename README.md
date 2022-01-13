@@ -276,7 +276,7 @@ struct ssd1306_ctx {
 
 As mentioned in [option #2](#option_2_users_application), you will pass
 in an instance of `struct ssd1306_ctx *` to all library functions. The struct's
-`send_cmd` and `write_data` fields are function pointers to the platform
+`ssd1306_ctx::send_cmd` and `ssd1306_ctx::write_data` fields are function pointers to the platform
 dependent I/O.
 
 <a id="code_snippet_using_libopencm3s_hal"></a>
