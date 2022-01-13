@@ -62,10 +62,14 @@ struct ssd1306_ctx {
     /**
      * User supplied callback that sends a command and that command's
      * argument(s), if it has any, to the SSD1306.
+     *
+     * Instead of calling this field directly, use @ref ssd1306_send_cmd.
      */
     const ssd1306_send_cmd_cb send_cmd;
     /**
      * User supplied callback that writes data to the SSD1306's memory.
+     *
+     * Instead of calling this field directly, use @ref ssd1306_write_data.
      */
     const ssd1306_write_data_cb write_data;
 
@@ -111,6 +115,30 @@ struct ssd1306_ctx {
 enum ssd1306_err ssd1306_send_cmd_list(struct ssd1306_ctx *ctx,
                                        const uint8_t *cmd_list,
                                        size_t cmd_list_len);
+
+/**
+ * Small wrapper that calls `ssd1306_ctx::send_cmd`.
+ *
+ * It's to avoid seeing `ctx->send_cmd(ctx, cmd)` all over the place.
+ *
+ * @param ctx struct that contains the platform dependent I/O
+ * @param cmd command to send
+ *
+ * @return the result of `ctx->send_cmd(ctx, cmd)`
+ */
+enum ssd1306_err ssd1306_send_cmd(struct ssd1306_ctx *ctx, uint8_t cmd);
+
+/**
+ * Small wrapper that calls `ssd1306_ctx::write_data`.
+ *
+ * It's to avoid seeing `ctx->write_data(ctx, data)` all over the place.
+ *
+ * @param ctx  struct that contains the platform dependent I/O
+ * @param data data to write to RAM
+ *
+ * @return the result of `ctx->write_data(ctx, data)`
+ */
+enum ssd1306_err ssd1306_write_data(struct ssd1306_ctx *ctx, uint8_t data);
 
 /** @} */ /* platform_dependent_operations */
 

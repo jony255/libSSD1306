@@ -63,7 +63,7 @@ ssd1306_turn_display_on(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISPLAY_ON));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_DISPLAY_ON));
 
     return SSD1306_OK;
 }
@@ -73,7 +73,7 @@ ssd1306_turn_display_off(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISPLAY_OFF));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_DISPLAY_OFF));
 
     return SSD1306_OK;
 }
@@ -83,7 +83,7 @@ ssd1306_ignore_ram_contents(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISPLAY_IGNORE_RAM));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_DISPLAY_IGNORE_RAM));
 
     return SSD1306_OK;
 }
@@ -93,7 +93,7 @@ ssd1306_follow_ram_contents(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISPLAY_FOLLOW_RAM));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_DISPLAY_FOLLOW_RAM));
 
     return SSD1306_OK;
 }
@@ -103,7 +103,7 @@ ssd1306_normalize_display(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_NORMAL_DISPLAY));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_NORMAL_DISPLAY));
 
     return SSD1306_OK;
 }
@@ -113,7 +113,7 @@ ssd1306_invert_display(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_INVERT_DISPLAY));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_INVERT_DISPLAY));
 
     return SSD1306_OK;
 }
@@ -123,8 +123,8 @@ ssd1306_set_contrast(struct ssd1306_ctx *ctx, uint8_t contrast_value)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_SET_CONTRAST_CTRL));
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, contrast_value));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_SET_CONTRAST_CTRL));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, contrast_value));
 
     return SSD1306_OK;
 }
@@ -142,7 +142,7 @@ ssd1306_start_scrolling(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_START_SCROLLING));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_START_SCROLLING));
 
     return SSD1306_OK;
 }
@@ -152,7 +152,7 @@ ssd1306_stop_scrolling(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD | CHECK_WRITE_DATA));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_STOP_SCROLLING));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_STOP_SCROLLING));
 
     /*
      * TODO(rewrite data to RAM to not risk data corruption)
@@ -204,8 +204,8 @@ setup_horiz_nonvert_scroll_params(struct ssd1306_ctx *ctx,
     SSD1306_RETURN_ON_ERR(setup_horiz_scroll_params(
         ctx, scroll_dir, upper_bound, interval, lower_bound));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DUMMY_BYTE_0S));
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DUMMY_BYTE_1S));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_DUMMY_BYTE_0S));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_DUMMY_BYTE_1S));
 
     return SSD1306_OK;
 }
@@ -290,7 +290,7 @@ setup_horiz_vert_scroll_params(struct ssd1306_ctx *ctx,
     SSD1306_RETURN_ON_ERR(setup_horiz_scroll_params(
         ctx, scroll_dir, upper_bound, interval, lower_bound));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, vertical_offset));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, vertical_offset));
 
     return SSD1306_OK;
 }
@@ -378,7 +378,7 @@ ssd1306_set_page_addr(struct ssd1306_ctx *ctx, enum ssd1306_page page)
 
     uint8_t cmd = SSD1306_SET_SINGLE_PAGE_ADDR | (page & 0x07);
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, cmd));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, cmd));
 
     return SSD1306_OK;
 }
@@ -467,7 +467,7 @@ ssd1306_set_start_line(struct ssd1306_ctx *ctx, enum ssd1306_row start_line)
 
     uint8_t cmd = SSD1306_SET_DISPLAY_START_LINE | (start_line & 0x3F);
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, cmd));
+    SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, cmd));
 
     return SSD1306_OK;
 }
@@ -493,7 +493,8 @@ ssd1306_enable_vert_reflection(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_ENABLE_VERT_REFLECTION));
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd(ctx, SSD1306_ENABLE_VERT_REFLECTION));
 
     return SSD1306_OK;
 }
@@ -503,7 +504,8 @@ ssd1306_disable_vert_reflection(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISABLE_VERT_REFLECTION));
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd(ctx, SSD1306_DISABLE_VERT_REFLECTION));
 
     return SSD1306_OK;
 }
@@ -513,7 +515,8 @@ ssd1306_enable_horiz_reflection(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_ENABLE_HORIZ_REFLECTION));
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd(ctx, SSD1306_ENABLE_HORIZ_REFLECTION));
 
     return SSD1306_OK;
 }
@@ -523,7 +526,8 @@ ssd1306_disable_horiz_reflection(struct ssd1306_ctx *ctx)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    SSD1306_RETURN_ON_ERR(ctx->send_cmd(ctx, SSD1306_DISABLE_HORIZ_REFLECTION));
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd(ctx, SSD1306_DISABLE_HORIZ_REFLECTION));
 
     return SSD1306_OK;
 }
