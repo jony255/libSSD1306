@@ -428,6 +428,7 @@ enum ssd1306_err ssd1306_scroll_vert_left(struct ssd1306_ctx *ctx,
                                           enum ssd1306_scroll_step interval,
                                           enum ssd1306_page lower_bound,
                                           enum ssd1306_row vertical_offset);
+
 /**
  * @implements SSD1306_SET_VERT_SCROLL_AREA
  *
@@ -518,6 +519,7 @@ enum ssd1306_addr_mode {
      * `(PAGE_0, COL_0)`.
      */
     SSD1306_HORIZ_ADDR_MODE,
+
     /**
      * Walk the entire column until you reach the end (i.e. the last page).
      * Afterwards, go to the beginning of the next column and repeat. Once you
@@ -525,6 +527,7 @@ enum ssd1306_addr_mode {
      * `(PAGE_0, COL_0)`.
      */
     SSD1306_VERT_ADDR_MODE,
+
     /**
      * Walk the entire page until you reach the end (i.e. the last column).
      * Afterwards, loop back to where you started (i.e. `(PAGE_0, COL_0)`).
@@ -790,10 +793,12 @@ enum ssd1306_hw_config_command {
      * @note The effect takes place on subsequent data writes.
      */
     SSD1306_DISABLE_HORIZ_REFLECTION = 0xC8,
+
     /**
      * Set multiple, alternative common pin configurations.
      */
     SSD1306_CONFIG_COMMON_PINS = 0xDA,
+
     /**
      * Set the number of active rows. Choosing a value of @c SSD1306_ROW_15
      * means that rows 0 to 15 will be active, a total of 16 rows.
@@ -913,14 +918,17 @@ enum ssd1306_timing_and_driving_command {
      * frequency.
      */
     SSD1306_SET_CLOCK_DIV_AND_OSC_FREQ = 0xD5,
+
     /**
      * Set Pre-charge period.
      */
     SSD1306_SET_PRECHARGE_PERIOD = 0xD9,
+
     /**
      * Set Vcomh's deselect level.
      */
     SSD1306_SET_V_COMH_DESELECT_LEVEL = 0xDB,
+
     /**
      * No operation.
      */

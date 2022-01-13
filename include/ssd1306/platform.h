@@ -61,7 +61,7 @@ typedef enum ssd1306_err (*ssd1306_write_data_cb)(struct ssd1306_ctx *ctx,
 struct ssd1306_ctx {
     /**
      * User supplied callback that sends a command and that command's
-     * argument(s), if it has any, to the SSD1306
+     * argument(s), if it has any, to the SSD1306.
      */
     const ssd1306_send_cmd_cb send_cmd;
     /**
