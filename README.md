@@ -208,7 +208,7 @@ this struct to the library's functions.
 2. The user could choose to switch which functions are used to communicate
    with the `SSD1306`.
 
-2. `libSSD1306` can be compiled into a static library, separate from the glue code,
+3. `libSSD1306` can be compiled into a static library, separate from the glue code,
    then linked with the user's main application. As a result, this follows the
    [open-closed principle](https://en.wikipedia.org/wiki/Open-closed_principle).
 
