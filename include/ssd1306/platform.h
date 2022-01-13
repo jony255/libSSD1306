@@ -1,3 +1,7 @@
+/**
+ * @file
+ */
+
 #ifndef LIBSSD1306_SSD1306_PLATFORM_H
 #define LIBSSD1306_SSD1306_PLATFORM_H
 
