@@ -179,7 +179,7 @@ setup_horiz_scroll_params(struct ssd1306_ctx *ctx,
                           enum ssd1306_scroll_step interval,
                           enum ssd1306_page lower_bound)
 {
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         scroll_dir, SSD1306_DUMMY_BYTE_0S, upper_bound, interval, lower_bound,
     };
 
@@ -335,7 +335,7 @@ ssd1306_set_vert_scroll_area(struct ssd1306_ctx *ctx,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         SSD1306_SET_VERT_SCROLL_AREA,
         static_rows,
         dynamic_rows,
@@ -360,7 +360,7 @@ ssd1306_set_addr_mode(struct ssd1306_ctx *ctx, enum ssd1306_addr_mode addr_mode)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         SSD1306_SET_MEM_ADDR_MODE,
         addr_mode,
     };
@@ -389,7 +389,7 @@ ssd1306_set_col_addr(struct ssd1306_ctx *ctx, enum ssd1306_col col)
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
     /* I'm not sure if the upper or lower nybble need to be sent first. */
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         SSD1306_SET_UPPER_NYBBLE_COL_ADDR | ((col & 0xF0) >> 4),
         SSD1306_SET_LOWER_NYBBLE_COL_ADDR | (col & 0x0F),
     };
@@ -406,7 +406,7 @@ ssd1306_set_page_range(struct ssd1306_ctx *ctx, enum ssd1306_page start_page,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         SSD1306_SET_PAGE_ADDR_RANGE,
         start_page,
         end_page,
@@ -424,7 +424,7 @@ ssd1306_set_col_range(struct ssd1306_ctx *ctx, enum ssd1306_col start_col,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         SSD1306_SET_COL_ADDR_RANGE,
         start_col,
         end_col,
@@ -461,7 +461,7 @@ ssd1306_set_vert_offset(struct ssd1306_ctx *ctx, enum ssd1306_row offset)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         SSD1306_SET_VERT_DISPLAY_OFFSET,
         offset,
     };
@@ -517,7 +517,7 @@ ssd1306_set_active_rows(struct ssd1306_ctx *ctx, enum ssd1306_row rows)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         SSD1306_SET_NUM_ACTIVE_ROWS,
         rows,
     };
@@ -535,7 +535,7 @@ ssd1306_set_common_pin_config(struct ssd1306_ctx *ctx,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         SSD1306_CONFIG_COMMON_PINS,
         common_layout | left_right_remap,
     };
@@ -560,7 +560,7 @@ ssd1306_config_timing(struct ssd1306_ctx *ctx,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         SSD1306_SET_CLOCK_DIV_AND_OSC_FREQ,
         (f_osc << 4) | divide_ratio,
     };
@@ -578,7 +578,7 @@ ssd1306_set_precharge_period(struct ssd1306_ctx *ctx,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         SSD1306_SET_PRECHARGE_PERIOD,
         (phase_two << 4) | phase_one,
     };
@@ -595,7 +595,7 @@ ssd1306_set_v_comh_deselect_level(struct ssd1306_ctx *ctx,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
-    uint8_t cmd_list[] = {
+    const uint8_t cmd_list[] = {
         SSD1306_SET_V_COMH_DESELECT_LEVEL,
         level,
     };
