@@ -15,6 +15,12 @@ inc_dir = include_directories('include')
 #       * src_files
 subdir('src')
 
+add_project_arguments(
+    '-U_FILE_OFFSET_BITS',
+    language: ['c'],
+    native: false,
+)
+
 libssd1306 = library(
     'ssd1306',
      src_files,
