@@ -43,15 +43,23 @@ enum ssd1306_err ssd1306_init_display(struct ssd1306_ctx *ctx);
  * The enumerated commands from `Table 9-1`
  */
 enum ssd1306_fundamental_command {
-    SSD1306_DISPLAY_ON = 0xAF,  /**< Turn the display on. (i.e. Normal Mode) */
-    SSD1306_DISPLAY_OFF = 0xAE, /**< Turn the display off. (i.e. Sleep Mode) */
+    /**
+     * Turn the display on. (i.e. Normal Mode)
+     * All of the selected circuits will be turned on.
+     */
+    SSD1306_DISPLAY_ON = 0xAF,
+    /**
+     * Turn the display off. (i.e. Sleep Mode)
+     * All of the selected circuits will be turned off.
+     */
+    SSD1306_DISPLAY_OFF = 0xAE,
 
     /**
      * The display shows the RAM's content.
      */
     SSD1306_DISPLAY_FOLLOW_RAM = 0xA4,
     /**
-     * The display ignores the RAM's content.
+     * The display ignores the RAM's content and turns all of the pixels on.
      */
     SSD1306_DISPLAY_IGNORE_RAM = 0xA5,
 
@@ -85,18 +93,18 @@ enum ssd1306_err ssd1306_turn_display_on(struct ssd1306_ctx *ctx);
 enum ssd1306_err ssd1306_turn_display_off(struct ssd1306_ctx *ctx);
 
 /**
- * @implements SSD1306_DISPLAY_IGNORE_RAM
- *
- * @param ctx struct that contains the platform dependent I/O
- */
-enum ssd1306_err ssd1306_ignore_ram_contents(struct ssd1306_ctx *ctx);
-
-/**
  * @implements SSD1306_DISPLAY_FOLLOW_RAM
  *
  * @param ctx struct that contains the platform dependent I/O
  */
 enum ssd1306_err ssd1306_follow_ram_contents(struct ssd1306_ctx *ctx);
+
+/**
+ * @implements SSD1306_DISPLAY_IGNORE_RAM
+ *
+ * @param ctx struct that contains the platform dependent I/O
+ */
+enum ssd1306_err ssd1306_ignore_ram_contents(struct ssd1306_ctx *ctx);
 
 /**
  * @implements SSD1306_NORMAL_DISPLAY
