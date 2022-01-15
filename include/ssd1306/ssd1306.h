@@ -1030,4 +1030,44 @@ ssd1306_set_v_comh_deselect_level(struct ssd1306_ctx *ctx,
 
 /** @} */ /* timing_and_driving_scheme_setting_commands */
 
+/**
+ * @defgroup charge_pump_commands Charge Pump Commands
+ *
+ * @ingroup commands
+ */
+
+/** @{ */
+
+/**
+ * The enumerated commands from `Table 2-1` from the application note at the end
+ * of the datasheet.
+ */
+enum ssd1306_charge_pump_command {
+    /**
+     * Configure the state of the charge pump.
+     */
+    SSD1306_CONFIG_CHARGE_PUMP = 0x8D,
+};
+
+/**
+ * These vales are meant to be used as arguments to the following command:
+ * - @ref SSD1306_CONFIG_CHARGE_PUMP
+ */
+enum sdd1306_charge_pump_config {
+    SSD1306_ENABLE_CHARGE_PUMP = 0x14,
+    SSD1306_DISABLE_CHARGE_PUMP = 0x10,
+};
+
+/**
+ * @implements SSD1306_CONFIG_CHARGE_PUMP
+ *
+ * @param ctx    struct that contains the platform dependent I/O
+ * @param config state to put charge pump in
+ */
+enum ssd1306_err
+ssd1306_config_charge_pump(struct ssd1306_ctx *ctx,
+                           enum sdd1306_charge_pump_config config);
+
+/** @} */
+
 #endif /* LIBSSD1306_SSD1306_SSD1306_H */

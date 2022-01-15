@@ -612,3 +612,26 @@ ssd1306_set_v_comh_deselect_level(struct ssd1306_ctx *ctx,
 }
 
 /** @} */ /* timing_and_driving_scheme_setting_commands */
+
+/**
+ * charge_pump_commands
+ */
+
+/** @{ */
+
+enum ssd1306_err
+ssd1306_config_charge_pump(struct ssd1306_ctx *ctx,
+                           enum sdd1306_charge_pump_config config)
+{
+
+    const uint8_t cmd_list[] = {
+        SSD1306_CONFIG_CHARGE_PUMP,
+        config,
+    };
+
+    ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list));
+
+    return SSD1306_OK;
+}
+
+/** @} */
