@@ -4,6 +4,7 @@
 #include "ssd1306/platform.h"
 
 #include <stddef.h> /* NULL */
+#include <stdint.h>
 
 /**
  * @todo Correctly check the validity of the parameters passed in to all
