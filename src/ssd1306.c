@@ -54,6 +54,37 @@ check_ctx(const struct ssd1306_ctx *ctx, enum cb_check flags)
 }
 
 /**
+ * @addtogroup project_setup
+ */
+
+/** @{ */
+
+enum ssd1306_err
+ssd1306_init_display(struct ssd1306_ctx *ctx)
+{
+    ssd1306_set_active_rows(ctx, SSD1306_ROW_63);
+    ssd1306_set_vert_offset(ctx, SSD1306_ROW_0);
+    ssd1306_set_start_line(ctx, SSD1306_ROW_0);
+
+    ssd1306_disable_vert_reflection(ctx);
+    ssd1306_disable_horiz_reflection(ctx);
+
+    ssd1306_set_contrast(ctx, 127);
+
+    ssd1306_normalize_display(ctx);
+
+    ssd1306_config_timing(ctx, SSD1306_DIVIDE_RATIO_1, 0x08);
+
+    ssd1306_config_charge_pump(ctx, SSD1306_ENABLE_CHARGE_PUMP);
+
+    ssd1306_turn_display_on(ctx);
+
+    return SSD1306_OK;
+}
+
+/** @} */
+
+/**
  * @addtogroup fundamental_commands
  */
 

@@ -9,6 +9,23 @@
 #include "ssd1306/platform.h"
 
 /**
+ * @defgroup project_setup Project Setup
+ */
+
+/** @{ */
+
+/**
+ * Initialize the display using the commands listed in `Figure 2` of the
+ * application note. Refer to the flow chart presented in the figure for the
+ * commands/arguments used.
+ *
+ * @param ctx struct that contains the platform dependent I/O
+ */
+enum ssd1306_err ssd1306_init_display(struct ssd1306_ctx *ctx);
+
+/** @} */
+
+/**
  * @defgroup commands Commands
  *
  * All possible command groups are placed here.
