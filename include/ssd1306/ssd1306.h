@@ -821,8 +821,6 @@ enum ssd1306_hw_config_command {
  * or the function that implements it
  *
  * @ref ssd1306_set_common_pin_config
- *
- * @todo Find apt descriptions for the various configurations!!
  */
 enum ssd1306_common_pin_config {
     SSD1306_SEQUENTIAL_COMMON_PINS = 0x02,
