@@ -63,7 +63,7 @@ check_ctx(const struct ssd1306_ctx *ctx, enum cb_check flags)
 enum ssd1306_err
 ssd1306_init_display(struct ssd1306_ctx *ctx, bool should_clear_display)
 {
-    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD | CHECK_WRITE_DATA));
 
     SSD1306_RETURN_ON_ERR(ssd1306_set_active_rows(ctx, SSD1306_ROW_63));
     SSD1306_RETURN_ON_ERR(ssd1306_set_vert_offset(ctx, SSD1306_ROW_0));
