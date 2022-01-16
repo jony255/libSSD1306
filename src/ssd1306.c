@@ -3,6 +3,7 @@
 #include "ssd1306/err.h"
 #include "ssd1306/platform.h"
 
+#include <stdbool.h>
 #include <stddef.h> /* NULL */
 #include <stdint.h>
 
@@ -60,7 +61,7 @@ check_ctx(const struct ssd1306_ctx *ctx, enum cb_check flags)
 /** @{ */
 
 enum ssd1306_err
-ssd1306_init_display(struct ssd1306_ctx *ctx)
+ssd1306_init_display(struct ssd1306_ctx *ctx, bool should_clear_display)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
 
@@ -81,7 +82,20 @@ ssd1306_init_display(struct ssd1306_ctx *ctx)
     SSD1306_RETURN_ON_ERR(
         ssd1306_config_charge_pump(ctx, SSD1306_ENABLE_CHARGE_PUMP));
 
-    ssd1306_config_charge_pump(ctx, SSD1306_ENABLE_CHARGE_PUMP);
+    SSD1306_RETURN_ON_ERR(ssd1306_set_addr_mode(ctx, SSD1306_HORIZ_ADDR_MODE));
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_set_page_range(ctx, SSD1306_PAGE_0, SSD1306_PAGE_7));
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_set_col_range(ctx, SSD1306_COL_0, SSD1306_COL_127));
+
+    if (should_clear_display) {
+        size_t bytes_of_display_ram =
+            ctx->width * ctx->height / SSD1306_ROWS_PER_PAGE;
+
+        for (size_t i = 0; i < bytes_of_display_ram; i++) {
+            SSD1306_RETURN_ON_ERR(ssd1306_write_data(ctx, 0x00));
+        }
+    }
 
     SSD1306_RETURN_ON_ERR(ssd1306_turn_display_on(ctx));
 

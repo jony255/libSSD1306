@@ -8,6 +8,8 @@
 #include "ssd1306/err.h"
 #include "ssd1306/platform.h"
 
+#include <stdbool.h>
+
 /**
  * @defgroup project_setup Project Setup
  */
@@ -19,9 +21,14 @@
  * application note. Refer to the flow chart presented in the figure for the
  * commands/arguments used.
  *
- * @param ctx struct that contains the platform dependent I/O
+ * Additionally, this function sets the display in @ref SSD1306_HORIZ_ADDR_MODE,
+ * using the entire display as its range.
+ *
+ * @param ctx                  struct that contains the platform dependent I/O
+ * @param should_clear_display flag to clear the RAM of the display
  */
-enum ssd1306_err ssd1306_init_display(struct ssd1306_ctx *ctx);
+enum ssd1306_err ssd1306_init_display(struct ssd1306_ctx *ctx,
+                                      bool should_clear_display);
 
 /** @} */
 
