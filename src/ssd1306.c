@@ -4,7 +4,7 @@
 #include "ssd1306/platform.h"
 
 #include <stdbool.h>
-#include <stddef.h> /* NULL */
+#include <stddef.h> /* NULL, size_t */
 #include <stdint.h>
 
 /**

@@ -4,6 +4,7 @@
 #include "ssd1306/platform.h"
 #include "ssd1306/ssd1306.h"
 
+#include <stddef.h> /* size_t */
 #include <stdint.h>
 
 /**
