@@ -53,7 +53,7 @@ To begin using this library, clone the repo.
 
 Once you have cloned the repo, download the SSD1306's datasheet like so:
 
-    $ ./scripts/dl_ssd1306_datasheet.sh
+    $ ./extra/dl_ssd1306_datasheet.sh
 
 The script assumes you have either `curl` or `wget` in your `$PATH`. If you
 don't have any of the two, install one of them. They are both pretty useful!
