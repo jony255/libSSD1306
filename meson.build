@@ -30,3 +30,9 @@ libssd1306_dep = declare_dependency(
     link_with: libssd1306,
     include_directories: inc_dir,
 )
+
+rotate = executable(
+    'rotate',
+    './extra/rotate.c',
+    native: true,
+)
