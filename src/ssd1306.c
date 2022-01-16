@@ -55,6 +55,42 @@ check_ctx(const struct ssd1306_ctx *ctx, enum cb_check flags)
 }
 
 /**
+ * Flags to determine which of the dimensions to check.
+ */
+enum dimension_check {
+    CHECK_WIDTH = BIT(0),
+    CHECK_HEIGHT = BIT(1),
+};
+
+/**
+ * Check that the dimensions of the OLED are non-zero.
+ *
+ * @param ctx   container of the dimensions
+ * @param flags bitwise or'd set of flags to determine which dimensions to check
+ *
+ * @return @ref SSD1306_WIDTH_ZERO  if the width is set to 0
+ * @return @ref SSD1306_HEIGHT_ZERO if the height is set to 0
+ * @return otherwise, @ref SSD1306_OK
+ */
+static enum ssd1306_err
+check_dimensions(const struct ssd1306_ctx *ctx, enum dimension_check flags)
+{
+    if ((flags & CHECK_WIDTH) && ctx->width == 0) {
+        return SSD1306_WIDTH_ZERO;
+    }
+    else if ((flags & CHECK_HEIGHT) && ctx->height == 0) {
+        return SSD1306_HEIGHT_ZERO;
+    }
+
+    /*
+     * Don't add an else clause returning SSD1306_OK. It will be easier to
+     * conditionally compile the if checks out of the function should such a
+     * need arise.
+     */
+    return SSD1306_OK;
+}
+
+/**
  * @addtogroup project_setup
  */
 
@@ -64,6 +100,7 @@ enum ssd1306_err
 ssd1306_init_display(struct ssd1306_ctx *ctx, bool should_clear_display)
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD | CHECK_WRITE_DATA));
+    SSD1306_RETURN_ON_ERR(check_dimensions(ctx, CHECK_WIDTH | CHECK_HEIGHT));
 
     SSD1306_RETURN_ON_ERR(ssd1306_set_active_rows(ctx, SSD1306_ROW_63));
     SSD1306_RETURN_ON_ERR(ssd1306_set_vert_offset(ctx, SSD1306_ROW_0));
@@ -259,42 +296,6 @@ setup_horiz_nonvert_scroll_params(struct ssd1306_ctx *ctx,
     SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_DUMMY_BYTE_0S));
     SSD1306_RETURN_ON_ERR(ssd1306_send_cmd(ctx, SSD1306_DUMMY_BYTE_1S));
 
-    return SSD1306_OK;
-}
-
-/**
- * Flags to determine which of the dimensions to check.
- */
-enum dimension_check {
-    CHECK_WIDTH = BIT(0),
-    CHECK_HEIGHT = BIT(1),
-};
-
-/**
- * Check that the dimensions of the OLED are non-zero.
- *
- * @param ctx   container of the dimensions
- * @param flags bitwise or'd set of flags to determine which dimensions to check
- *
- * @return @ref SSD1306_WIDTH_ZERO  if the width is set to 0
- * @return @ref SSD1306_HEIGHT_ZERO if the height is set to 0
- * @return otherwise, @ref SSD1306_OK
- */
-static enum ssd1306_err
-check_dimensions(const struct ssd1306_ctx *ctx, enum dimension_check flags)
-{
-    if ((flags & CHECK_WIDTH) && ctx->width == 0) {
-        return SSD1306_WIDTH_ZERO;
-    }
-    else if ((flags & CHECK_HEIGHT) && ctx->height == 0) {
-        return SSD1306_HEIGHT_ZERO;
-    }
-
-    /*
-     * Don't add an else clause returning SSD1306_OK. It will be easier to
-     * conditionally compile the if checks out of the function should such a
-     * need arise.
-     */
     return SSD1306_OK;
 }
 
