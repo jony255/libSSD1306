@@ -22,7 +22,7 @@
     - [And the winner is...](#and_the_winner_is)
     - [Implementing option 2](#implementing_option_2_four)
         - [Explaining platform dependent operations](#explaining_platform_dependent_operations)
-        - [Code snippet using libopencm3s HAL](#code_snippet_using_libopencm3s_hal)
+        - [Example using libopencm3's HAL](#example_using_libopencm3s_hal)
 
 <a id="description"></a>
 ## Description
@@ -281,81 +281,10 @@ in an instance of `struct ssd1306_ctx *` to all library functions. The struct's
 `ssd1306_ctx::send_cmd` and `ssd1306_ctx::write_data` fields are function pointers to the platform
 dependent I/O.
 
-<a id="code_snippet_using_libopencm3s_hal"></a>
-#### Code snippet using libopencm3s HAL
+<a id="example_using_libopencm3s_hal"></a>
+#### Example using libopencm3's HAL
 
-The following is a small example on how to configure/use `libSSD1306` with
-[libopencm3's](https://libopencm3.org/) HAL.
-
-The snippet assumes you have already configured the SPI peripheral and will
-focus only on how to interface `libopencm3` with `libSSD1306`. The wiring used
-in this example is explained in detail in the `SSD1306`'s datasheet (8.1.3) and
-will be referred to from here on out as 4-wire SPI. (SDIN, SCLK, CS, D/C)
-
-```c
-/* chip select is active LOW */
-
-#define CS_PORT GPIOC
-#define CS_PIN  GPIO9
-
-#define DC_PORT GPIOC
-#define DC_PIN  GPIO2
-
-static void set_chip_select_high(void) {
-    gpio_set(CS_PORT, CS_PIN);
-}
-static void set_chip_select_low(void) {
-    gpio_clear(CS_PORT, CS_PIN);
-}
-
-static void mark_as_data(void) {
-    gpio_set(DC_PORT, DC_PIN);
-}
-static void mark_as_command(void) {
-    gpio_clear(DC_PORT, DC_PIN);
-}
-
-static enum ssd1306_err send_cmd(struct ssd1306_ctx *ctx, uint8_t cmd) {
-    set_chip_select_low();
-
-    mark_as_command();
-
-    spi_send(SPI2, (uint8_t)cmd);
-
-    set_chip_select_high();
-
-    return SSD1306_OK;
-}
-
-static enum ssd1306_err write_data(struct ssd1306_ctx *ctx, uint8_t data) {
-    set_chip_select_low();
-
-    mark_as_data();
-
-    spi_send(SPI2, (uint8_t)data);
-
-    set_chip_select_high();
-
-    return SSD1306_OK;
-}
-
-int main(int argc, char *argv[]) {
-    /*
-     * libopencm3 setup done ...
-     *
-     * Assume GPIO ports C9 = chip select and C2 = data/command.
-     * Assume SPI2 peripheral is being used.
-     */
-
-    struct ssd1306_ctx ctx = {
-        .send_cmd = &send_cmd,
-        .write_data = &write_data,
-    };
-
-    ssd1306_setup(&ctx);
-
-    ssd1306_set_contrast(&ctx, 4);
-
-    return 0;
-}
-```
+`libopencm3` provides a template repository for one to start their projects off
+of. It is from that template that I built this
+[example](https://github.com/maybe-one-day-ubermensch/libSSD1306-example.git)
+repository. It provides a complete and working example to start you off.
