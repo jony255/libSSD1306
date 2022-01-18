@@ -24,6 +24,10 @@
  * Additionally, this function sets the display in @ref SSD1306_HORIZ_ADDR_MODE,
  * using the entire display as its range.
  *
+ * Sometimes, the display will display things from previous runs. To remedy
+ * this, pass in `true` to `should_clear_display` so that the entire display is
+ * cleared.
+ *
  * @param ctx                  struct that contains the platform dependent I/O
  * @param should_clear_display flag to clear the RAM of the display
  */
