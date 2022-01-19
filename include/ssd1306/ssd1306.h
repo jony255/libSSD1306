@@ -10,6 +10,10 @@
 
 #include <stdbool.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @defgroup project_setup Project Setup
  */
@@ -1103,5 +1107,9 @@ ssd1306_config_charge_pump(struct ssd1306_ctx *ctx,
                            enum sdd1306_charge_pump_config config);
 
 /** @} */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* LIBSSD1306_SSD1306_SSD1306_H */

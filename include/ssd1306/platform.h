@@ -10,6 +10,10 @@
 #include <stddef.h> /* size_t */
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @defgroup platform_dependent_operations Platform Dependent Operations
  *
@@ -145,5 +149,9 @@ enum ssd1306_err ssd1306_send_cmd(struct ssd1306_ctx *ctx, uint8_t cmd);
 enum ssd1306_err ssd1306_write_data(struct ssd1306_ctx *ctx, uint8_t data);
 
 /** @} */ /* platform_dependent_operations */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* LIBSSD1306_SSD1306_PLATFORM_H */

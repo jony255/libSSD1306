@@ -5,6 +5,10 @@
 #ifndef LIBSSD1306_SSD1306_ERR_H
 #define LIBSSD1306_SSD1306_ERR_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * @defgroup ssd1306_return_codes Return Codes
  *
@@ -110,5 +114,9 @@ enum ssd1306_err {
     } while (0)
 
 /** @} */ /* ssd1306_return_codes */
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* LIBSSD1306_SSD1306_ERR_H */

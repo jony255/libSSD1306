@@ -6,6 +6,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Writes a string to the display.
  *
@@ -21,5 +25,9 @@ enum ssd1306_err ssd1306_write_str(struct ssd1306_ctx *ctx, const uint8_t *str);
  * @param c   character to write to the display
  */
 enum ssd1306_err ssd1306_write_char(struct ssd1306_ctx *ctx, uint8_t c);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* LIBSSD1306_SSD1306_FONT_H */
