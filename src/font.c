@@ -187,9 +187,7 @@ ssd1306_write_char(struct ssd1306_ctx *ctx, uint8_t c)
 {
     const uint8_t *glyph = font8x8_basic[c];
 
-    for (size_t i = 0; i < FONT_WIDTH; i++) {
-        SSD1306_RETURN_ON_ERR(ssd1306_write_data(ctx, glyph[i]));
-    }
+    SSD1306_RETURN_ON_ERR(ssd1306_write_data_list(ctx, glyph, FONT_WIDTH));
 
     return SSD1306_OK;
 }
