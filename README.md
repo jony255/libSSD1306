@@ -6,7 +6,8 @@
 - [Prerequisites](#prerequisites)
 - [Getting started](#getting_started)
     - [Download necessary files](#download_necessary_files)
-    - [Configure and build the library](#configure_and_build_the_library)
+    - [Compiling a native build of the library](#compiling_a_native_build_of_the_library)
+    - [Compiling a cross build of the library](#compiling_a_cross_build_of_the_library)
     - [Build the documentation](#build_the_documentation)
 - [SSD1306 commands](#ssd1306_commands)
     - [Command definitions](#command_definitions)
@@ -60,32 +61,50 @@ don't have any of the two, install one of them. They are both pretty useful!
 Alternatively, you can copy the datasheet's url from the script, paste it into
 your browser, and download it from there.
 
-<a id="configure_and_build_the_library"></a>
-### Configure and build the library
+<a id="compiling_a_native_build_of_the_library"></a>
+### Compiling a native build of the library
 
-Next, configure the build by calling `meson`:
+First, configure the build by calling `meson`:
 
     $ BUILD_DIR='build'
     $
-    $ # The build-system currently defaults to building a static library.
+    $ # meson defaults to building a shared library
     $ meson "$BUILD_DIR"
 
 or
 
-    $ # Tell meson to build a shared libray instead
-    $ meson -Ddefault_libray=shared "$BUILD_DIR"
+    $ # Tell meson to build a static library instead
+    $ meson -Ddefault_library=static "$BUILD_DIR"
 
 or
 
     $ # Tell meson to build both types of libraries
-    $ meson -Ddefault_libray=both "$BUILD_DIR"
+    $ meson -Ddefault_library=both "$BUILD_DIR"
 
 Finally, build the library:
 
     $ ninja -C "$BUILD_DIR"
 
-todo(add examples on how to build with cross-compilers like clang or arm-none-eabi-gcc)
-todo(those examples should include example [machine files](https://mesonbuild.com/Machine-files.html))
+One thing to note is that `meson` defaults to building static libraries as
+position independent. If you do not want to build static libraries as
+position independent, then supply the `-Db_staticpic=false` argument when
+intially configuring the build.
+
+This method is quite simple for native builds, especially for single board
+computers that run some linux distribution like the raspberry pi but what about
+cross builds?
+
+<a id="compiling_a_cross_build_of_the_library"></a>
+### Compiling a cross build of the library
+
+There is an
+[example](https://github.com/maybe-one-day-ubermensch/libSSD1306-example.git)
+repository that includes a complete and working example on how to cross compile
+`libSSD1306`. Head over to the `machine-files` directory and read the
+`README.md`. The `README.md` talks about how cross compiling `libSSD1306` with
+`meson` looks like. In short, you independently describe each aspect of your
+build in [machine files](https://mesonbuild.com/Machine-files.html) and, come
+build time, layer the relavent machine files on top of one another.
 
 <a id="build_the_documentation"></a>
 ### Build the documentation
