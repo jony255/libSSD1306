@@ -676,12 +676,15 @@ ssd1306_config_charge_pump(struct ssd1306_ctx *ctx,
                            enum sdd1306_charge_pump_config config)
 {
 
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
+
     const uint8_t cmd_list[] = {
         SSD1306_CONFIG_CHARGE_PUMP,
         config,
     };
 
-    ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list));
+    SSD1306_RETURN_ON_ERR(
+        ssd1306_send_cmd_list(ctx, cmd_list, SSD1306_ARRAY_LEN(cmd_list)));
 
     return SSD1306_OK;
 }
