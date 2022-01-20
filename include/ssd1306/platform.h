@@ -109,6 +109,18 @@ struct ssd1306_ctx {
 #define SSD1306_ARRAY_LEN(arr) (sizeof(arr) / sizeof(arr[0]))
 
 /**
+ * Small wrapper that calls `ssd1306_ctx::send_cmd`.
+ *
+ * It's to avoid seeing `ctx->send_cmd(ctx, cmd)` all over the place.
+ *
+ * @param ctx struct that contains the platform dependent I/O
+ * @param cmd command to send
+ *
+ * @return the result of `ctx->send_cmd(ctx, cmd)`
+ */
+enum ssd1306_err ssd1306_send_cmd(struct ssd1306_ctx *ctx, uint8_t cmd);
+
+/**
  * Sends all of the commands present in @c cmd_list.
  *
  * This is useful when sending commands that require multiple arguments.
@@ -125,18 +137,6 @@ enum ssd1306_err ssd1306_send_cmd_list(struct ssd1306_ctx *ctx,
                                        size_t cmd_list_len);
 
 /**
- * Small wrapper that calls `ssd1306_ctx::send_cmd`.
- *
- * It's to avoid seeing `ctx->send_cmd(ctx, cmd)` all over the place.
- *
- * @param ctx struct that contains the platform dependent I/O
- * @param cmd command to send
- *
- * @return the result of `ctx->send_cmd(ctx, cmd)`
- */
-enum ssd1306_err ssd1306_send_cmd(struct ssd1306_ctx *ctx, uint8_t cmd);
-
-/**
  * Small wrapper that calls `ssd1306_ctx::write_data`.
  *
  * It's to avoid seeing `ctx->write_data(ctx, data)` all over the place.
@@ -147,6 +147,22 @@ enum ssd1306_err ssd1306_send_cmd(struct ssd1306_ctx *ctx, uint8_t cmd);
  * @return the result of `ctx->write_data(ctx, data)`
  */
 enum ssd1306_err ssd1306_write_data(struct ssd1306_ctx *ctx, uint8_t data);
+
+/**
+ * Writes all of the data present in @c data_list.
+ *
+ * This is useful when writing data stored in some list. The data is written by
+ * calling @ref ssd1306_ctx::write_data on each element of @c data_list.
+ * @ref ssd1306_write_data_list returns immediately if
+ * @ref ssd1306_ctx::write_data returns anything other than @ref SSD1306_OK.
+ *
+ * @param ctx          struct that contains all of the platform dependent I/O
+ * @param data_list     list of data
+ * @param data_list_len length of @c data_list
+ */
+enum ssd1306_err ssd1306_write_data_list(struct ssd1306_ctx *ctx,
+                                         const uint8_t *data_list,
+                                         size_t data_list_len);
 
 /** @} */ /* platform_dependent_operations */
 
