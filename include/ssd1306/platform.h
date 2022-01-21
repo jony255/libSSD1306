@@ -31,7 +31,10 @@ struct ssd1306_ctx;
 /**
  * A callback typedef that is in charge of sending a command and that command's
  * argument(s), if it has any, to the SSD1306. The user can safely assume that
- * @c ctx will be not be @c NULL.
+ * @c ctx will be not be @c NULL. Before actually transferring the byte, you
+ * must signal to the SSD1306 that the byte you are about to transfer is to be
+ * interpreted as a command. In other words, before the transfer, set the @c D/C
+ * line low.
  *
  * @param ctx struct that contains the platform dependent I/O
  * @param cmd command to send
@@ -42,7 +45,10 @@ typedef enum ssd1306_err (*ssd1306_send_cmd_cb)(struct ssd1306_ctx *ctx,
                                                 uint8_t cmd);
 /**
  * A callback typedef that is in charge of writing data to the SSD1306's memory.
- * The user can safely assume that @c ctx will be not be @c NULL.
+ * The user can safely assume that @c ctx will be not be @c NULL. Before
+ * actually transferring the byte, you must signal to the SSD1306 that the byte
+ * you are about to transfer is to be interpreted as data. In other words,
+ * before the transfer, set the @c D/C line high.
  *
  * @param ctx  struct that contains the platform dependent I/O
  * @param data data to write to RAM
