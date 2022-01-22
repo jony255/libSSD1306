@@ -105,8 +105,9 @@ struct ssd1306_ctx {
 /**
  * Standard macro used to calculate the length of an array.
  *
- * Use this macro to calculate the length of @c cmd_list when calling
- * @ref ssd1306_send_cmd_list.
+ * Use this macro to calculate the length of @c cmd_list or @c data_list when
+ * calling @ref ssd1306_send_cmd_list or @ref ssd1306_write_data_list,
+ * respectively.
  *
  * @param arr array to calculate the length of
  *
