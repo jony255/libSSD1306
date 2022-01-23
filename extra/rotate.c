@@ -1,7 +1,9 @@
 /**
- * Rotate the 8x8 array present in `font8x8_basic.h` by +90 degrees.
+ * Rotate and flip the 8x8 array present in `font8x8_basic.h` by +90 degrees.
  *
- * The result of the conversion is printed to stdout.
+ * Since each row in `font8x8_basic.h` is reversed, `rotate.c` will flip the
+ * result of the rotated array. The result of the conversion is printed to
+ * stdout.
  */
 
 #include <ctype.h>
@@ -63,23 +65,43 @@ extract_bit(uint8_t num, uint8_t bit)
 /**
  * Rotates an 8 bit x 8 bit matrix +90 degrees.
  *
+ * This function also flips @c output.
+ *
+ * A cleaner solution may be to add a @c bool parameter to configure whether or
+ * not @c output should be flipped. For now, it's fine.
+ *
  * @param original array to rotate
  * @param output   array to place result of rotation
  */
 static void
 rotate_8x8_bit_plus_90(const uint8_t *original, uint8_t *output)
 {
-    // for each element of output
+    /* For each element of output. */
     for (size_t i = 0; i < FONT_WIDTH; i++) {
         uint8_t tmp = 0x00;
 
-        // for each element in original
-        // reversed to omit 2 `FONT_WIDTH - j` calculations
+        /*
+         * For each element in original.
+         * Reversed to omit two 'FONT_WIDTH - j' calculations.
+         */
         for (int j = FONT_WIDTH - 1; j >= 0; j--) {
+            /*
+             * This is where the first 'FONT_WIDTH - j' calculation would occur
+             * if we started at 0.
+             */
             uint8_t current_val = original[j];
 
+            /*
+             * Extracts least significant bit first.
+             * Use 'FONT_WIDTH - i' for extracting the most significant bit
+             * first.
+             */
             uint8_t bit = extract_bit(current_val, i);
 
+            /*
+             * This is where the second 'FONT_WIDTH - j' calculation would occur
+             * if we started at 0.
+             */
             tmp |= (bit << j);
         }
 
