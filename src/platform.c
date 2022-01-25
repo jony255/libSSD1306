@@ -57,6 +57,10 @@ enum ssd1306_err
 ssd1306_send_cmd_list(struct ssd1306_ctx *ctx, const uint8_t *cmd_list,
                       size_t cmd_list_len)
 {
+    if (cmd_list == NULL) {
+        return SSD1306_CMD_LIST_NULL;
+    }
+
     for (size_t i = 0; i < cmd_list_len; i++) {
         uint8_t cmd = cmd_list[i];
 
@@ -78,6 +82,10 @@ enum ssd1306_err
 ssd1306_write_data_list(struct ssd1306_ctx *ctx, const uint8_t *data_list,
                         size_t data_list_len)
 {
+    if (data_list == NULL) {
+        return SSD1306_DATA_LIST_NULL;
+    }
+
     for (size_t i = 0; i < data_list_len; i++) {
         uint8_t data = data_list[i];
 

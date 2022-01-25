@@ -40,6 +40,15 @@ enum ssd1306_err {
     SSD1306_WRITE_DATA_NULL, /**< @ref ssd1306_ctx::write_data is @c NULL. */
 
     /**
+     *  The @c cmd_list passed in to @ref ssd1306_send_cmd_list is @c NULL.
+     */
+    SSD1306_CMD_LIST_NULL,
+    /**
+     *  The @c data_list passed in to @ref ssd1306_write_data_list is @c NULL.
+     */
+    SSD1306_DATA_LIST_NULL,
+
+    /**
      * The current wiring setup doesn't support reading from the @c SSD1306.
      * This is the case for serial wiring setups.
      *
