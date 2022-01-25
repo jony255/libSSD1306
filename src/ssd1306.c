@@ -619,7 +619,7 @@ ssd1306_config_timing(struct ssd1306_ctx *ctx,
 
     const uint8_t cmd_list[] = {
         SSD1306_SET_CLOCK_DIV_AND_OSC_FREQ,
-        (f_osc << 4) | divide_ratio,
+        ((f_osc & 0xF) << 4) | (divide_ratio & 0xF),
     };
 
     SSD1306_RETURN_ON_ERR(
@@ -637,7 +637,7 @@ ssd1306_set_precharge_period(struct ssd1306_ctx *ctx,
 
     const uint8_t cmd_list[] = {
         SSD1306_SET_PRECHARGE_PERIOD,
-        (phase_two << 4) | phase_one,
+        ((phase_two & 0xF) << 4) | (phase_one & 0xF),
     };
 
     SSD1306_RETURN_ON_ERR(
