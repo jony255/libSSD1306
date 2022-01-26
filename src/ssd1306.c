@@ -221,6 +221,97 @@ ssd1306_set_contrast(struct ssd1306_ctx *ctx, uint8_t contrast_value)
 /** @} */ /* fundamental_commands */
 
 /**
+ * Checks that the bounds for horizontal scrolling are in the correct order.
+ */
+static bool
+are_bounds_in_correct_order(enum ssd1306_page upper_bound,
+                            enum ssd1306_page lower_bound)
+{
+    return upper_bound <= lower_bound;
+}
+
+/**
+ * Calculate the row of a page at a given offset.
+ *
+ * @param page   page to index into
+ * @param offset offset into the page [SSD1306_ROW_0, SSD1306_ROW_7]
+ *
+ * @return the row of the page at the given offset
+ */
+static enum ssd1306_row
+calc_row_of_page_at_offset(enum ssd1306_page page, enum ssd1306_row offset)
+{
+    return (page * SSD1306_ROWS_PER_PAGE) + offset;
+}
+
+/**
+ * Calculates the last row of a page.
+ *
+ * @param page page to calculate the last row of
+ *
+ * @return last row of the page
+ */
+static enum ssd1306_row
+calc_last_row_of_page(enum ssd1306_page page)
+{
+    return calc_row_of_page_at_offset(page, SSD1306_ROW_7);
+}
+
+/**
+ * Checks if the row is within the dimensions of the OLED.
+ *
+ * @param ctx container of the dimensions
+ * @param row row to check
+ */
+static bool
+is_row_within_dimension(const struct ssd1306_ctx *ctx, enum ssd1306_row row)
+{
+    /* The row enumerations start at 0 so add 1 to account for that. */
+    return ctx->height >= row + 1;
+}
+
+/**
+ * Checks if the page fits within the dimensions of the OLED.
+ *
+ * @param ctx  container of the dimensions
+ * @param page page to check
+ */
+static bool
+is_page_within_dimension(const struct ssd1306_ctx *ctx, enum ssd1306_page page)
+{
+    return is_row_within_dimension(ctx, calc_last_row_of_page(page));
+}
+
+/**
+ * Checks that the bounds passed in are
+ *
+ *   - within the dimensions of the OLED
+ *      and
+ *   - the upper bound of the srolling area is less than or equal
+ *     the lower bound of the scrolling area
+ *
+ * @param ctx         container of the dimensions
+ * @param upper_bound upper bound of the scrolling area
+ * @param lower_bound lower bound of the scrolling area
+ */
+static enum ssd1306_err
+check_bounds(const struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
+             enum ssd1306_page lower_bound)
+{
+    if (!is_page_within_dimension(ctx, upper_bound)) {
+        return SSD1306_UPPER_BOUND_OUT_OF_DIMENSION;
+    }
+    else if (!is_page_within_dimension(ctx, lower_bound)) {
+        return SSD1306_LOWER_BOUND_OUT_OF_DIMENSION;
+    }
+    else if (!are_bounds_in_correct_order(upper_bound, lower_bound)) {
+        return SSD1306_UPPER_BOUND_GT_LOWER_BOUND;
+    }
+
+    return SSD1306_OK;
+}
+
+/**
  * @addtogroup scrolling_commands
  */
 
@@ -306,6 +397,7 @@ ssd1306_scroll_right(struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
     SSD1306_RETURN_ON_ERR(check_dimensions(ctx, CHECK_HEIGHT));
+    SSD1306_RETURN_ON_ERR(check_bounds(ctx, upper_bound, lower_bound));
 
     SSD1306_RETURN_ON_ERR(setup_horiz_nonvert_scroll_params(
         ctx, SSD1306_RIGHT_SCROLL, upper_bound, interval, lower_bound));
@@ -320,6 +412,7 @@ ssd1306_scroll_left(struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
     SSD1306_RETURN_ON_ERR(check_dimensions(ctx, CHECK_HEIGHT));
+    SSD1306_RETURN_ON_ERR(check_bounds(ctx, upper_bound, lower_bound));
 
     SSD1306_RETURN_ON_ERR(setup_horiz_nonvert_scroll_params(
         ctx, SSD1306_LEFT_SCROLL, upper_bound, interval, lower_bound));
@@ -357,6 +450,7 @@ ssd1306_scroll_vert_right(struct ssd1306_ctx *ctx,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
     SSD1306_RETURN_ON_ERR(check_dimensions(ctx, CHECK_HEIGHT));
+    SSD1306_RETURN_ON_ERR(check_bounds(ctx, upper_bound, lower_bound));
 
     SSD1306_RETURN_ON_ERR(setup_horiz_vert_scroll_params(
         ctx, SSD1306_RIGHT_VERT_SCROLL, upper_bound, interval, lower_bound,
@@ -373,6 +467,7 @@ ssd1306_scroll_vert_left(struct ssd1306_ctx *ctx, enum ssd1306_page upper_bound,
 {
     SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_SEND_CMD));
     SSD1306_RETURN_ON_ERR(check_dimensions(ctx, CHECK_HEIGHT));
+    SSD1306_RETURN_ON_ERR(check_bounds(ctx, upper_bound, lower_bound));
 
     SSD1306_RETURN_ON_ERR(setup_horiz_vert_scroll_params(
         ctx, SSD1306_LEFT_VERT_SCROLL, upper_bound, interval, lower_bound,
