@@ -43,6 +43,7 @@ struct ssd1306_ctx;
  */
 typedef enum ssd1306_err (*ssd1306_send_cmd_cb)(struct ssd1306_ctx *ctx,
                                                 uint8_t cmd);
+
 /**
  * A callback typedef that is in charge of writing data to the SSD1306's memory.
  * The user can safely assume that @c ctx will be not be @c NULL. Before
@@ -57,6 +58,32 @@ typedef enum ssd1306_err (*ssd1306_send_cmd_cb)(struct ssd1306_ctx *ctx,
  */
 typedef enum ssd1306_err (*ssd1306_write_data_cb)(struct ssd1306_ctx *ctx,
                                                   uint8_t data);
+
+/**
+ * A callback typedef that is in charge of writing data stored in some array to
+ * the SSD1306's memory.
+ *
+ * @ref ssd1306_write_data_list defaults to calling @ref ssd1306_write_data on
+ * each element of @c data_list. Since @ref ssd1306_write_data must perform the
+ * necessary setup/teardown to accomplish the transaction, this can be very
+ * expensive when sending a list of data. If one writes @c n bytes, then the
+ * setup/teardown happens @c n times. This includes marking the byte about to be
+ * sent as data and is done by setting the @c D/C line high.
+ *
+ * This optional callback lets one perform the necessary setup once, before
+ * looping over the elements of @c data_list, and once, after the loop.
+ *
+ * The user can safely assume that @c ctx will be not be @c NULL.
+ *
+ * @param ctx           struct that contains the platform dependent I/O
+ * @param data_list     list of data
+ * @param data_list_len length of @c data_list
+ *
+ * @return an appropriate error code of type enum @ref ssd1306_err
+ */
+typedef enum ssd1306_err (*ssd1306_write_data_list_cb)(struct ssd1306_ctx *ctx,
+                                                       const uint8_t *data_list,
+                                                       size_t data_list_len);
 
 /**
  * An instance of this struct must be populated and passed in to all functions
@@ -86,6 +113,13 @@ struct ssd1306_ctx {
      * Instead of calling this field directly, use @ref ssd1306_write_data.
      */
     const ssd1306_write_data_cb write_data;
+    /**
+     * **Optional**, user supplied callback that writes a list of data to the
+     * SSD1306's memory.
+     *
+     * Instead of calling this field directly, use @ref ssd1306_write_data_list.
+     */
+    const ssd1306_write_data_list_cb write_data_list;
 
     /**
      * Custom data that a user might want available in their supplied callbacks.
@@ -158,12 +192,13 @@ enum ssd1306_err ssd1306_write_data(struct ssd1306_ctx *ctx, uint8_t data);
 /**
  * Writes all of the data present in @c data_list.
  *
- * This is useful when writing data stored in some list. The data is written by
- * calling @ref ssd1306_ctx::write_data on each element of @c data_list.
- * @ref ssd1306_write_data_list returns immediately if
+ * Calls @ref ssd1306_ctx::write_data_list if it is not @c NULL
+ *
+ * Otherwise, @ref ssd1306_ctx::write_data is called on each element of
+ * @c data_list. @ref ssd1306_write_data_list returns immediately if
  * @ref ssd1306_ctx::write_data returns anything other than @ref SSD1306_OK.
  *
- * @param ctx          struct that contains all of the platform dependent I/O
+ * @param ctx           struct that contains all of the platform dependent I/O
  * @param data_list     list of data
  * @param data_list_len length of @c data_list
  */

@@ -82,8 +82,14 @@ enum ssd1306_err
 ssd1306_write_data_list(struct ssd1306_ctx *ctx, const uint8_t *data_list,
                         size_t data_list_len)
 {
+    /* Don't want a segault when checking 'ssd1306_ctx::write_data_list'. */
+    SSD1306_RETURN_ON_ERR(check_ctx(ctx, CHECK_WRITE_DATA));
+
     if (data_list == NULL) {
         return SSD1306_DATA_LIST_NULL;
+    }
+    else if (ctx->write_data_list != NULL) {
+        return ctx->write_data_list(ctx, data_list, data_list_len);
     }
 
     for (size_t i = 0; i < data_list_len; i++) {
